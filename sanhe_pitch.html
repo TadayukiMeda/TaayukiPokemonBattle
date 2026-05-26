@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanhe Interfashion｜日本市場開拓戦略</title>
+<style>
+  :root {
+    --navy: #1a2a4a;
+    --navy-light: #2c3e6b;
+    --accent: #c8a96e;
+    --accent-light: #f0e6d0;
+    --gray: #f4f6f9;
+    --text: #1e1e1e;
+    --text-sub: #555;
+    --border: #dde2ea;
+    --red: #c0392b;
+    --green: #1e7e34;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', 'Yu Gothic', sans-serif;
+    color: var(--text);
+    background: #eef0f4;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .page {
+    width: 1000px;
+    margin: 32px auto;
+    background: white;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* ===== COVER ===== */
+  .cover {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 60%, #1a3a5c 100%);
+    color: white;
+    padding: 80px 70px;
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 40px solid rgba(200,169,110,0.15);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    border: 30px solid rgba(200,169,110,0.1);
+  }
+  .cover-tag {
+    display: inline-block;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+  .cover h1 {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+  }
+  .cover h1 span { color: var(--accent); }
+  .cover-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    max-width: 520px;
+    line-height: 1.8;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+  }
+  .cover-meta strong { display: block; color: white; font-size: 14px; margin-bottom: 2px; }
+
+  /* ===== SECTION STYLES ===== */
+  .section {
+    padding: 56px 70px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+  .section-alt { background: var(--gray); }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .section-title-en {
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+  }
+  .divider {
+    width: 40px; height: 3px;
+    background: var(--accent);
+    margin-bottom: 36px;
+    border-radius: 2px;
+  }
+
+  /* ===== SUMMARY CARDS ===== */
+  .cards-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 8px;
+  }
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px 22px;
+    position: relative;
+  }
+  .card-num {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .card-num span { font-size: 16px; color: var(--text-sub); }
+  .card-label { font-size: 12px; color: var(--text-sub); margin-bottom: 8px; }
+  .card-desc { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .card-icon {
+    position: absolute;
+    top: 20px; right: 20px;
+    font-size: 22px;
+    opacity: 0.15;
+  }
+
+  /* ===== PROBLEM BOX ===== */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .problem-box {
+    background: #fff8f8;
+    border-left: 4px solid var(--red);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .problem-box h4 {
+    color: var(--red);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .problem-box p { font-size: 13px; color: var(--text); line-height: 1.7; }
+
+  .insight-box {
+    background: #f0f7ff;
+    border-left: 4px solid var(--navy);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin-top: 24px;
+  }
+  .insight-box h4 {
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .insight-box p { font-size: 13px; line-height: 1.8; }
+
+  /* ===== PERSONA ===== */
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .persona-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .persona-header {
+    background: var(--navy);
+    color: white;
+    padding: 16px 24px;
+  }
+  .persona-header h3 { font-size: 15px; margin-bottom: 2px; }
+  .persona-header p { font-size: 12px; color: rgba(255,255,255,0.65); }
+  .persona-body { padding: 20px 24px; }
+  .persona-row {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .persona-row:last-child { border-bottom: none; }
+  .persona-key {
+    min-width: 80px;
+    color: var(--text-sub);
+    font-size: 12px;
+    padding-top: 1px;
+  }
+  .persona-val { color: var(--text); line-height: 1.6; }
+
+  /* ===== TABLE ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: var(--navy);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  tr:nth-child(even) td { background: var(--gray); }
+  tr:last-child td { border-bottom: none; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .badge-red { background: #fde8e8; color: var(--red); }
+  .badge-blue { background: #e8f0fe; color: #1a5cb8; }
+  .badge-gold { background: var(--accent-light); color: #7a5c20; }
+  .badge-green { background: #e8f5e9; color: var(--green); }
+  .badge-gray { background: #eeeeee; color: #555; }
+
+  /* ===== SEQUENCE ===== */
+  .sequence {
+    position: relative;
+    padding-left: 0;
+  }
+  .seq-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 4px;
+    align-items: stretch;
+  }
+  .seq-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 52px;
+  }
+  .seq-num {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .seq-line {
+    width: 2px;
+    background: var(--border);
+    flex: 1;
+    margin: 4px 0;
+    min-height: 20px;
+  }
+  .seq-row:last-child .seq-line { display: none; }
+  .seq-content {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 20px;
+    flex: 1;
+    margin-bottom: 12px;
+  }
+  .seq-day { font-size: 11px; color: var(--accent); font-weight: 700; margin-bottom: 4px; letter-spacing: 1px; }
+  .seq-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .seq-desc { font-size: 13px; color: var(--text-sub); line-height: 1.6; }
+
+  /* ===== TRUST PILLARS ===== */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .pillar {
+    border-top: 4px solid var(--accent);
+    background: white;
+    border-radius: 0 0 6px 6px;
+    padding: 24px 20px;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--accent);
+  }
+  .pillar h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .pillar ul { padding-left: 16px; }
+  .pillar li { font-size: 13px; color: var(--text); margin-bottom: 6px; line-height: 1.6; }
+
+  /* ===== PHASE ===== */
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .phase {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+  }
+  .phase:last-child { border-right: none; }
+  .phase-tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .phase-1 .phase-tag { color: var(--green); }
+  .phase-2 .phase-tag { color: #1565c0; }
+  .phase-3 .phase-tag { color: var(--accent); }
+  .phase h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .phase-period { font-size: 12px; color: var(--text-sub); margin-bottom: 16px; }
+  .phase ul { padding-left: 0; list-style: none; }
+  .phase li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 5px 0;
+    border-bottom: 1px dashed var(--border);
+    display: flex;
+    gap: 8px;
+  }
+  .phase li:last-child { border-bottom: none; }
+  .phase li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+
+  /* ===== KPI ===== */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .kpi-card {
+    text-align: center;
+    background: var(--navy);
+    color: white;
+    border-radius: 8px;
+    padding: 28px 16px;
+  }
+  .kpi-val {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .kpi-val span { font-size: 16px; }
+  .kpi-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 6px; }
+
+  /* ===== GOOD/BAD ===== */
+  .goodbad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .good-box {
+    background: #f0f9f0;
+    border: 1px solid #b2dfb2;
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .bad-box {
+    background: #fff5f5;
+    border: 1px solid #ffbaba;
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .good-box h4 { color: var(--green); font-size: 13px; margin-bottom: 10px; }
+  .bad-box h4 { color: var(--red); font-size: 13px; margin-bottom: 10px; }
+  .good-box p, .bad-box p {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    font-family: 'Courier New', monospace;
+    padding: 10px;
+    background: white;
+    border-radius: 4px;
+  }
+  .good-box p { color: var(--navy); border-left: 3px solid var(--green); }
+  .bad-box p { color: #888; border-left: 3px solid var(--red); text-decoration: line-through; }
+
+  /* ===== BUDGET ===== */
+  .budget-note {
+    background: var(--accent-light);
+    border: 1px solid #d4b483;
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #6b4c1e;
+    line-height: 1.7;
+  }
+
+  /* ===== FOOTER ===== */
+  .doc-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; border-radius: 0; page-break-after: always; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<div class="page">
+  <div class="cover">
+    <div>
+      <div class="cover-tag">CONFIDENTIAL PITCH DECK</div>
+      <h1>日本市場開拓<br><span>広告・営業戦略</span></h1>
+      <p class="cover-sub">
+        韓国OEM工場 Sanhe Interfashion が<br>
+        日本の革製品ブランドとの契約を獲得するための<br>
+        包括的な広告・信頼構築・営業戦略
+      </p>
+    </div>
+    <div class="cover-meta">
+      <div><strong>対象市場</strong>日本・革製品ブランド</div>
+      <div><strong>ターゲット規模</strong>年商10〜30億円企業</div>
+      <div><strong>戦略期間</strong>フェーズ1〜3（12ヶ月）</div>
+      <div><strong>作成日</strong>2026年5月</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EXECUTIVE SUMMARY ===== -->
+<div class="page">
+  <div class="section">
+    <div class="section-label">01 / Executive Summary</div>
+    <div class="section-title">戦略の核心</div>
+    <div class="section-title-en">What This Strategy Is About</div>
+    <div class="divider"></div>
+
+    <div class="insight-box" style="margin-bottom: 32px;">
+      <h4>現状の課題：「知ってもらう」戦略はあるが「信じてもらう」設計が致命的に弱い</h4>
+      <p>
+        日本のオーナー社長（職人気質・数字重視）は、存在を知ったからといって即連絡しない。<br>
+        必ず「本当に信頼できるか？」を徹底的に検証してから動く。<br>
+        この<strong>「検証プロセス」への設計が現状の戦略にはほぼ存在しない。</strong>
+      </p>
+    </div>
+
+    <div class="cards-3">
+      <div class="card">
+        <div class="card-icon">📣</div>
+        <div class="card-num">70<span>点</span></div>
+        <div class="card-label">「知ってもらう」設計</div>
+        <div class="card-desc">LinkedIn・Instagram・メールの設計は既にある。チャネルは整っている。</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <div class="card-num" style="color:var(--red)">20<span>点</span></div>
+        <div class="card-label">「信じてもらう」設計</div>
+        <div class="card-desc">証拠・データ・訪問プログラム・事例の設計が不足。これが最大の弱点。</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤝</div>
+        <div class="card-num" style="color:var(--red)">10<span>点</span></div>
+        <div class="card-label">「会いに来てもらう」設計</div>
+        <div class="card-desc">工場訪問・展示会・紹介プログラムの具体的設計がゼロ。</div>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top: 28px;">
+      <h4>この資料が示す解決策</h4>
+      <p>
+        既存の「知ってもらう」チャネルを維持しながら、<strong>6つの重大な欠落戦略</strong>を追加する。<br>
+        「信じてもらう」比率を70点まで引き上げることで、問い合わせ獲得・成約率を大幅改善する。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PERSONA ===== -->
+<div class="page">
+  <div class="section">
+    <div class="section-label">02 / Target Persona</div>
+    <div class="section-title">ターゲットペルソナ</div>
+    <div class="section-title-en">Who We Are Selling To</div>
+    <div class="divider"></div>
+
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-header">
+          <h3>企業ペルソナ</h3>
+          <p>どんな会社を狙うか</p>
+        </div>
+        <div class="persona-body">
+          <div class="persona-row"><span class="persona-key">業種</span><span class="persona-val">革製品ブランド（ハンドバッグ・財布がメイン）</span></div>
+          <div class="persona-row"><span class="persona-key">年商</span><span class="persona-val">10〜30億円</span></div>
+          <div class="persona-row"><span class="persona-key">拠点</span><span class="persona-val">東京（表参道・台東区・浅草周辺）</span></div>
+          <div class="persona-row"><span class="persona-key">海外展開</span><span class="persona-val">海外EC・直営店を積極展開中</span></div>
+          <div class="persona-row"><span class="persona-key">製造現状</span><span class="persona-val">中国工場使用・品質バラつきに悩んでいる</span></div>
+          <div class="persona-row"><span class="persona-key">英語対応</span><span class="persona-val">英語対応スタッフが在籍している</span></div>
+          <div class="persona-row"><span class="persona-key">必須条件</span><span class="persona-val">自社ブランドを保有していること</span></div>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-header">
+          <h3>個人ペルソナ（意思決定者：オーナー社長）</h3>
+          <p>誰の心を動かすか</p>
+        </div>
+        <div class="persona-body">
+          <div class="persona-row"><span class="persona-key">年齢</span><span class="persona-val">40〜60代（男性が多い）</span></div>
+          <div class="persona-row"><span class="persona-key">性格</span><span class="persona-val">厳しい・職人気質・妥協しない・ブランドへの誇りが強い</span></div>
+          <div class="persona-row"><span class="persona-key">価値観</span><span class="persona-val">数字と実績で判断する・パッションを重視する</span></div>
+          <div class="persona-row"><span class="persona-key">行動特性</span><span class="persona-val">せっかち・結論から聞きたい・回りくどい営業は即シャットアウト</span></div>
+          <div class="persona-row"><span class="persona-key">情報収集</span><span class="persona-val">FaW TOKYO・業界口コミ・Instagram・LinkedIn・WWD JAPAN・繊研新聞</span></div>
+          <div class="persona-row"><span class="persona-key">信頼条件</span><span class="persona-val">サンプルの再現性・工場訪問・不良率と納期遵守率のデータ</span></div>
+          <div class="persona-row"><span class="persona-key">意思決定</span><span class="persona-val">知っている人からの紹介・展示会での直接対話・実績数字の提示</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <table>
+        <tr>
+          <th>タイプ</th>
+          <th>特徴</th>
+          <th>主なアプローチ</th>
+          <th>優先度</th>
+        </tr>
+        <tr>
+          <td><strong>タイプA：海外展開を検討中</strong></td>
+          <td>能動的にOEM工場を探している・意思決定が早い</td>
+          <td>LP・Instagram・LinkedInで「見つけてもらう」プル型</td>
+          <td><span class="badge badge-red">最優先</span></td>
+        </tr>
+        <tr>
+          <td><strong>タイプB：すでに海外展開済み</strong></td>
+          <td>現状維持モード・プッシュしない限り気づかない</td>
+          <td>メール・封筒・DM等のプッシュ型が必須</td>
+          <td><span class="badge badge-blue">高</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CRITICAL GAPS ===== -->
+<div class="page">
+  <div class="section section-alt">
+    <div class="section-label">03 / Gap Analysis</div>
+    <div class="section-title">現状戦略の重大な欠落</div>
+    <div class="section-title-en">What Is Missing From The Current Strategy</div>
+    <div class="divider"></div>
+
+    <div class="problem-grid">
+      <div class="problem-box">
+        <h4>欠落① 信頼の「証拠パッケージ」がない</h4>
+        <p>LPに「実績数字・取引先ロゴ」と書いてあるだけ。日本向けに特化した不良率・納期遵守率・検品プロセスを示す<strong>日本語証拠文書が存在しない。</strong></p>
+      </div>
+      <div class="problem-box">
+        <h4>欠落② 展示会戦略がゼロ</h4>
+        <p>ペルソナの「情報収集」に<strong>FaW TOKYOが明記されているのに戦略に記載がない。</strong>最重要接点を完全に見落としている。</p>
+      </div>
+      <div class="problem-box">
+        <h4>欠落③ 工場訪問の「誘導設計」がない</h4>
+        <p>「工場訪問」が信頼条件として挙がっているのに、<strong>どうやって訪問に誘導するかの設計がゼロ。</strong>「来てください」という言葉だけでは動かない。</p>
+      </div>
+      <div class="problem-box">
+        <h4>欠落④ 紹介（口コミ）の設計がない</h4>
+        <p>意思決定トリガーの筆頭に「知っている人からの紹介」があるのに、<strong>紹介を獲得するプログラムが一切ない。</strong>成約率が最も高いチャネルを放置している。</p>
+      </div>
+      <div class="problem-box">
+        <h4>欠落⑤ セールスシーケンスが「1回で終わり」</h4>
+        <p>「メールを送る」「LinkedIn投稿をする」で止まっている。<strong>返信がなかったときの次の手が設計されていない。</strong>1回送って終わりが最多の失敗パターン。</p>
+      </div>
+      <div class="problem-box">
+        <h4>欠落⑥ 業界メディアへのPR戦略がない</h4>
+        <p>ペルソナが読む<strong>WWD JAPAN・繊研新聞への掲載戦略がゼロ。</strong>記事1本でメール100通分以上の信頼効果があるにもかかわらず。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STRATEGY: TRUST PACKAGE ===== -->
+<div class="page">
+  <div class="section">
+    <div class="section-label">04 / Strategy 01</div>
+    <div class="section-title">戦略①：信頼データシートの作成</div>
+    <div class="section-title-en">Build a Japanese-Language Trust Package</div>
+    <div class="divider"></div>
+
+    <p style="font-size: 14px; color: var(--text-sub); margin-bottom: 24px;">
+      日本のオーナー社長が「本物か確認する」プロセスに対応するため、<br>証拠をひとつのパッケージに集約する。メールに添付・LP掲載・郵送全てに使い回せる設計にする。
+    </p>
+
+    <table>
+      <tr>
+        <th style="width: 20%">項目</th>
+        <th style="width: 45%">具体的な内容</th>
+        <th style="width: 35%">効果・理由</th>
+      </tr>
+      <tr>
+        <td><strong>不良率データ</strong></td>
+        <td>直近3年の不良率推移グラフ<br>例：1.2%→0.6%→0.3%（改善の軌跡を見せる）</td>
+        <td>「品質バラつき」への最大の反論材料</td>
+      </tr>
+      <tr>
+        <td><strong>納期遵守率</strong></td>
+        <td>月別の納期遵守率（98%以上を明示）<br>過去24ヶ月のデータをグラフ化</td>
+        <td>「せっかち」なオーナー社長の最重要懸念点への回答</td>
+      </tr>
+      <tr>
+        <td><strong>取引先の声</strong></td>
+        <td>Jigsaw UK担当者のコメント（英語原文＋日本語訳）<br>Roots Canadaのコメントも同様に</td>
+        <td>「海外実績」を第三者の言葉で証明</td>
+      </tr>
+      <tr>
+        <td><strong>検品プロセス</strong></td>
+        <td>写真付き4段階検品フローの説明<br>各ステップで何をチェックするか明記</td>
+        <td>「職人気質」の社長が最も見たい部分</td>
+      </tr>
+      <tr>
+        <td><strong>日本語対応体制</strong></td>
+        <td>日本語対応可能なスタッフの名前・顔写真<br>対応時間・レスポンスタイムも明記</td>
+        <td>「言語の壁」という最初の心理的ハードルを除去</td>
+      </tr>
+      <tr>
+        <td><strong>品質認証</strong></td>
+        <td>ISO・現在保有する認証のロゴを明記<br>取得予定のものは「取得予定」と明示</td>
+        <td>数字と実績で判断するオーナー社長への信頼感</td>
+      </tr>
+    </table>
+
+    <div class="budget-note" style="margin-top: 24px;">
+      <strong>実装方法：</strong>A4両面PDFとして日本語で制作。メール添付用・LP掲載用・郵送封入用の3パターンを用意する。Canvaで作成可能、費用0円。
+    </div>
+  </div>
+</div>
+
+<!-- ===== STRATEGY: EMAIL DESIGN ===== -->
+<div class="page">
+  <div class="section section-alt">
+    <div class="section-label">04 / Strategy 02</div>
+    <div class="section-title">戦略②：件名・メール設計の最適化</div>
+    <div class="section-title-en">Email Subject Line & Copy Optimization</div>
+    <div class="divider"></div>
+
+    <div class="goodbad">
+      <div class="good-box">
+        <h4>✅ 採用する件名（即開封される）</h4>
+        <p>「Jigsaw UK・Roots Canadaに15年供給している韓国OEM工場をご紹介したいです」</p>
+      </div>
+      <div class="bad-box">
+        <h4>❌ 使ってはいけない件名（即削除される）</h4>
+        <p>「革製品OEMのご提案について」</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 28px;">
+      <table>
+        <tr>
+          <th>メール構成要素</th>
+          <th>書き方のルール</th>
+          <th>NG例</th>
+        </tr>
+        <tr>
+          <td><strong>1行目（書き出し）</strong></td>
+          <td>結論から書く。「貴社の○○を拝見し、一点だけ確認させてください」</td>
+          <td>「はじめまして、私どもは〜」から始まる長い自己紹介</td>
+        </tr>
+        <tr>
+          <td><strong>本文（100字以内）</strong></td>
+          <td>「中国工場の品質バラつきでお悩みではありませんか？解決した実績があります」</td>
+          <td>会社概要・沿革・製品ラインナップを詰め込んだ長文</td>
+        </tr>
+        <tr>
+          <td><strong>CTA（行動喚起）</strong></td>
+          <td>「まず15分だけお時間いただけますか？」という低ハードルな一点依頼</td>
+          <td>「ご検討のほど、よろしくお願いいたします」という受け身の終わり方</td>
+        </tr>
+        <tr>
+          <td><strong>添付ファイル</strong></td>
+          <td>信頼データシート（PDF）を1枚だけ添付</td>
+          <td>会社案内・製品カタログを複数添付（容量過多で迷惑）</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STRATEGY: SALES SEQUENCE ===== -->
+<div class="page">
+  <div class="section">
+    <div class="section-label">04 / Strategy 03</div>
+    <div class="section-title">戦略③：7ステップ営業シーケンス</div>
+    <div class="section-title-en">The 7-Touch Sales Sequence</div>
+    <div class="divider"></div>
+
+    <p style="font-size: 14px; color: var(--text-sub); margin-bottom: 28px;">
+      日本のオーナー社長は最初のコンタクトを無視することが多い。忙しいのではなく「まだ判断していない」だけ。
+      <strong>7回接触して初めてスタートラインに立てる。</strong>1回送って終わりは最も多い失敗パターン。
+    </p>
+
+    <div class="sequence">
+      <div class="seq-row">
+        <div class="seq-left"><div class="seq-num">1</div><div class="seq-line"></div></div>
+        <div class="seq-content">
+          <div class="seq-day">DAY 0</div>
+          <div class="seq-title">LinkedIn接続リクエスト（メッセージなし）</div>
+          <div class="seq-desc">いきなりメッセージを送ると警戒される。まず接続リクエストのみ送り、顔と名前を認識させる。</div>
+        </div>
+      </div>
+      <div class="seq-row">
+        <div class="seq-left"><div class="seq-num">2</div><div class="seq-line"></div></div>
+        <div class="seq-content">
+          <div class="seq-day">DAY 2（接続承認後）</div>
+          <div class="seq-title">短いDMを送る</div>
+          <div class="seq-desc">「はじめまして。韓国の革製品OEM工場です。一点だけ確認させてください——現在の工場の品質には満足されていますか？」。長文禁止。</div>
+        </div>
+      </div>
+      <div class="seq-row">
+        <div class="seq-left"><div class="seq-num">3</div><div class="seq-line"></div></div>
+        <div class="seq-content">
+          <div class="seq-day">DAY 5</div>
+          <div class="seq-title">メール送信（最適化された件名で）</div>
+          <div class="seq-desc">「Jigsaw UK・Roots Canadaに15年供給している韓国OEM工場をご紹介したいです」の件名で、信頼データシートを添付して送る。</div>
+        </div>
+      </div>
+      <div class="seq-row">
+        <div class="seq-left"><div class="seq-num">4</div><div class="seq-line"></div></div>
+        <div class="seq-content">
+          <div class="seq-day">DAY 8（未開封の場合）</div>
+          <div class="seq-title">別件名で再送</div>
+          <div class="seq-desc">件名を変えて再送。「中国工場から切り替えた日本ブランドの事例をご紹介できますか？」。同じ件名での再送は効果なし。</div>
+        </div>
+      </div>
+      <div class="seq-row">
+        <div class="seq-left"><div class="seq-num">5</div><div class="seq-line"></div></div>
+        <div class="seq-content">
+          <div class="seq-day">DAY 12</div>
+          <div class="seq-title">LinkedIn投稿をDMでシェア</div>
+          <div class="seq-desc">自分たちが投稿したJigsaw UKストーリー記事を「この記事が関連するかと思いご連絡しました」とDMでシェアする。売り込みではなく価値提供に見せる。</div>
+        </div>
+      </div>
+      <div class="seq-row">
+        <div class="seq-left"><div class="seq-num">6</div><div class="seq-line"></div></div>
+        <div class="seq-content">
+          <div class="seq-day">DAY 20</div>
+          <div class="seq-title">革封筒＋資料の郵送（物理接触）</div>
+          <div class="seq-desc">革製の封筒に会社住所でQRコード付き資料を封入して郵送。手で触れることで記憶に残る。デジタルで埋もれていた存在がリアルになる瞬間。</div>
+        </div>
+      </div>
+      <div class="seq-row">
+        <div class="seq-left"><div class="seq-num">7</div><div class="seq-line"></div></div>
+        <div class="seq-content">
+          <div class="seq-day">DAY 30</div>
+          <div class="seq-title">郵送物の確認メール</div>
+          <div class="seq-desc">「先日、革のサンプル封筒をお送りしましたが、お手元に届きましたでしょうか？」。触れた体験を「確認」という自然な形で会話に変える。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STRATEGY: TRUST BUILDING ===== -->
+<div class="page">
+  <div class="section section-alt">
+    <div class="section-label">04 / Strategy 04・05・06</div>
+    <div class="section-title">戦略④⑤⑥：展示会・工場訪問・紹介設計</div>
+    <div class="section-title-en">Exhibition, Factory Visit & Referral Programs</div>
+    <div class="divider"></div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <h3>展示会戦略（FaW TOKYO）</h3>
+        <ul>
+          <li>展示会<strong>前</strong>：LinkedInで来場予定者に告知投稿</li>
+          <li>展示会<strong>当日</strong>：革サンプルを持参し直接対話（意思決定トリガーを直撃）</li>
+          <li>展示会<strong>後48時間以内</strong>：名刺交換した全員に個別メールを送る</li>
+          <li>参加予算が厳しい場合：出展社・来場者リストをリサーチして展示会後にアプローチするだけでも有効</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <h3>工場訪問プログラム</h3>
+        <ul>
+          <li>2泊3日の訪問パッケージを設計・明文化する</li>
+          <li><strong>Day1</strong>：仁川空港送迎 → ホテルチェックイン</li>
+          <li><strong>Day2</strong>：工場見学・検品工程・職人紹介 → サンプル共同確認</li>
+          <li><strong>Day3</strong>：商談 → 空港送迎</li>
+          <li>航空・宿泊は自己負担、<strong>送迎・通訳・食事はSanhe負担</strong>と明記する</li>
+          <li>このプログラムをLPとLinkedInに掲載する</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <h3>紹介（口コミ）設計</h3>
+        <ul>
+          <li>JETRO・韓国系商社・在日韓国人ビジネスマンをアンバサダーとして活用</li>
+          <li>最初の1社と取引が始まったら<strong>「1社だけ紹介してもらえますか」と依頼する</strong></li>
+          <li>日本皮革産業連合会の会員企業リストをターゲットリストとして活用</li>
+          <li>紹介成約は通常の5〜10倍の成約率、費用はゼロ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 28px;">
+      <table>
+        <tr>
+          <th>業界メディアPR戦略</th>
+          <th>アプローチ方法</th>
+          <th>期待効果</th>
+        </tr>
+        <tr>
+          <td><strong>繊研新聞</strong></td>
+          <td>「韓国の皮革OEM工場で日本向けサービス開始」のプレスリリースを記者に送付</td>
+          <td>記事1本＝メール100通分以上の信頼効果</td>
+        </tr>
+        <tr>
+          <td><strong>WWD JAPAN（オンライン版）</strong></td>
+          <td>コメント・寄稿を打診（「欧州ブランドが韓国OEMを選ぶ理由」等の切り口）</td>
+          <td>ターゲットペルソナが毎日読む媒体に露出</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHANNEL STRATEGY ===== -->
+<div class="page">
+  <div class="section">
+    <div class="section-label">05 / Channel Strategy</div>
+    <div class="section-title">チャネル全体設計（更新版）</div>
+    <div class="section-title-en">Full Channel Map — Updated</div>
+    <div class="divider"></div>
+
+    <table>
+      <tr>
+        <th style="width: 8%">優先度</th>
+        <th style="width: 18%">チャネル</th>
+        <th style="width: 12%">種類</th>
+        <th style="width: 32%">戦略的役割</th>
+        <th style="width: 10%">フェーズ</th>
+        <th style="width: 10%">費用</th>
+        <th style="width: 10%">ステータス</th>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">最優先</span></td>
+        <td><strong>メール（7Stepシーケンス）</strong></td>
+        <td>営業</td>
+        <td>存在を知らせる最初の接触。7回接触設計で返信率を3〜5倍に</td>
+        <td>Ph.1</td>
+        <td>無料</td>
+        <td><span class="badge badge-gold">改善必要</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">最優先</span></td>
+        <td><strong>LinkedIn（Story投稿）</strong></td>
+        <td>営業・広告</td>
+        <td>決裁者への直接アプローチ。週2〜3本投稿で継続的な存在感を構築</td>
+        <td>Ph.1</td>
+        <td>無料</td>
+        <td><span class="badge badge-green">継続</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">最優先</span></td>
+        <td><strong>信頼データシート（PDF）</strong></td>
+        <td>証拠・販促</td>
+        <td>全チャネルの信頼度を一気に引き上げる。メール添付・LP掲載・郵送に活用</td>
+        <td>Ph.1</td>
+        <td>無料</td>
+        <td><span class="badge badge-red">新規作成</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">最優先</span></td>
+        <td><strong>LP（Canva Website）</strong></td>
+        <td>信頼確認ツール</td>
+        <td>「本物か確認する」場所として設計。信頼データシートを組み込み</td>
+        <td>Ph.1</td>
+        <td>無料</td>
+        <td><span class="badge badge-gold">改善必要</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-blue">高</span></td>
+        <td><strong>Instagram（360度動画）</strong></td>
+        <td>広告</td>
+        <td>品質の視覚的証明。革の質感・職人の手仕事を週2本投稿</td>
+        <td>Ph.1</td>
+        <td>無料</td>
+        <td><span class="badge badge-green">継続</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-blue">高</span></td>
+        <td><strong>革封筒＋QR資料郵送</strong></td>
+        <td>販促・物理接触</td>
+        <td>7Stepシーケンスの一部として実施。デジタルの壁を突破する物理体験</td>
+        <td>Ph.2</td>
+        <td>約630円/社</td>
+        <td><span class="badge badge-green">継続</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-blue">高</span></td>
+        <td><strong>工場訪問プログラム</strong></td>
+        <td>信頼構築</td>
+        <td>成約の決定打。2泊3日プログラムを設計してLPに明記し誘導する</td>
+        <td>Ph.2</td>
+        <td>接待費のみ</td>
+        <td><span class="badge badge-red">新規設計</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-gold">中</span></td>
+        <td><strong>FaW TOKYO（展示会）</strong></td>
+        <td>直接対話</td>
+        <td>ペルソナが最重視する意思決定トリガー「展示会での直接対話」を活用</td>
+        <td>Ph.2</td>
+        <td>出展費用</td>
+        <td><span class="badge badge-red">新規追加</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-gold">中</span></td>
+        <td><strong>繊研新聞・WWD JAPAN</strong></td>
+        <td>PR・広報</td>
+        <td>ペルソナが毎日読む媒体への掲載。1本でメール100通分の信頼効果</td>
+        <td>Ph.3</td>
+        <td>無料（PR）</td>
+        <td><span class="badge badge-red">新規追加</span></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-gold">中</span></td>
+        <td><strong>紹介プログラム</strong></td>
+        <td>営業</td>
+        <td>最低コスト・最高成約率。最初の1社取引後に即設計・実行する</td>
+        <td>Ph.3</td>
+        <td>無料</td>
+        <td><span class="badge badge-red">新規追加</span></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== PHASE PLAN ===== -->
+<div class="page">
+  <div class="section section-alt">
+    <div class="section-label">06 / Execution Plan</div>
+    <div class="section-title">フェーズ別実行計画</div>
+    <div class="section-title-en">12-Month Phased Execution Roadmap</div>
+    <div class="divider"></div>
+
+    <div class="phases">
+      <div class="phase phase-1">
+        <div class="phase-tag">Phase 01 — 基盤構築</div>
+        <h3>信頼資産を作る</h3>
+        <p class="phase-period">Month 1〜3</p>
+        <ul>
+          <li>信頼データシート（日本語PDF）の作成</li>
+          <li>LPに証拠コンテンツを追加</li>
+          <li>7Stepシーケンスの設計と実行開始</li>
+          <li>LinkedIn・Instagram週次投稿の定常化</li>
+          <li>メール件名・本文の最適化と送信開始</li>
+          <li>ターゲット企業100社リストの作成</li>
+        </ul>
+      </div>
+      <div class="phase phase-2">
+        <div class="phase-tag">Phase 02 — 接触拡大</div>
+        <h3>物理・対面を増やす</h3>
+        <p class="phase-period">Month 4〜8</p>
+        <ul>
+          <li>革封筒郵送の実施（優先50社）</li>
+          <li>工場訪問プログラムをLPに掲載</li>
+          <li>FaW TOKYOの調査・出展or来場者リサーチ</li>
+          <li>展示会前後のLinkedIn投稿戦略実施</li>
+          <li>繊研新聞へのプレスリリース送付</li>
+          <li>初回問い合わせ対応フローの整備</li>
+        </ul>
+      </div>
+      <div class="phase phase-3">
+        <div class="phase-tag">Phase 03 — 関係深化</div>
+        <h3>紹介と実績で加速する</h3>
+        <p class="phase-period">Month 9〜12</p>
+        <ul>
+          <li>初回取引先から紹介プログラム開始</li>
+          <li>JETRO・業界団体ネットワークの活用</li>
+          <li>日本皮革産業連合会の会員リスト攻略</li>
+          <li>成約事例をLPとLinkedInに追加</li>
+          <li>WWD JAPANへの掲載打診</li>
+          <li>2年目戦略の策定</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== KPI ===== -->
+<div class="page">
+  <div class="section">
+    <div class="section-label">07 / KPI & Targets</div>
+    <div class="section-title">目標数値（KPI）</div>
+    <div class="section-title-en">Key Performance Indicators</div>
+    <div class="divider"></div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-val">100<span>社</span></div>
+        <div class="kpi-label">Month 1-3<br>ターゲットリスト作成数</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">15<span>%</span></div>
+        <div class="kpi-label">Month 1-3<br>メール開封率目標</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">5<span>社</span></div>
+        <div class="kpi-label">Month 4-8<br>商談獲得目標</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-val">2<span>社</span></div>
+        <div class="kpi-label">Month 9-12<br>契約獲得目標</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <table>
+        <tr>
+          <th>フェーズ</th>
+          <th>測定指標</th>
+          <th>目標値</th>
+          <th>測定方法</th>
+        </tr>
+        <tr>
+          <td>Phase 1</td>
+          <td>メール開封率</td>
+          <td>15%以上（業界平均10%）</td>
+          <td>Gmailの開封追跡ツール（Mailtrack等）</td>
+        </tr>
+        <tr>
+          <td>Phase 1</td>
+          <td>LinkedIn接続承認率</td>
+          <td>30%以上</td>
+          <td>LinkedIn Analytics</td>
+        </tr>
+        <tr>
+          <td>Phase 1</td>
+          <td>LP訪問数</td>
+          <td>月50UU以上</td>
+          <td>Canva Website Analytics</td>
+        </tr>
+        <tr>
+          <td>Phase 2</td>
+          <td>郵送後の返信率</td>
+          <td>5%以上（郵送50社→2〜3社返信）</td>
+          <td>郵送リストとの照合</td>
+        </tr>
+        <tr>
+          <td>Phase 2</td>
+          <td>商談獲得数</td>
+          <td>Month 4-8で累計5社</td>
+          <td>商談記録シート</td>
+        </tr>
+        <tr>
+          <td>Phase 3</td>
+          <td>契約獲得数</td>
+          <td>12ヶ月以内に2社</td>
+          <td>契約書の締結数</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BUDGET ===== -->
+<div class="page">
+  <div class="section section-alt">
+    <div class="section-label">08 / Budget</div>
+    <div class="section-title">費用概要</div>
+    <div class="section-title-en">Budget Overview</div>
+    <div class="divider"></div>
+
+    <table>
+      <tr>
+        <th>カテゴリ</th>
+        <th>アクション</th>
+        <th>費用</th>
+        <th>優先度</th>
+      </tr>
+      <tr>
+        <td><strong>コンテンツ制作</strong></td>
+        <td>信頼データシート（Canva PDF制作）</td>
+        <td>無料</td>
+        <td><span class="badge badge-red">最優先</span></td>
+      </tr>
+      <tr>
+        <td><strong>デジタル営業</strong></td>
+        <td>メール・LinkedIn DM・Instagram投稿</td>
+        <td>無料</td>
+        <td><span class="badge badge-red">最優先</span></td>
+      </tr>
+      <tr>
+        <td><strong>物理郵送</strong></td>
+        <td>革封筒＋QR資料 × 50社</td>
+        <td>約31,500円（630円×50社）</td>
+        <td><span class="badge badge-blue">高</span></td>
+      </tr>
+      <tr>
+        <td><strong>展示会</strong></td>
+        <td>FaW TOKYO 出展or来場リサーチ</td>
+        <td>出展：30〜80万円 / リサーチ：無料</td>
+        <td><span class="badge badge-blue">高</span></td>
+      </tr>
+      <tr>
+        <td><strong>工場訪問接待</strong></td>
+        <td>送迎・通訳・食事（訪問1社あたり）</td>
+        <td>約3〜5万円/社</td>
+        <td><span class="badge badge-gold">中</span></td>
+      </tr>
+      <tr>
+        <td><strong>PR</strong></td>
+        <td>繊研新聞・WWD JAPANへのプレスリリース</td>
+        <td>無料（記事掲載の場合）</td>
+        <td><span class="badge badge-gold">中</span></td>
+      </tr>
+    </table>
+
+    <div class="budget-note">
+      <strong>フェーズ1（Month 1-3）の実質費用：ほぼ0円。</strong><br>
+      最初の3ヶ月は信頼データシートの作成・メール送信・LinkedIn運用のみで開始できる。
+      費用が発生するのは郵送（Phase 2）と展示会（Phase 2-3）から。
+      まず費用ゼロで動き始め、反応を見ながらPhase 2に進む設計にすることで、リスクを最小化できる。
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONCLUSION ===== -->
+<div class="page">
+  <div class="section">
+    <div class="section-label">09 / Conclusion</div>
+    <div class="section-title">まとめ：3つの優先行動</div>
+    <div class="section-title-en">Three Actions To Start Immediately</div>
+    <div class="divider"></div>
+
+    <div class="cards-3">
+      <div class="card" style="border-top: 4px solid var(--green);">
+        <div class="card-num" style="color: var(--green); font-size: 20px; margin-bottom: 12px;">今週中に着手</div>
+        <div class="card-desc" style="font-size: 14px; line-height: 1.8;">
+          <strong>① 信頼データシートを日本語で作成する</strong><br>
+          不良率・納期遵守率・取引先の声・検品フローを1枚のPDFに集約。これが全ての土台になる。
+        </div>
+      </div>
+      <div class="card" style="border-top: 4px solid #1565c0;">
+        <div class="card-num" style="color: #1565c0; font-size: 20px; margin-bottom: 12px;">今月中に実行</div>
+        <div class="card-desc" style="font-size: 14px; line-height: 1.8;">
+          <strong>② 7Stepシーケンスで100社に接触を始める</strong><br>
+          ターゲット100社リストを作成し、Day 0からLinkedIn接続リクエストを送り始める。
+        </div>
+      </div>
+      <div class="card" style="border-top: 4px solid var(--accent);">
+        <div class="card-num" style="color: var(--accent); font-size: 20px; margin-bottom: 12px;">3ヶ月以内に整備</div>
+        <div class="card-desc" style="font-size: 14px; line-height: 1.8;">
+          <strong>③ 工場訪問プログラムをLPに掲載する</strong><br>
+          「来てください」ではなく「来やすい仕組み」を見せる。これが初回商談を成約に変える決め手。
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top: 32px;">
+      <h4>最終メッセージ</h4>
+      <p>
+        現状の戦略は「知ってもらう設計：70点」「信じてもらう設計：20点」「会いに来てもらう設計：10点」。<br>
+        日本のオーナー社長は<strong>信頼しなければ絶対に動かない。</strong><br>
+        この比率を逆転させることが、Sanhe Interfashionが日本市場で最初の契約を獲得するための唯一の道筋。
+      </p>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    SANHE INTERFASHION ｜ JAPAN MARKET STRATEGY ｜ CONFIDENTIAL ｜ 2026
+  </div>
+</div>
+
+</body>
+</html>
