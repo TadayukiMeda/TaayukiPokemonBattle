@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ライフスタイルWeek夏 2026 — Sanhe 展示会戦略レポート</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+    background: #f5f5f0;
+    color: #1a1a2e;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  /* ===== COVER ===== */
+  .cover {
+    background: linear-gradient(145deg, #0a1628 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: rgba(212,175,55,0.2);
+    border: 1px solid rgba(212,175,55,0.5);
+    color: #d4af37;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    margin-bottom: 40px;
+    width: fit-content;
+  }
+
+  .cover h1 {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    letter-spacing: 0.03em;
+  }
+
+  .cover h1 span {
+    color: #d4af37;
+    display: block;
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .cover-subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 50px;
+  }
+
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta-item {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .cover-meta-item .num {
+    font-size: 28px;
+    font-weight: 700;
+    color: #d4af37;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .cover-meta-item .label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .cover-bottom {
+    position: absolute;
+    bottom: 40px; left: 80px; right: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+  }
+
+  /* ===== PAGE LAYOUT ===== */
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 50px 60px;
+    page-break-after: always;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #16213e;
+  }
+
+  .section-num {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    color: #d4af37;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #16213e;
+  }
+
+  .section-title small {
+    display: block;
+    font-size: 11px;
+    color: #888;
+    font-weight: 400;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== KPI BOXES ===== */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .kpi-box {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 3px solid #16213e;
+  }
+
+  .kpi-box .kpi-num {
+    font-size: 30px;
+    font-weight: 700;
+    color: #16213e;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .kpi-box .kpi-num span { font-size: 14px; }
+  .kpi-box .kpi-label { font-size: 11px; color: #666; }
+
+  .kpi-box.gold { border-top-color: #d4af37; }
+  .kpi-box.gold .kpi-num { color: #b8860b; }
+
+  /* ===== INFO TABLE ===== */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 24px;
+  }
+
+  .info-table th {
+    background: #16213e;
+    color: #d4af37;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .info-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+  }
+
+  .info-table tr:last-child td { border-bottom: none; }
+
+  .info-table tr:nth-child(even) td { background: #fafafa; }
+
+  .info-table td:first-child {
+    font-weight: 600;
+    color: #16213e;
+    width: 180px;
+    background: #f5f7fa;
+  }
+
+  /* ===== HIGHLIGHT BOX ===== */
+  .highlight-box {
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    color: white;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+
+  .highlight-box h3 {
+    color: #d4af37;
+    font-size: 14px;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .highlight-box p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.8;
+  }
+
+  .highlight-box ul {
+    list-style: none;
+    margin-top: 10px;
+  }
+
+  .highlight-box ul li {
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .highlight-box ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #d4af37;
+  }
+
+  /* ===== EXPO SECTIONS ===== */
+  .expo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .expo-card {
+    background: white;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 4px solid #ccc;
+  }
+
+  .expo-card.primary { border-left-color: #d4af37; }
+  .expo-card.secondary { border-left-color: #16213e; }
+  .expo-card.neutral { border-left-color: #aaa; }
+
+  .expo-card .expo-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .expo-card.primary .expo-tag { color: #b8860b; }
+  .expo-card.secondary .expo-tag { color: #16213e; }
+  .expo-card.neutral .expo-tag { color: #666; }
+
+  .expo-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+  }
+
+  .expo-card p {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* ===== COMPANY TABLE ===== */
+  .company-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 24px;
+    font-size: 12px;
+  }
+
+  .company-table thead th {
+    background: #16213e;
+    color: #d4af37;
+    padding: 11px 12px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .company-table thead th:first-child { text-align: left; }
+
+  .company-table tbody tr { border-bottom: 1px solid #f0f0f0; }
+  .company-table tbody tr:last-child { border-bottom: none; }
+  .company-table tbody tr:hover { background: #fffdf5; }
+
+  .company-table td {
+    padding: 12px;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .company-table td:first-child { text-align: left; }
+
+  .company-name {
+    font-weight: 600;
+    color: #16213e;
+    font-size: 12px;
+  }
+
+  .company-desc {
+    font-size: 10px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  .badge-check { color: #22a36f; font-weight: 700; font-size: 14px; }
+  .badge-partial { color: #e0a800; font-weight: 700; font-size: 14px; }
+  .badge-unknown { color: #aaa; font-size: 14px; }
+  .badge-cross { color: #e05252; font-weight: 700; font-size: 14px; }
+
+  .type-a {
+    background: #16213e;
+    color: #d4af37;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .type-b {
+    background: #2d5016;
+    color: #7ac143;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .type-competitor {
+    background: #4a1010;
+    color: #e05252;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .type-irrelevant {
+    background: #f0f0f0;
+    color: #999;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .score-bar-wrap {
+    width: 100%;
+    background: #eee;
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+
+  .score-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #d4af37, #b8860b);
+  }
+
+  /* ===== FINDINGS ===== */
+  .findings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .finding-card {
+    background: white;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .finding-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #16213e;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+  }
+
+  .finding-card h4.warn { color: #c0392b; border-bottom-color: #f5c6c6; }
+  .finding-card h4.good { color: #1e8449; border-bottom-color: #c6f5d4; }
+
+  .finding-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: #444;
+  }
+
+  .finding-item .icon { flex-shrink: 0; font-size: 16px; }
+
+  /* ===== ACTION PLAN ===== */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 24px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #d4af37, #16213e);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 6px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #d4af37;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px #d4af37;
+  }
+
+  .timeline-date {
+    font-size: 10px;
+    font-weight: 700;
+    color: #d4af37;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .timeline-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #16213e;
+    margin-bottom: 6px;
+  }
+
+  .timeline-body {
+    background: white;
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-size: 12px;
+    color: #555;
+  }
+
+  .timeline-body ul { padding-left: 16px; }
+  .timeline-body ul li { margin-bottom: 4px; }
+
+  .urgent {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .urgent .urgent-icon { font-size: 20px; flex-shrink: 0; }
+
+  .urgent-content h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #856404;
+    margin-bottom: 4px;
+  }
+
+  .urgent-content p {
+    font-size: 12px;
+    color: #664d03;
+  }
+
+  /* ===== PITCH SECTION ===== */
+  .pitch-box {
+    background: linear-gradient(135deg, #fefce8, #fffbf0);
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+
+  .pitch-box h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #7a5c00;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pitch-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+
+  .pitch-step {
+    text-align: center;
+  }
+
+  .pitch-step .step-num {
+    width: 32px; height: 32px;
+    background: #16213e;
+    color: #d4af37;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 auto 10px;
+  }
+
+  .pitch-step h5 {
+    font-size: 12px;
+    font-weight: 700;
+    color: #16213e;
+    margin-bottom: 6px;
+  }
+
+  .pitch-step p {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .pitch-divider {
+    width: 24px; height: 2px;
+    background: #d4af37;
+    margin: 16px auto;
+    display: none;
+  }
+
+  /* ===== STRATEGY RECOMMENDATION ===== */
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .strategy-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    text-align: center;
+  }
+
+  .strategy-card .priority {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .strategy-card.p1 .priority { color: #c0392b; }
+  .strategy-card.p2 .priority { color: #d4af37; }
+  .strategy-card.p3 .priority { color: #3498db; }
+
+  .strategy-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #16213e;
+    margin-bottom: 8px;
+  }
+
+  .strategy-card p {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* ===== FOOTER ===== */
+  .report-footer {
+    text-align: center;
+    padding: 40px;
+    color: #aaa;
+    font-size: 11px;
+    border-top: 1px solid #eee;
+  }
+
+  /* ===== PRINT ===== */
+  .print-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #16213e, #0f3460);
+    color: #d4af37;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(22,33,62,0.4);
+    z-index: 1000;
+    letter-spacing: 0.05em;
+  }
+
+  .print-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  @media print {
+    .print-btn { display: none; }
+    body { background: white; }
+    .cover { min-height: 100vh; page-break-after: always; }
+    .page { page-break-after: always; }
+  }
+
+  /* ===== LEGEND ===== */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 11px;
+    color: #666;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+
+  /* Summary ribbon */
+  .ribbon {
+    display: inline-block;
+    background: #c0392b;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<div class="cover">
+  <div class="cover-badge">CONFIDENTIAL — INTERNAL PITCH DOCUMENT</div>
+  <h1>
+    <span>ライフスタイルWeek夏 2026</span>
+    Sanhe 展示会アプローチ戦略
+  </h1>
+  <div class="cover-subtitle">Japan Market Entry — Trade Show Intelligence Report</div>
+
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="num">6/24</span>
+      <span class="label">開催開始日</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="num">1,250<span style="font-size:14px">社</span></span>
+      <span class="label">総出展社数</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="num">42,000<span style="font-size:14px">名</span></span>
+      <span class="label">年間来場者数</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="num">71<span style="font-size:14px">%</span></span>
+      <span class="label">購買決定権保有バイヤー率</span>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <span>Sanhe Interfashion — Japan B2B Strategy</span>
+    <span>作成日：2026年5月26日</span>
+    <span>For Internal Use Only</span>
+  </div>
+</div>
+
+<!-- ===== PAGE 1: 展示会概要 ===== -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">展示会概要<small>SHOW OVERVIEW</small></div>
+  </div>
+
+  <table class="info-table">
+    <tbody>
+      <tr><td>展示会名</td><td><strong>ライフスタイルWeek 夏 2026</strong>（第29回）</td></tr>
+      <tr><td>主催</td><td>RX Japan 合同会社</td></tr>
+      <tr><td>会期</td><td><strong>2026年6月24日（水）〜 26日（金）</strong>&nbsp;&nbsp;3日間</td></tr>
+      <tr><td>会場</td><td>東京ビッグサイト（東展示棟）</td></tr>
+      <tr><td>出展規模</td><td>関連10展 合計 <strong>1,250社・38,000点</strong></td></tr>
+      <tr><td>来場者数</td><td>毎年 <strong>約42,000名</strong>（71.2%が購買決定権保有バイヤー）</td></tr>
+      <tr><td>性格</td><td>B2B 商談専門展（一般来場不可）</td></tr>
+      <tr><td>来場登録</td><td>無料 / <strong>事前登録締切：2026年6月19日（金）</strong></td></tr>
+      <tr><td>国際来場者</td><td>中国・韓国・台湾・タイ・ベトナム・米国・フランス等</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-header" style="margin-top:40px">
+    <div class="section-num" style="width:32px;height:32px;font-size:13px">—</div>
+    <div class="section-title" style="font-size:15px">構成展示会（10展）<small>COMPONENT EXPOS</small></div>
+  </div>
+
+  <div class="expo-grid">
+    <div class="expo-card primary">
+      <div class="expo-tag">★ Sanhe重点ターゲット</div>
+      <h4>国際 ファッション雑貨 EXPO</h4>
+      <p>バッグ・アクセサリー・革小物・帽子などファッション雑貨専門。OEM商談に最適。</p>
+    </div>
+    <div class="expo-card secondary">
+      <div class="expo-tag">参考調査</div>
+      <h4>国際 雑貨 EXPO</h4>
+      <p>セレクトショップ・雑貨店向け。生活雑貨・インテリア小物など幅広い出展。</p>
+    </div>
+    <div class="expo-card secondary">
+      <div class="expo-tag">参考調査</div>
+      <h4>推し活 EXPO</h4>
+      <p>グッズ・キャラクターコラボ系。革小物活用の可能性を探る。</p>
+    </div>
+    <div class="expo-card neutral">
+      <div class="expo-tag">対象外</div>
+      <h4>国際 インテリア EXPO</h4>
+      <p>家具・インテリア雑貨専門。Sanheのターゲット外。</p>
+    </div>
+    <div class="expo-card neutral">
+      <div class="expo-tag">対象外</div>
+      <h4>コスメ・美容 EXPO</h4>
+      <p>美容・スキンケア系。直接的な接点なし。</p>
+    </div>
+    <div class="expo-card neutral">
+      <div class="expo-tag">対象外</div>
+      <h4>国際 食器・鍋 EXPO 他</h4>
+      <p>キッチン・テーブルウェア系。Sanheのターゲット外。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 2: Sanheにとっての戦略的意義 ===== -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">Sanheにとっての戦略的意義<small>WHY THIS SHOW MATTERS</small></div>
+  </div>
+
+  <div class="highlight-box">
+    <h3>▌ 本展示会がSanheの日本市場開拓に直結する理由</h3>
+    <p>Sanheのターゲット（日本の革バッグ・財布ブランド企業）のバイヤーおよびオーナーが、年42,000名規模で来場する場。メールでは届かない「意思決定者への直接アプローチ」が3日間で実現できる唯一の機会。</p>
+    <ul>
+      <li>購買決定権保有バイヤー比率 71.2% — 担当者ではなくオーナーに直接話せる</li>
+      <li>競合OEM工場も出展しており、Sanheの差別化を「対比」で見せられる</li>
+      <li>セレクトショップ・バッグ専門店のバイヤーから「どこのOEM使ってるか」を逆聞きできる</li>
+      <li>国際バイヤーも来場 → 日本以外のアジア市場への横展開情報も収集可能</li>
+    </ul>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-box">
+      <div class="kpi-num">3<span>日間</span></div>
+      <div class="kpi-label">商談集中期間</div>
+    </div>
+    <div class="kpi-box gold">
+      <div class="kpi-num">71<span>%</span></div>
+      <div class="kpi-label">決定権保有バイヤー率</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-num">10<span>+</span></div>
+      <div class="kpi-label">アプローチ目標社数/日</div>
+    </div>
+    <div class="kpi-box gold">
+      <div class="kpi-num">6/19</div>
+      <div class="kpi-label">無料登録締切</div>
+    </div>
+  </div>
+
+  <div class="findings-grid">
+    <div class="finding-card">
+      <h4 class="good">✅ この展示会でできること</h4>
+      <div class="finding-item">
+        <span class="icon">🎯</span>
+        <span>OEM外注先を探している日本ブランドに直接ピッチ</span>
+      </div>
+      <div class="finding-item">
+        <span class="icon">🔍</span>
+        <span>競合OEM工場（中国・台湾・ベトナム）の価格・品質ポジションを調査</span>
+      </div>
+      <div class="finding-item">
+        <span class="icon">🤝</span>
+        <span>バイヤーとの名刺交換 → 後日メールフォローの許可を取得</span>
+      </div>
+      <div class="finding-item">
+        <span class="icon">📋</span>
+        <span>「今の工場に何か不満はあるか」を聞く市場調査</span>
+      </div>
+      <div class="finding-item">
+        <span class="icon">🌏</span>
+        <span>海外展開中の日本ブランドを現場で特定</span>
+      </div>
+    </div>
+    <div class="finding-card">
+      <h4 class="warn">⚠️ 現状の課題・限界</h4>
+      <div class="finding-item">
+        <span class="icon">🔒</span>
+        <span>出展者ディレクトリは事前登録なしにはアクセス困難（ログイン必須）</span>
+      </div>
+      <div class="finding-item">
+        <span class="icon">📂</span>
+        <span>調査済みセクション（ファッション雑貨）はOEM競合が多く、ターゲットブランドが少なかった</span>
+      </div>
+      <div class="finding-item">
+        <span class="icon">📌</span>
+        <span>バッグ・財布専門のセクション絞り込みが事前必須</span>
+      </div>
+      <div class="finding-item">
+        <span class="icon">⏰</span>
+        <span>来場登録締切まで残り<strong>約3週間</strong>（6月19日）</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 3: 出展者分析 ===== -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">出展者分析（調査済み分）<small>EXHIBITOR ANALYSIS — FASHION GOODS SECTION</small></div>
+  </div>
+
+  <div class="urgent">
+    <div class="urgent-icon">ℹ️</div>
+    <div class="urgent-content">
+      <h4>調査範囲について</h4>
+      <p>現時点では「国際ファッション雑貨EXPO」セクションの一部出展者データのみ分析済み。ログイン認証のためシステムによる全件取得は不可。ユーザー提供データをもとに分析。</p>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="legend-item"><span class="badge-check">✓</span> 条件合致</span>
+    <span class="legend-item"><span class="badge-partial">△</span> 部分合致/要調査</span>
+    <span class="legend-item"><span class="badge-unknown">?</span> 不明</span>
+    <span class="legend-item"><span class="badge-cross">✗</span> 非該当</span>
+    <span class="legend-item">条件：A革製品ブランド / B年商10-30億 / C東京 / D海外展開 / E海外OEM / F英語対応 / G自社ブランド</span>
+  </div>
+
+  <table class="company-table">
+    <thead>
+      <tr>
+        <th style="width:180px">企業名</th>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+        <th>D</th>
+        <th>E</th>
+        <th>F</th>
+        <th>G</th>
+        <th>分類</th>
+        <th>Sanheとの関係</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="company-name">株式会社エヌ・エックス</div>
+          <div class="company-desc">牛革ベルト・革小物 / Ryugasaki4716ブランド</div>
+        </td>
+        <td><span class="badge-partial">△</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-partial">△</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="type-a">要調査</span></td>
+        <td style="text-align:left;font-size:11px;color:#555">革製品ブランド有り。国内製造訴求強め → OEM検討余地要確認</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="company-name">D'JORA Lifestyles Pte Ltd</div>
+          <div class="company-desc">バッグ・レザー素材使用 / シンガポール法人</div>
+        </td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-partial">△</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="type-b">海外ブランド</span></td>
+        <td style="text-align:left;font-size:11px;color:#555">東京拠点なし → 優先度低。ただし英語商談可能</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="company-name">DEPARTURE INTERNATIONAL</div>
+          <div class="company-desc">旅行かばん / 台湾法人 / 7カ国展開</div>
+        </td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="type-irrelevant">対象外</span></td>
+        <td style="text-align:left;font-size:11px;color:#555">旅行かばん専門・革財布/ハンドバッグ非該当</td>
+      </tr>
+      <tr style="background:#fff8f8">
+        <td>
+          <div class="company-name">HAINING ALLBRIGHT TRADING</div>
+          <div class="company-desc">バッグ・財布OEM / 中国・浙江省工場</div>
+        </td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-partial">△</span></td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="type-competitor">Sanhe競合</span></td>
+        <td style="text-align:left;font-size:11px;color:#555">中国OEM工場 → Sanheの直接競合。価格・品質調査対象</td>
+      </tr>
+      <tr style="background:#fff8f8">
+        <td>
+          <div class="company-name">RIDER ENTERPRISE CO.</div>
+          <div class="company-desc">台湾・中国・ベトナム 3工場OEM</div>
+        </td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="type-competitor">Sanhe競合</span></td>
+        <td style="text-align:left;font-size:11px;color:#555">多拠点OEM工場。複数国対応がSanheとの差別化ポイント</td>
+      </tr>
+      <tr style="background:#fff8f8">
+        <td>
+          <div class="company-name">株式会社 茅</div>
+          <div class="company-desc">日本OEM会社・中国自社工場使用</div>
+        </td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-partial">△</span></td>
+        <td><span class="badge-partial">△</span></td>
+        <td><span class="badge-check">✓</span></td>
+        <td><span class="badge-partial">△</span></td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="type-competitor">競合/代理店候補</span></td>
+        <td style="text-align:left;font-size:11px;color:#555">日本系OEM仲介。競合だが代理店化できる可能性も</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="company-name">その他 15社</div>
+          <div class="company-desc">傘・タオル・手袋・シリコン・デニム等</div>
+        </td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-cross">✗</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="badge-unknown">?</span></td>
+        <td><span class="type-irrelevant">対象外</span></td>
+        <td style="text-align:left;font-size:11px;color:#555">革製品・バッグ事業なし。接触不要。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <h3>▌ 分析サマリー — このセクションの結論</h3>
+    <p>今回調査した「ファッション雑貨EXPO」セクションでは、<strong>Sanheの真のターゲット（日本の革バッグ/財布ブランド）はほぼ不在</strong>でした。出展者の多くが中国・台湾のOEM工場（競合）か、革以外の雑貨メーカーです。</p>
+    <ul>
+      <li>真のターゲット企業は「バッグ・革小物」カテゴリ絞り込み後のセクションにいる可能性が高い</li>
+      <li>競合OEM工場の出展は、逆にSanheの差別化ポジションを整理する好機</li>
+      <li>全1,250社の中にはターゲット企業が存在するはず → 来場後のブース訪問で特定が現実的</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== PAGE 4: 当日アクションプラン ===== -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">当日アクションプラン<small>ON-SITE ACTION PLAN</small></div>
+  </div>
+
+  <div class="pitch-box">
+    <h3>📋 当日の動き方 — 4ステップ</h3>
+    <div class="pitch-steps">
+      <div class="pitch-step">
+        <div class="step-num">1</div>
+        <h5>競合マッピング</h5>
+        <p>中国・台湾OEM工場ブースを先に回る。価格・MOQ・リードタイム・品質ポジションを把握。</p>
+      </div>
+      <div class="pitch-step">
+        <div class="step-num">2</div>
+        <h5>ターゲット特定</h5>
+        <p>バッグ・革小物系の日本ブランドブースを探す。ペルソナ条件（年商・東京・海外展開）を目視確認。</p>
+      </div>
+      <div class="pitch-step">
+        <div class="step-num">3</div>
+        <h5>ファーストコンタクト</h5>
+        <p>「Sanheのカタログ＋サンプル」を持参。30秒エレベーターピッチ後、名刺交換と次回アポを打診。</p>
+      </div>
+      <div class="pitch-step">
+        <div class="step-num">4</div>
+        <h5>翌日フォロー</h5>
+        <p>展示会終了後72時間以内にメール送信。韓国工場見学の招待状を添付。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-header" style="margin-top:36px">
+    <div class="section-num" style="width:32px;height:32px;font-size:13px">—</div>
+    <div class="section-title" style="font-size:15px">事前準備チェックリスト<small>PRE-SHOW CHECKLIST</small></div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">今週中 — 5月30日まで</div>
+      <div class="timeline-title">来場者登録（最優先） <span class="ribbon">要対応</span></div>
+      <div class="timeline-body">
+        <ul>
+          <li>lifestyle-expo.jp より来場者登録を完了（無料）</li>
+          <li>登録時に「バイヤー」「仕入れ・OEM商談目的」を選択</li>
+          <li><strong>締切：2026年6月19日（金）— 過ぎると有料になる可能性あり</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">6月1日〜10日</div>
+      <div class="timeline-title">出展者リスト事前調査</div>
+      <div class="timeline-body">
+        <ul>
+          <li>来場者登録後、ディレクトリにアクセスし「バッグ」「革小物」「財布」カテゴリで絞り込み</li>
+          <li>ペルソナ条件A〜Gに近い出展者を10〜15社リストアップ</li>
+          <li>各社の公式サイトで年商・所在地・海外展開状況を事前確認</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">6月10日〜20日</div>
+      <div class="timeline-title">ピッチ資料・持参物の準備</div>
+      <div class="timeline-body">
+        <ul>
+          <li>Sanhe会社概要（日本語版）— A4両面、1枚</li>
+          <li>革サンプル（財布・ハンドバッグ用素材スウォッチ）を持参</li>
+          <li>価格表（MOQ・リードタイム・対応素材）日本語版</li>
+          <li>名刺（日本語表記、韓国工場の写真入り推奨）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">6月24日〜26日（当日）</div>
+      <div class="timeline-title">展示会訪問・商談実施</div>
+      <div class="timeline-body">
+        <ul>
+          <li>国際ファッション雑貨EXPOを重点的に回る（東展示棟）</li>
+          <li>1日10社アプローチ目標（3日間で30社）</li>
+          <li>名刺にメモ書き → その日の夜に整理</li>
+          <li>競合OEM工場のカタログ・価格情報を収集</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">6月27日〜30日（展示会後）</div>
+      <div class="timeline-title">フォローアップ送信</div>
+      <div class="timeline-body">
+        <ul>
+          <li>名刺交換した全社にお礼メール送信（72時間以内）</li>
+          <li>温度感の高い企業に韓国工場見学の案内を送付</li>
+          <li>次の展示会（FaW TOKYO 10月）に向けたアポ打診</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 5: 次の展示会ロードマップ ===== -->
+<div class="page">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">展示会ロードマップ 2026<small>TRADE SHOW ROADMAP</small></div>
+  </div>
+
+  <div class="strategy-grid">
+    <div class="strategy-card p1">
+      <div class="priority">★★★ 最優先</div>
+      <h4>ライフスタイルWeek夏<br>6/24〜26</h4>
+      <p>来場登録済み後の初回実践。競合分析と名刺収集を最優先目標とする。</p>
+    </div>
+    <div class="strategy-card p2">
+      <div class="priority">★★ 重要</div>
+      <h4>FaW TOKYO 秋<br>10/7〜9</h4>
+      <p>850社・日本最大ファッション展。「ブランド&デザイナーEXPO」に革バッグブランドが集中。</p>
+    </div>
+    <div class="strategy-card p1">
+      <div class="priority">★★★ 本命</div>
+      <h4>ハンドバッグかばん見本市<br>11/10〜</h4>
+      <p>バッグ業界専門B2B見本市。日本バッグ協会主催。ペルソナ直撃の精度最高の展示会。</p>
+    </div>
+  </div>
+
+  <table class="info-table">
+    <thead>
+      <tr>
+        <th>展示会</th>
+        <th>時期</th>
+        <th>規模</th>
+        <th>精度</th>
+        <th>優先アクション</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ライフスタイルWeek夏</strong></td>
+        <td>6/24〜26</td>
+        <td>1,250社</td>
+        <td>★★☆</td>
+        <td>来場登録（6/19締切）</td>
+      </tr>
+      <tr>
+        <td><strong>FaW TOKYO 秋</strong></td>
+        <td>10/7〜9</td>
+        <td>850社</td>
+        <td>★★★</td>
+        <td>7月に出展者リスト公開予定 → チェック</td>
+      </tr>
+      <tr>
+        <td><strong>ハンドバッグかばん見本市（TBL）</strong></td>
+        <td>11/10〜</td>
+        <td>バッグ専門</td>
+        <td>★★★</td>
+        <td>8月に来場登録・事前アポ打診</td>
+      </tr>
+      <tr>
+        <td>TOKYO LEATHER FAIR</td>
+        <td>12/3〜4</td>
+        <td>55社</td>
+        <td>★★☆</td>
+        <td>素材工場・職人系 → 競合情報収集</td>
+      </tr>
+      <tr>
+        <td>START EXHIBITION（浅草）</td>
+        <td>未定</td>
+        <td>23社</td>
+        <td>★★★</td>
+        <td>東日本バッグ工業組合に問い合わせ</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box" style="margin-top:32px">
+    <h3>▌ 推奨戦略 — 3ステップアプローチ</h3>
+    <ul>
+      <li><strong>Step 1（6月）ライフスタイルWeek夏</strong> — 競合調査・日本市場の肌感をつかむ。名刺30枚収集目標。</li>
+      <li><strong>Step 2（10月）FaW TOKYO秋</strong> — 6月で得た情報をもとにピッチを洗練。「具体的に提案できる」状態で臨む。</li>
+      <li><strong>Step 3（11月）ハンドバッグかばん見本市</strong> — ペルソナ直撃。本命商談。韓国工場見学アポを複数社から取る。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="report-footer">
+  <p>Sanhe Interfashion — Japan Market Entry Strategy</p>
+  <p style="margin-top:6px">本資料は社内ピッチ用途に限定。無断転載・外部共有禁止。作成日：2026年5月26日</p>
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ PDF出力</button>
+
+</body>
+</html>
