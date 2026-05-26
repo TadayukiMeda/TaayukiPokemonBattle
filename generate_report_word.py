@@ -649,10 +649,10 @@ add_findings_grid(doc,
 doc.add_page_break()
 
 
-# ── PAGE 3: 出展者分析 ────────────────────────────────────────
+# ── PAGE 3: 出展者分析（10社）────────────────────────────────
 
-add_section_heading(doc, 3, '出展者分析 — アプローチ候補企業',
-                    'EXHIBITOR ANALYSIS — TARGET & COMPETITOR COMPANIES')
+add_section_heading(doc, 3, '出展者分析（調査済み10社）',
+                    'EXHIBITOR ANALYSIS — 10 COMPANIES IDENTIFIED')
 
 # info note
 note_tbl = doc.add_table(rows=1, cols=1)
@@ -668,87 +668,176 @@ set_cell_border(nc, top={'val': 'single', 'sz': 4, 'color': 'FDE68A'},
 cell_para(nc, 'ℹ  調査範囲について', bold=True, size=10, color=YELLOW_DARK, before=0, after=40)
 note_text = nc.add_paragraph()
 set_para_spacing(note_text, before=0, after=0)
-add_run(note_text, '「ファッション雑貨EXPO」「インバウンド向けグッズEXPO」セクションの出展者データ（ユーザー提供）を分析。ログイン認証のためシステムによる全件取得は不可。全1,250社中の一部分析。', size=9, color=YELLOW_DARK)
+add_run(note_text,
+        '「ファッション雑貨EXPO」「インバウンド向けグッズEXPO」セクションの出展者データ（全3バッチ）を分析。'
+        'ログイン認証のためシステムによる全件取得は不可。全1,250社中の抽出分析。',
+        size=9, color=YELLOW_DARK)
 doc.add_paragraph()
 
-# Legend
-p_legend = doc.add_paragraph()
-set_para_spacing(p_legend, before=0, after=80)
-add_run(p_legend, '凡例：', bold=True, size=9, color=TEXT_MAIN)
-add_run(p_legend, ' ✓ 条件合致  ', size=9, color=GREEN_DARK)
-add_run(p_legend, '△ 部分合致  ', size=9, color=RGBColor(0xD9, 0x77, 0x06))
-add_run(p_legend, '? 不明  ', size=9, color=TEXT_MUTED)
-add_run(p_legend, '✗ 非該当  ', size=9, color=RGBColor(0xDC, 0x26, 0x26))
-add_run(p_legend, '　条件：A革製品 / B年商 / C東京 / D海外展開 / E海外OEM / F英語対応 / G自社ブランド', size=8, color=TEXT_MUTED)
+# ── Unified 10-company table ──────────────────────────────────
+# Columns: 企業名/所在地 | 主要製品 | OEM/ODM | 製造拠点 | 分類 | 商談のポイント | 優先度
+COL_WIDTHS = [3.5, 2.4, 1.2, 2.2, 2.2, 5.5, 1.0]
+HEADERS    = ['企業名 / 所在地', '主要製品', 'OEM/\nODM', '製造拠点', '分類', '商談のポイント', '優先度']
+BD = {'val': 'single', 'sz': 4, 'color': 'DBEAFE'}
+BD_RED = {'val': 'single', 'sz': 4, 'color': 'FECACA'}
 
-# Sub heading targets
-p_sub = doc.add_paragraph()
-set_para_spacing(p_sub, before=80, after=40)
-add_run(p_sub, '◎ アプローチ優先ターゲット（5社）', bold=True, size=11, color=BLUE_DARK)
+# section divider helper
+def add_divider_row(tbl, label, bg_hex, text_hex):
+    row = tbl.add_row()
+    merged = row.cells[0]
+    for i in range(1, len(COL_WIDTHS)):
+        merged = merged.merge(row.cells[i])
+    set_cell_bg(merged, RGBColor(int(bg_hex[0:2],16), int(bg_hex[2:4],16), int(bg_hex[4:6],16)))
+    set_cell_margins(merged, 60, 60, 140, 80)
+    tc = merged._tc
+    tcPr = tc.get_or_add_tcPr()
+    cell_para(merged, '▌  ' + label, bold=True, size=9,
+              color=RGBColor(int(text_hex[0:2],16), int(text_hex[2:4],16), int(text_hex[4:6],16)),
+              before=40, after=40)
 
-target_companies = [
-    ('株式会社 ラビット',
-     'バッグ・財布メーカー / 創業48年 / 東京・中野区',
-     ['check', 'partial', 'check', 'unknown', 'check', 'partial', 'check'],
-     '★★★ 最優先',
-     '自社ブランドMineed by Osel。中国協力工場使用（社員常駐）。韓国工場への切替提案余地あり'),
-    ('株式会社 HKM（SIXWHEELSLIFE）',
-     '本革バッグ・財布・ポーチ / 浅草橋・日本橋横山町',
-     ['check', 'unknown', 'check', 'unknown', 'partial', 'partial', 'check'],
-     '★★ 優先',
-     '京都西陣織×本革の独自路線。ODM対応可。インバウンドEXPOセクション出展 → 海外志向強め'),
-    ('株式会社 HARU',
-     'Pig Skin革製品 バッグ・ポーチ / ODM事業あり',
-     ['check', 'unknown', 'unknown', 'unknown', 'check', 'partial', 'check'],
-     '★★ 優先',
-     '代理店募集中・ODM対応可。Made in Japan主軸だが外注先拡大に前向きな可能性'),
-    ('株式会社 シフレ',
-     'スーツケース・バッグ / OEM・ODM事業部あり',
-     ['partial', 'partial', 'unknown', 'partial', 'check', 'partial', 'check'],
-     '★ 参考',
-     '中国工場使用。OEM/ODM事業あり。スーツケースが主力のため革小物との関連性要確認'),
-    ('株式会社 エヌ・エックス',
-     '牛革ベルト・革小物 / Ryugasaki4716ブランド',
-     ['partial', 'unknown', 'unknown', 'unknown', 'partial', 'unknown', 'check'],
-     '★ 参考',
-     '国内製造訴求強め。OEM検討余地は要確認。小物特化のため量産規模が小さい可能性'),
+def add_data_row(tbl, name, loc, product, oem, base, cls_label, cls_color, note, priority_text, bg_color):
+    row = tbl.add_row()
+    for ci, w in enumerate(COL_WIDTHS):
+        tbl.columns[ci].width = Cm(w)
+    cells = row.cells
+
+    # col 0: name + location
+    set_cell_bg(cells[0], bg_color)
+    set_cell_margins(cells[0], 60, 60, 100, 80)
+    set_cell_border(cells[0], top=BD, bottom=BD, left=BD, right=BD)
+    p_name = cell_para(cells[0], name, bold=True, size=10, color=BLUE_DARK, before=40, after=10)
+    p_loc  = cells[0].add_paragraph()
+    set_para_spacing(p_loc, before=0, after=40)
+    add_run(p_loc, loc, size=8, color=TEXT_MUTED)
+
+    # cols 1-5
+    data = [product, oem, base, cls_label, note]
+    for ci, val in enumerate(data, start=1):
+        set_cell_bg(cells[ci], bg_color)
+        set_cell_margins(cells[ci], 60, 60, 80, 80)
+        set_cell_border(cells[ci], top=BD, bottom=BD, left=BD, right=BD)
+        color = cls_color if ci == 4 else GRAY_TEXT
+        bold  = ci == 4
+        align = WD_ALIGN_PARAGRAPH.CENTER if ci in (2, 3) else WD_ALIGN_PARAGRAPH.LEFT
+        cell_para(cells[ci], val, bold=bold, size=9, color=color, align=align, before=40, after=40)
+
+    # col 6: priority
+    set_cell_bg(cells[6], bg_color)
+    set_cell_margins(cells[6], 60, 60, 60, 60)
+    set_cell_border(cells[6], top=BD, bottom=BD, left=BD, right=BD)
+    cell_para(cells[6], priority_text, bold=True, size=10, color=BLUE_MID,
+              align=WD_ALIGN_PARAGRAPH.CENTER, before=40, after=40)
+
+# Build table (header + 10 data rows + 3 section dividers)
+tbl10 = doc.add_table(rows=1, cols=len(COL_WIDTHS))
+set_table_no_spacing(tbl10)
+for ci, w in enumerate(COL_WIDTHS):
+    tbl10.columns[ci].width = Cm(w)
+
+# Header
+hrow = tbl10.rows[0]
+for ci, h in enumerate(HEADERS):
+    c = hrow.cells[ci]
+    set_cell_bg(c, BLUE_DARK)
+    set_cell_margins(c, 60, 60, 80, 80)
+    set_cell_border(c, top=BD, bottom=BD, left=BD, right=BD)
+    cell_para(c, h, bold=True, size=9, color=BLUE_PALE,
+              align=WD_ALIGN_PARAGRAPH.CENTER, before=40, after=40)
+
+# Section 1: Targets
+add_divider_row(tbl10, 'アプローチターゲット（商談候補）', '0f2d5e', '93c5fd')
+
+targets = [
+    ('株式会社 ラビット', '東京・中野区 / 創業48年',
+     'バッグ・財布・革小物', 'あり', '中国（協力工場\n社員常駐）',
+     '★★★ 最優先', BLUE_MID,
+     '自社ブランド「Mineed by Osel」保有。中国工場依存 → 韓国切替提案の余地大。経営者に直接ピッチ可。',
+     '🔵🔵🔵', BLUE_BG),
+    ('株式会社 HKM', '東京・浅草橋 / SIXWHEELSLIFE',
+     '本革バッグ・財布・ポーチ', 'ODM可', '外注（詳細未確認）',
+     '★★ 優先', BLUE_MID,
+     '京都西陣織×本革の差別化ブランド。ODM対応可・インバウンドEXPOに出展 → 海外展開志向あり。',
+     '🔵🔵', BLUE_BG),
+    ('株式会社 HARU', '所在地調査中',
+     'Pig Skin革製品\nバッグ・ポーチ', 'ODM可', 'Made in Japan主軸',
+     '★★ 優先', BLUE_MID,
+     '代理店募集中・ODM対応可。外注先拡大に前向きな可能性。Made in Japanからの分散提案が刺さりうる。',
+     '🔵🔵', WHITE),
+    ('株式会社 シフレ', '所在地調査中',
+     'スーツケース・バッグ全般', 'あり', '中国工場',
+     '★ 参考', TEXT_MUTED,
+     'OEM/ODM事業部あり。スーツケース主力のため革小物の割合要確認。中国→韓国の切替メリットを訴求。',
+     '🔵', BLUE_BG),
+    ('株式会社 エヌ・エックス', '所在地調査中 / Ryugasaki4716',
+     '牛革ベルト・革小物', '要確認', '国内製造訴求',
+     '★ 参考', TEXT_MUTED,
+     '自社ブランド保有。国内製造訴求が強いためOEM移行ハードル高め。小物特化で量産規模が小さい可能性。',
+     '🔵', WHITE),
+    ("D'JORA Lifestyles", 'シンガポール法人 / 日本出展',
+     'バッグ・レザー製品', '要確認', '外注（詳細未確認）',
+     '★ 参考', TEXT_MUTED,
+     '英語商談可能。東京拠点なし → 優先度低め。ただし海外展開済みのため韓国工場との相性を探る価値あり。',
+     '🔵', BLUE_BG),
 ]
+for t in targets:
+    add_data_row(tbl10, *t)
 
-add_target_table(doc, target_companies)
+# Section 2: Partner candidates
+add_divider_row(tbl10, '代理店・パートナー候補（日本側OEM仲介）', '1e40af', 'bfdbfe')
 
-# Sub heading competitors
-p_sub2 = doc.add_paragraph()
-set_para_spacing(p_sub2, before=80, after=40)
-add_run(p_sub2, '◎ 競合・参考調査対象（OEM工場 5社）', bold=True, size=11, color=RED_DARK)
-
-competitor_companies = [
-    ('HAINING ALLBRIGHT TRADING', 'バッグ・財布OEM / 中国・浙江省工場',
-     '中国', '中国OEMメーカー。低価格・大ロット対応が強み', '直接競合',
-     '価格帯・MOQ・素材ラインナップを詳細調査。Sanheの韓国品質との差別化材料'),
-    ('RIDER ENTERPRISE CO.', '台湾・中国・ベトナム 3工場OEM',
-     '台湾', '複数国3工場体制。多様なMOQ対応', '直接競合',
-     '多拠点が強み。Sanheの「韓国専門特化」の逆算ポジションを整理する素材'),
-    ('ANHUI RONGDA BAGS', 'バッグ・小物OEM / 中国・安徽省',
-     '中国', '中国OEM工場。合成皮革・本革対応', '直接競合',
-     '素材別の価格差・リードタイム差を比較。バイヤーの評価軸を収集'),
-    ('株式会社 茅', '日本OEM仲介・中国自社工場使用',
-     '日本', '日本語対応OEM仲介業。日本ブランドの中間層', '競合 / 代理店候補',
-     '競合だが日本代理店化できる可能性あり。中国工場依存からの切替提案'),
-    ('株式会社 ユーティ', 'OEM受託製造（中国工場）/ バッグ・雑貨',
-     '日本', '日本OEM仲介業。中国工場ネットワーク保有', '競合 / 代理店候補',
-     'ユーティを通じたバイヤーへの間接アプローチも検討可能'),
+partners = [
+    ('株式会社 茅', '日本 / OEM仲介業',
+     'バッグ・小物OEM仲介', 'あり', '中国（自社工場）',
+     '代理店候補', RGBColor(0x1E, 0x40, 0xAF),
+     '中国工場を自社保有するOEM仲介。競合だが日本側代理店として取り込める可能性あり。中国→韓国への切替提案から関係構築。',
+     '🟡', RGBColor(0xF0, 0xF9, 0xFF)),
+    ('株式会社 ユーティ', '日本 / OEM受託',
+     'バッグ・雑貨OEM受託', 'あり', '中国工場ネットワーク',
+     '代理店候補', RGBColor(0x1E, 0x40, 0xAF),
+     '日本語対応OEM仲介。中国工場依存 → Sanheを供給元として提案。日本ブランドへの間接アプローチルートになりうる。',
+     '🟡', WHITE),
 ]
+for p in partners:
+    add_data_row(tbl10, *p)
 
-add_competitor_table(doc, competitor_companies)
+# Section 3: Competitor research
+add_divider_row(tbl10, '競合調査対象（価格・品質ベンチマーク用）', '7f1d1d', 'fecaca')
+
+competitors = [
+    ('HAINING ALLBRIGHT', '中国・浙江省 / OEM工場',
+     'バッグ・財布OEM', 'あり', '中国',
+     '直接競合', RED_DARK,
+     '低価格・大ロット対応。価格帯・MOQ・リードタイムを調査してSanheの差別化ポジションを数値化する。',
+     '🔴', RED_SOFT),
+    ('RIDER ENTERPRISE CO.', '台湾 / 台中・中国・ベトナム',
+     'バッグ・小物OEM', 'あり', '台湾・中国・ベトナム',
+     '直接競合', RED_DARK,
+     '3カ国工場体制が強み。多拠点対応 vs Sanheの「韓国品質特化」の差別化軸を整理する比較材料。',
+     '🔴', WHITE),
+]
+for c in competitors:
+    add_data_row(tbl10, *c)
+
+doc.add_paragraph()
+
+# Legend row
+p_leg = doc.add_paragraph()
+set_para_spacing(p_leg, before=40, after=80)
+add_run(p_leg, '優先度：', bold=True, size=9, color=TEXT_MAIN)
+add_run(p_leg, ' 🔵🔵🔵 最優先商談  ', size=9, color=TEXT_MUTED)
+add_run(p_leg, '🔵🔵 優先訪問  ', size=9, color=TEXT_MUTED)
+add_run(p_leg, '🔵 可能なら接触  ', size=9, color=TEXT_MUTED)
+add_run(p_leg, '🟡 関係構築候補  ', size=9, color=TEXT_MUTED)
+add_run(p_leg, '🔴 競合調査のみ', size=9, color=TEXT_MUTED)
 
 add_highlight_box(doc,
-    '▌ 分析サマリー — 全バッチ調査の結論',
+    '▌ 分析サマリー',
     [
-        '最優先：株式会社ラビット（中国工場からの切替余地、創業48年の実績あり）',
-        '競合OEM工場5社は「価格・品質調査対象」として積極的にブースを訪問する',
-        '全1,250社のうちまだ未調査セクションが多数 → 来場後のフロア探索が依然重要',
+        '最優先：株式会社ラビット（創業48年・中国工場依存からの切替余地が最も大きい）',
+        '競合2社は商談ではなく「ブース立ち寄り・カタログ収集・価格確認」のみで十分',
+        '全1,250社のうち未調査セクションが多数残存 → 来場後のフロア探索でさらに候補を増やせる',
     ],
-    body_text='調査した出展者（ファッション雑貨EXPO・インバウンドEXPO計3バッチ）では、直接アプローチ候補は5社に絞られた。多くはOEM競合または非関連雑貨。'
+    body_text='調査した出展者（全3バッチ）の中から10社を選定。うちターゲット商談候補6社、代理店候補2社、競合調査対象2社。'
 )
 
 doc.add_page_break()
