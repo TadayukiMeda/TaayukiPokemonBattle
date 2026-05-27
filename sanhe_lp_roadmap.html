@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanhe LP制作ロードマップ — 知識ゼロからの実行ガイド</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --bd:#0f2d5e; --bm:#1a56db; --bl:#3b82f6;
+    --bt:#dbeafe; --bb:#eff6ff;
+    --tx:#1e3a5f; --mu:#64748b; --fa:#94a3b8;
+    --sf:#fff; --br:#e2e8f0;
+    --gd:#166534; --gb:#f0fdf4; --gl:#bbf7d0;
+    --rd:#991b1b; --rb:#fff5f5; --rl:#fecaca;
+    --od:#92400e; --ob:#fffbeb; --ol:#fde68a;
+    --yd:#854d0e; --yb:#fefce8;
+  }
+  body{
+    font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;
+    background:#f2f5fb; color:var(--tx); font-size:13px; line-height:1.8;
+  }
+
+  /* COVER */
+  .cover{
+    background:linear-gradient(150deg,#071530 0%,#0f2d5e 55%,#163a7a 100%);
+    color:#fff; padding:72px 100px 60px; position:relative; overflow:hidden;
+  }
+  .cover::before{
+    content:'';position:absolute;top:-80px;right:-80px;
+    width:480px;height:480px;border-radius:50%;
+    background:radial-gradient(circle,rgba(59,130,246,.14) 0%,transparent 70%);
+  }
+  .ctag{
+    display:inline-block;background:rgba(147,197,253,.14);
+    border:1px solid rgba(147,197,253,.3);color:#93c5fd;
+    padding:5px 16px;border-radius:20px;font-size:10px;
+    letter-spacing:.12em;margin-bottom:28px;
+  }
+  .cover h1{font-size:30px;font-weight:700;line-height:1.35;margin-bottom:10px;}
+  .cover h1 span{color:#93c5fd;font-weight:300;font-size:20px;display:block;margin-bottom:6px;}
+  .cover-sub{font-size:13px;color:rgba(255,255,255,.58);margin-bottom:52px;}
+  .cover-stat{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+    position:relative;z-index:1;
+  }
+  .csi{
+    background:rgba(255,255,255,.07);border:1px solid rgba(147,197,253,.18);
+    border-radius:10px;padding:16px;text-align:center;
+  }
+  .csi .n{font-size:20px;font-weight:700;color:#93c5fd;display:block;margin-bottom:3px;}
+  .csi .l{font-size:10px;color:rgba(255,255,255,.48);}
+
+  /* LAYOUT */
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 48px;}
+
+  /* SECTION */
+  .sec{margin-bottom:52px;}
+  .sh{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding-bottom:11px;border-bottom:2px solid var(--bt);}
+  .sn{
+    width:40px;height:40px;background:linear-gradient(135deg,var(--bd),var(--bm));
+    color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:15px;font-weight:700;flex-shrink:0;
+  }
+  .st{font-size:17px;font-weight:700;color:var(--bd);}
+  .st small{display:block;font-size:9px;color:var(--fa);letter-spacing:.1em;font-weight:400;margin-top:2px;}
+
+  /* PHASE BANNER */
+  .phase-banner{
+    border-radius:10px;padding:18px 24px;margin-bottom:20px;
+    display:flex;align-items:center;gap:16px;
+  }
+  .phase-banner.blue  {background:var(--bd);color:#fff;}
+  .phase-banner.green {background:#14532d;color:#fff;}
+  .phase-banner.orange{background:#78350f;color:#fff;}
+  .phase-banner.red   {background:#7f1d1d;color:#fff;}
+  .phase-banner.purple{background:#3b0764;color:#fff;}
+  .phase-banner .pb-num{
+    width:48px;height:48px;border-radius:50%;
+    background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;font-weight:700;flex-shrink:0;
+  }
+  .phase-banner .pb-body h3{font-size:15px;font-weight:700;margin-bottom:2px;}
+  .phase-banner .pb-body p{font-size:11px;opacity:.75;}
+  .phase-banner .pb-time{
+    margin-left:auto;text-align:right;flex-shrink:0;
+  }
+  .phase-banner .pb-time span{
+    display:inline-block;background:rgba(255,255,255,.18);
+    border-radius:20px;padding:4px 14px;font-size:11px;font-weight:600;
+  }
+
+  /* STEP CARDS */
+  .steps{display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
+  .step{
+    background:var(--sf);border-radius:10px;padding:18px 20px;
+    box-shadow:0 1px 5px rgba(15,45,94,.07);
+    display:grid;grid-template-columns:36px 1fr auto;gap:14px;align-items:start;
+  }
+  .step-circle{
+    width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:700;flex-shrink:0;color:#fff;
+  }
+  .step-circle.blue  {background:var(--bm);}
+  .step-circle.green {background:#16a34a;}
+  .step-circle.orange{background:#d97706;}
+  .step-circle.red   {background:#dc2626;}
+  .step-circle.purple{background:#7c3aed;}
+  .step-circle.gray  {background:#64748b;}
+
+  .step-body h4{font-size:13px;font-weight:700;color:var(--bd);margin-bottom:5px;}
+  .step-body p {font-size:12px;color:var(--mu);line-height:1.7;}
+  .step-body ul{padding-left:16px;margin-top:6px;}
+  .step-body ul li{font-size:12px;color:var(--mu);margin-bottom:3px;}
+  .step-meta{text-align:right;flex-shrink:0;}
+
+  /* TAGS */
+  .tag{
+    display:inline-block;padding:2px 10px;border-radius:12px;
+    font-size:9px;font-weight:700;letter-spacing:.05em;
+  }
+  .tag.must  {background:#fee2e2;color:var(--rd);}
+  .tag.tool  {background:var(--bt);color:var(--bd);}
+  .tag.do-it {background:var(--gb);color:var(--gd);}
+  .tag.hire  {background:var(--ob);color:var(--od);}
+  .tag.both  {background:#f3e8ff;color:#6d28d9;}
+  .tag.week  {background:#f1f5f9;color:var(--mu);font-size:10px;}
+
+  /* TOOL CARD */
+  .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+  .tool-card{
+    background:var(--sf);border-radius:10px;padding:16px 18px;
+    box-shadow:0 1px 5px rgba(15,45,94,.07);
+    border-top:3px solid var(--bm);
+  }
+  .tool-card.green{border-top-color:#16a34a;}
+  .tool-card.orange{border-top-color:#d97706;}
+  .tool-card h5{font-size:12px;font-weight:700;color:var(--bd);margin-bottom:6px;}
+  .tool-card p {font-size:11px;color:var(--mu);line-height:1.6;}
+  .tool-card .tool-name{
+    font-size:14px;font-weight:700;color:var(--bm);margin-bottom:4px;
+  }
+  .tool-card.green .tool-name{color:#16a34a;}
+  .tool-card.orange .tool-name{color:#d97706;}
+  .tool-cost{
+    font-size:10px;color:var(--mu);margin-top:8px;
+    padding-top:8px;border-top:1px solid var(--br);
+  }
+
+  /* DECISION BOX */
+  .decision{
+    background:var(--yb);border:1px solid var(--ol);
+    border-left:4px solid #d97706;border-radius:8px;
+    padding:16px 20px;margin-bottom:16px;
+  }
+  .decision h4{font-size:12px;font-weight:700;color:var(--yd);margin-bottom:8px;}
+  .dec-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+  .dec-opt{
+    border-radius:8px;padding:12px 16px;
+  }
+  .dec-opt.a{background:var(--gb);border:1px solid var(--gl);}
+  .dec-opt.b{background:var(--rb);border:1px solid var(--rl);}
+  .dec-opt h5{font-size:12px;font-weight:700;margin-bottom:4px;}
+  .dec-opt.a h5{color:var(--gd);}
+  .dec-opt.b h5{color:var(--rd);}
+  .dec-opt p{font-size:11px;color:var(--mu);}
+
+  /* HIGHLIGHT */
+  .hl{
+    background:linear-gradient(135deg,var(--bd),#1a40a0);
+    color:#fff;border-radius:10px;padding:22px 26px;margin-bottom:18px;
+  }
+  .hl h3{color:#93c5fd;font-size:12px;font-weight:600;margin-bottom:8px;letter-spacing:.04em;}
+  .hl p{font-size:12px;color:rgba(255,255,255,.85);line-height:1.8;}
+  .hl ul{list-style:none;margin-top:8px;}
+  .hl ul li{
+    padding:3px 0 3px 16px;position:relative;
+    font-size:12px;color:rgba(255,255,255,.82);
+  }
+  .hl ul li::before{content:'▸';position:absolute;left:0;color:#93c5fd;}
+
+  /* INFO BOX */
+  .ib{
+    border-radius:8px;padding:14px 18px;margin-bottom:14px;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .ib.blue  {background:var(--bb);border:1px solid var(--bt);}
+  .ib.green {background:var(--gb);border:1px solid var(--gl);}
+  .ib.red   {background:var(--rb);border:1px solid var(--rl);}
+  .ib.orange{background:var(--ob);border:1px solid var(--ol);}
+  .ib .ico{font-size:16px;flex-shrink:0;margin-top:2px;}
+  .ib-c h4{font-size:12px;font-weight:700;margin-bottom:3px;}
+  .ib.blue   .ib-c h4{color:var(--bd);}
+  .ib.green  .ib-c h4{color:var(--gd);}
+  .ib.red    .ib-c h4{color:var(--rd);}
+  .ib.orange .ib-c h4{color:var(--od);}
+  .ib-c p{font-size:12px;color:var(--mu);line-height:1.7;}
+
+  /* TIMELINE VISUAL */
+  .timeline-visual{
+    position:relative;margin:24px 0;
+  }
+  .tv-line{
+    position:absolute;left:20px;top:0;bottom:0;width:2px;
+    background:linear-gradient(to bottom,var(--bl),var(--bd));
+  }
+  .tv-item{
+    position:relative;padding:0 0 24px 52px;
+  }
+  .tv-item:last-child{padding-bottom:0;}
+  .tv-dot{
+    position:absolute;left:12px;top:4px;
+    width:18px;height:18px;border-radius:50%;
+    background:var(--bm);border:3px solid #fff;
+    box-shadow:0 0 0 2px var(--bm);
+  }
+  .tv-dot.done  {background:#16a34a;box-shadow:0 0 0 2px #16a34a;}
+  .tv-dot.warn  {background:#d97706;box-shadow:0 0 0 2px #d97706;}
+  .tv-dot.future{background:var(--fa);box-shadow:0 0 0 2px var(--fa);}
+  .tv-date{font-size:10px;font-weight:700;color:var(--bm);letter-spacing:.06em;margin-bottom:4px;}
+  .tv-title{font-size:14px;font-weight:700;color:var(--bd);margin-bottom:6px;}
+  .tv-body{
+    background:var(--sf);border-radius:8px;padding:14px 16px;
+    box-shadow:0 1px 5px rgba(15,45,94,.06);
+    border-left:3px solid var(--bt);font-size:12px;color:var(--mu);
+  }
+  .tv-body ul{padding-left:16px;}
+  .tv-body ul li{margin-bottom:4px;}
+
+  /* TWO COL */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+
+  /* TABLE */
+  .tbl{
+    width:100%;border-collapse:collapse;background:var(--sf);
+    border-radius:10px;overflow:hidden;
+    box-shadow:0 1px 5px rgba(15,45,94,.06);margin-bottom:18px;
+  }
+  .tbl thead th{
+    background:var(--bd);color:#93c5fd;padding:10px 14px;
+    text-align:left;font-size:10px;letter-spacing:.05em;
+  }
+  .tbl tbody td{
+    padding:11px 14px;border-bottom:1px solid var(--br);
+    font-size:12px;color:var(--tx);
+  }
+  .tbl tbody tr:last-child td{border-bottom:none;}
+  .tbl tbody tr:nth-child(even) td{background:#fafcff;}
+  .tbl td.k{font-weight:700;color:var(--bd);background:#f5f8ff;width:200px;}
+
+  /* PRINT */
+  .print-btn{
+    position:fixed;bottom:26px;right:26px;
+    background:var(--bd);color:#fff;border:none;
+    padding:12px 20px;border-radius:28px;font-size:12px;font-weight:600;
+    cursor:pointer;box-shadow:0 4px 16px rgba(15,45,94,.35);
+    letter-spacing:.04em;transition:all .15s;z-index:1000;
+  }
+  .print-btn:hover{background:var(--bm);transform:translateY(-1px);}
+  @media print{.print-btn{display:none;}body{background:#fff;}}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="ctag">INTERNAL ROADMAP — LP &amp; WEB STRATEGY</div>
+  <h1>
+    <span>Sanhe Interfashion — LP制作 完全ロードマップ</span>
+    知識ゼロから日本向けBtoB<br>ウェブサイトを立ち上げるまでの全手順
+  </h1>
+  <div class="cover-sub">「何から調べればいいかわからない」状態から、実際に日本企業の問い合わせを獲得するまでのステップバイステップガイド</div>
+  <div class="cover-stat">
+    <div class="csi"><span class="n">2種類</span><span class="l">作るべきサイト（本社LP・日本語LP）</span></div>
+    <div class="csi"><span class="n">6フェーズ</span><span class="l">ゼロから公開までのステップ</span></div>
+    <div class="csi"><span class="n">約3ヶ月</span><span class="l">最初の問い合わせを得るまでの目安</span></div>
+    <div class="csi"><span class="n">0円〜</span><span class="l">ツール次第で自力制作も可能</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ============================
+  はじめに：2つのサイトの全体像
+============================= -->
+<div class="sec">
+  <div class="sh">
+    <div class="sn" style="background:linear-gradient(135deg,#4b5563,#1f2937)">!</div>
+    <div class="st">まず理解すること：作るべきサイトは2種類ある<small>THE TWO SITES YOU NEED TO BUILD</small></div>
+  </div>
+
+  <div class="two">
+    <div style="background:var(--sf);border-radius:10px;padding:20px;box-shadow:0 1px 5px rgba(15,45,94,.07);border-top:4px solid var(--bd)">
+      <div style="font-size:10px;font-weight:700;color:var(--bd);letter-spacing:.08em;margin-bottom:8px">SITE A</div>
+      <div style="font-size:16px;font-weight:700;color:var(--bd);margin-bottom:8px">本社コーポレートサイト</div>
+      <p style="font-size:12px;color:var(--mu);line-height:1.7">
+        韓国語・英語・日本語の3言語対応。工場の「顔」になるサイト。<br>
+        展示会で名刺を渡した後に「サイト見てみます」と言われたときに辿り着く場所。<br><br>
+        <strong style="color:var(--bd)">目的：</strong>会社の実在感・信頼感を証明する
+      </p>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--br)">
+        <div style="font-size:10px;color:var(--mu)">主なコンテンツ</div>
+        <div style="font-size:11px;margin-top:4px">会社概要 / 工場紹介 / 製品カテゴリ / 実績 / 連絡先</div>
+      </div>
+    </div>
+    <div style="background:var(--sf);border-radius:10px;padding:20px;box-shadow:0 1px 5px rgba(15,45,94,.07);border-top:4px solid var(--bm)">
+      <div style="font-size:10px;font-weight:700;color:var(--bm);letter-spacing:.08em;margin-bottom:8px">SITE B</div>
+      <div style="font-size:16px;font-weight:700;color:var(--bd);margin-bottom:8px">日本語ランディングページ（LP）</div>
+      <p style="font-size:12px;color:var(--mu);line-height:1.7">
+        日本のバイヤー・ブランド担当者専用。ペルソナ（理想の顧客像）に合わせた1枚もの。<br>
+        「中国工場を乗り換えたい」「小ロットでOEMしたい」という悩みに直撃する設計。<br><br>
+        <strong style="color:var(--bd)">目的：</strong>問い合わせ・サンプル請求・資料DLを取る
+      </p>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--br)">
+        <div style="font-size:10px;color:var(--mu)">主なコンテンツ</div>
+        <div style="font-size:11px;margin-top:4px">課題提起 / 解決策 / 実績 / 工場写真 / FAQ / フォーム</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ib blue">
+    <div class="ico">📋</div>
+    <div class="ib-c">
+      <h4>どちらを先に作るか？</h4>
+      <p><strong>先に作るのはSite B（日本語LP）</strong>。理由は、展示会（6/24）までに「連絡先を渡せる場所」が必要だから。<br>
+      Site A（本社サイト）は時間をかけて丁寧に作る。まず1枚のLP→次に本社サイト、という順番が正しい。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  PHASE 0: 基礎知識を1週間でインプット
+============================= -->
+<div class="sec">
+  <div class="phase-banner blue">
+    <div class="pb-num">0</div>
+    <div class="pb-body">
+      <h3>フェーズ0：基礎知識を1週間でインプットする</h3>
+      <p>「LP」「ドメイン」「ホスティング」など基本用語を最低限理解してから動く</p>
+    </div>
+    <div class="pb-time"><span>1週間</span></div>
+  </div>
+
+  <div class="ib orange">
+    <div class="ico">⚠️</div>
+    <div class="ib-c">
+      <h4>なぜ先に知識が必要か</h4>
+      <p>知識なしに「LP作ってください」と発注すると、<strong>相場感がわからず高額請求される・完成物が目的と違う・修正でお金がかかり続ける</strong>という失敗が多い。最低限の語彙と仕組みを知ってから動く。</p>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-circle blue">1</div>
+      <div class="step-body">
+        <h4>「LP・ランディングページ」とは何かを理解する</h4>
+        <p>YouTube で「LP 作り方 BtoB」「ランディングページとは」を検索して動画を3本見る。<br>
+        理解すべき最低限のポイント：LPとウェブサイトの違い / CVRとは何か / ファーストビューの役割</p>
+      </div>
+      <div class="step-meta"><span class="tag week">30分〜1時間</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle blue">2</div>
+      <div class="step-body">
+        <h4>最低限の技術用語を理解する（5つだけ）</h4>
+        <ul>
+          <li><strong>ドメイン</strong>：サイトのURL（例：sanhe.jp）。年間1,000〜2,000円で購入。</li>
+          <li><strong>ホスティング（サーバー）</strong>：サイトデータを置く場所。月額500〜2,000円が目安。</li>
+          <li><strong>CMS</strong>：サイトを管理するシステム（WordPress など）。更新しやすくなる。</li>
+          <li><strong>CVR（コンバージョン率）</strong>：サイト訪問者のうち問い合わせした人の割合。</li>
+          <li><strong>SEO</strong>：Googleで検索上位に出るための対策。最初は気にしなくていい。</li>
+        </ul>
+      </div>
+      <div class="step-meta"><span class="tag week">1時間</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle blue">3</div>
+      <div class="step-body">
+        <h4>競合・参考サイトを10個調べてスクリーンショットを保存する</h4>
+        <p>Google で「革 OEM 韓国」「バッグ OEM 工場 日本語」「leather OEM factory Japan」などで検索。<br>
+        ヒットしたサイトを見て「どんな構成か・何が書いてあるか・どこに連絡先があるか」をメモする。<br>
+        好きなデザインのサイトも5個探して保存しておく（発注時の参考資料になる）。</p>
+      </div>
+      <div class="step-meta"><span class="tag week">2〜3時間</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle blue">4</div>
+      <div class="step-body">
+        <h4>「自分で作る」か「外注する」かを大まかに決める</h4>
+        <p>この時点での判断基準：</p>
+        <ul>
+          <li><strong>予算が50万円以上ある → 外注を検討</strong></li>
+          <li><strong>予算が10万円以下 or まず試したい → 自分でノーコードツールで作る</strong></li>
+          <li><strong>中間（20〜40万円）→ テンプレートを使った格安制作会社か、知人のフリーランスを探す</strong></li>
+        </ul>
+      </div>
+      <div class="step-meta"><span class="tag week">30分</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  PHASE 1: ペルソナ・コンテンツ設計
+============================= -->
+<div class="sec">
+  <div class="phase-banner green">
+    <div class="pb-num">1</div>
+    <div class="pb-body">
+      <h3>フェーズ1：「誰のため・何を伝えるか」を文章で書き出す</h3>
+      <p>制作の前にコンテンツを言語化する。これをやらないと作り直しが何度も発生する</p>
+    </div>
+    <div class="pb-time"><span>1〜2週間</span></div>
+  </div>
+
+  <div class="hl">
+    <h3>▌ このフェーズが最も重要な理由</h3>
+    <p>LP制作で失敗する9割は「デザインから入る」から。まず「誰に・何を・なぜ伝えるか」を<strong>テキストファイルでもいいので書き出す</strong>ことが先決。制作会社や友人に依頼するときも、このコンテンツ設計書が「発注書」になる。</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-circle green">1</div>
+      <div class="step-body">
+        <h4>ペルソナを1人に絞って具体的に書く</h4>
+        <p>「日本のバッグブランド」ではなく、具体的な1人を想像して書く。以下のテンプレートを埋める：</p>
+        <ul>
+          <li>名前（仮名OK）・年齢・役職</li>
+          <li>会社の規模・所在地・主力商品</li>
+          <li>今使っている工場と、そこへの不満</li>
+          <li>新しい工場に何を求めているか</li>
+          <li>決断するために何が必要か（価格か・実績か・品質か）</li>
+        </ul>
+        <p style="margin-top:6px;font-size:11px;color:var(--bm)">→ 展示会で話した企業の担当者をモデルにするのがベスト。実際に会った人をペルソナにすると精度が上がる。</p>
+      </div>
+      <div class="step-meta"><span class="tag must">最重要</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle green">2</div>
+      <div class="step-body">
+        <h4>「ペルソナが感じている5つの悩み」を日本語で書く</h4>
+        <p>例：「縫製のほつれが毎ロット数個出る」「担当者が変わるたびに認識がずれる」「急な仕様変更に対応できない」</p>
+        <p>抽象的な言葉（「品質が悪い」）ではなく、<strong>現場で実際に起きている具体的な出来事</strong>の言葉で書く。展示会でヒアリングした生の声があれば最高の素材。</p>
+      </div>
+      <div class="step-meta"><span class="tag must">最重要</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle green">3</div>
+      <div class="step-body">
+        <h4>「Sanheがその悩みをどう解決するか」を1対1で書く</h4>
+        <p>悩みリストのそれぞれに対して「Sanheならこうする」を書く。これがLPの本文になる。</p>
+        <ul>
+          <li>悩み：縫製のほつれが出る → Sanhe：出荷前全品検査・写真報告</li>
+          <li>悩み：担当者が変わって認識がずれる → Sanhe：日本語専任担当が一貫対応</li>
+        </ul>
+      </div>
+      <div class="step-meta"><span class="tag must">最重要</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle green">4</div>
+      <div class="step-body">
+        <h4>数字を全部書き出す</h4>
+        <p>LPに載せられる実績数値を全て集める。以下を確認してリスト化する：</p>
+        <ul>
+          <li>創業年（または会社設立年）</li>
+          <li>日本ブランドとの取引社数（実績ベース）</li>
+          <li>最小発注ロット（MOQ）</li>
+          <li>標準リードタイム（試作・量産それぞれ）</li>
+          <li>工場の広さ・従業員数・ミシン台数など</li>
+          <li>対応素材の種類数</li>
+        </ul>
+      </div>
+      <div class="step-meta"><span class="tag week">1〜2日</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle green">5</div>
+      <div class="step-body">
+        <h4>コンテンツ設計書（ワード or ノート）を1枚にまとめる</h4>
+        <p>上記1〜4の内容をまとめた「コンテンツ設計書」を作る。これが制作の仕様書になる。<br>
+        フォーマットはWordでもGoogleドキュメントでも何でもいい。<strong>これがないと発注できない・自分でも作れない。</strong></p>
+      </div>
+      <div class="step-meta"><span class="tag must">必須</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  PHASE 2: 素材準備
+============================= -->
+<div class="sec">
+  <div class="phase-banner orange">
+    <div class="pb-num">2</div>
+    <div class="pb-body">
+      <h3>フェーズ2：素材を集める（写真・文章・許諾）</h3>
+      <p>LPの品質は「コンテンツの質」で9割決まる。ここをケチると何度リニューアルしても改善しない</p>
+    </div>
+    <div class="pb-time"><span>2〜4週間</span></div>
+  </div>
+
+  <div class="two">
+    <div>
+      <div class="ib green">
+        <div class="ico">📸</div>
+        <div class="ib-c">
+          <h4>写真撮影（最優先タスク）</h4>
+          <p>プロのカメラマンに依頼するのが理想。費用：韓国国内なら5〜15万円程度。<br>
+          スマホでも<strong>「自然光・清潔感・整理整頓された状態」</strong>で撮れば使用可。絶対にストック写真を使わない。</p>
+        </div>
+      </div>
+      <div style="background:var(--sf);border-radius:8px;padding:14px 16px;font-size:12px;color:var(--mu);box-shadow:0 1px 4px rgba(15,45,94,.06)">
+        <div style="font-weight:700;color:var(--bd);margin-bottom:8px">撮影リスト（最低限）</div>
+        <ul style="padding-left:16px">
+          <li>工場外観（昼・正面）× 2〜3枚</li>
+          <li>生産ライン全景 × 2枚</li>
+          <li>職人のクローズアップ × 3〜5枚</li>
+          <li>品質検査シーン × 2枚</li>
+          <li>完成品の製品写真 × カテゴリ別</li>
+          <li>日本語担当者の顔写真 × 1枚</li>
+          <li>工場内の素材・革見本の写真 × 2〜3枚</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="ib green">
+        <div class="ico">✍️</div>
+        <div class="ib-c">
+          <h4>日本語テキストの準備</h4>
+          <p>フェーズ1で書いたコンテンツ設計書を、LP用の日本語文章に仕上げる。<br>
+          <strong>自分で書いたら必ずネイティブの日本人にチェックしてもらう。</strong>不自然な日本語は信頼を大きく損なう。</p>
+        </div>
+      </div>
+      <div class="ib orange">
+        <div class="ico">⚠️</div>
+        <div class="ib-c">
+          <h4>取引先ブランドの掲載許可</h4>
+          <p>ロゴ・会社名・担当者コメントをLPに載せる場合、<strong>必ず書面または メールで事前許可を取る</strong>。許可なく掲載するとトラブルになる。</p>
+        </div>
+      </div>
+      <div class="ib blue">
+        <div class="ico">📄</div>
+        <div class="ib-c">
+          <h4>カタログPDF（ダウンロード素材）</h4>
+          <p>製品カタログをPDF化しておく。LP上で「無料ダウンロード」として配布することでメールアドレスを取得できる。A4・8〜12ページが目安。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  PHASE 3: 制作方法を選ぶ
+============================= -->
+<div class="sec">
+  <div class="phase-banner red">
+    <div class="pb-num">3</div>
+    <div class="pb-body">
+      <h3>フェーズ3：制作方法を選ぶ（最大の分岐点）</h3>
+      <p>「自分で作る」「外注する」の判断と、ツール・会社の選び方</p>
+    </div>
+    <div class="pb-time"><span>1週間で決断</span></div>
+  </div>
+
+  <div class="decision">
+    <h4>⚖️ 判断基準：自分で作るか、外注するか</h4>
+    <div class="dec-row">
+      <div class="dec-opt a">
+        <h5>✅ 自分（ノーコードツール）で作る場合</h5>
+        <p>
+          予算が少ない（〜10万円）<br>
+          まず試してみたい・スピード優先<br>
+          デザインへのこだわりが強くない<br>
+          将来自分で更新したい<br>
+          → <strong>Wix / Webflow / STUDIO を使う</strong>
+        </p>
+      </div>
+      <div class="dec-opt b">
+        <h5>🏢 制作会社・フリーランスに外注する場合</h5>
+        <p>
+          予算がある（30万円〜）<br>
+          日本語の品質にこだわりたい<br>
+          専門的なデザイン・SEOが必要<br>
+          自分の時間をかけたくない<br>
+          → <strong>制作会社 or クラウドソーシング</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-weight:700;color:var(--bd);margin-bottom:12px;font-size:13px">▌ ノーコードツール比較（自分で作る場合）</p>
+  <div class="tool-grid">
+    <div class="tool-card green">
+      <div class="tool-name">STUDIO</div>
+      <h5>日本製・日本語最強</h5>
+      <p>日本語フォントの美しさ・日本語サポートが最高水準。日本向けLPを自分で作るなら第一候補。テンプレートも豊富。</p>
+      <div class="tool-cost">
+        無料プランあり / 有料：月1,500円〜<br>
+        <span class="tag do-it">自力制作 ◎</span>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Webflow</div>
+      <h5>英語圏で最も使われる</h5>
+      <p>デザイン自由度が高い。英語コーポレートサイトに最適。日本語対応は少し手間。本社サイト（英語版）に向いている。</p>
+      <div class="tool-cost">
+        無料プランあり / 有料：月14ドル〜<br>
+        <span class="tag do-it">自力制作 ○</span>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Wix</div>
+      <h5>最も簡単</h5>
+      <p>直感的な操作でLP・サイトが作れる。テンプレートが多く、知識ゼロでもすぐ始められる。デザインの自由度は低め。</p>
+      <div class="tool-cost">
+        無料プランあり / 有料：月1,700円〜<br>
+        <span class="tag do-it">自力制作 ◎（初心者向け）</span>
+      </div>
+    </div>
+    <div class="tool-card orange">
+      <div class="tool-name">WordPress</div>
+      <h5>本格運用向け</h5>
+      <p>世界シェアNo.1 CMS。自由度が最高だがセットアップに知識が必要。本社サイトを長期運用するなら候補。</p>
+      <div class="tool-cost">
+        ソフト無料 / サーバー：月500円〜<br>
+        <span class="tag hire">要知識 or 外注推奨</span>
+      </div>
+    </div>
+    <div class="tool-card orange">
+      <div class="tool-name">Shopify（参考）</div>
+      <h5>ECも兼ねる場合</h5>
+      <p>将来的にB2C販売もするなら検討。BtoB専用LPとしては過剰。現時点では不要。</p>
+      <div class="tool-cost">
+        月29ドル〜<br>
+        <span class="tag hire">将来検討</span>
+      </div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-name">Notion / Framer</div>
+      <h5>超簡易版（最初の1ヶ月）</h5>
+      <p>展示会直前に「まず何かページが必要」という場合の緊急手段。あくまでも仮。</p>
+      <div class="tool-cost">
+        無料〜<br>
+        <span class="tag do-it">緊急用途のみ</span>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-weight:700;color:var(--bd);margin-bottom:12px;font-size:13px">▌ 外注する場合の探し方と相場</p>
+  <table class="tbl">
+    <thead><tr><th>発注先</th><th>相場</th><th>向いているケース</th><th>探し方</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="k">日本の中小LP制作会社</td>
+        <td>20〜80万円</td>
+        <td>日本語品質・デザインにこだわりたい</td>
+        <td>Google「LP制作 BtoB 中小企業」で検索</td>
+      </tr>
+      <tr>
+        <td class="k">フリーランス（日本人）</td>
+        <td>5〜30万円</td>
+        <td>コストを抑えつつ日本語品質を保ちたい</td>
+        <td>ランサーズ・クラウドワークス・ビズリーチ</td>
+      </tr>
+      <tr>
+        <td class="k">韓国の制作会社（日本語対応）</td>
+        <td>10〜40万円</td>
+        <td>本社と日本語版を一括で依頼したい</td>
+        <td>知人紹介 or Google「한국 웹디자인 일본어」</td>
+      </tr>
+      <tr>
+        <td class="k">製造業専門マーケ会社</td>
+        <td>50〜200万円</td>
+        <td>SEO・広告・コンテンツまで一括対応</td>
+        <td>「製造業 Web集客 LP」で検索</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="ib orange">
+    <div class="ico">💡</div>
+    <div class="ib-c">
+      <h4>外注するときの失敗を避ける3原則</h4>
+      <p>
+        ① <strong>コンテンツ設計書（フェーズ1の成果物）を必ず渡す</strong> — 「いい感じに作って」は最悪の発注。<br>
+        ② <strong>参考サイトを5個以上渡す</strong> — デザインの好みを言葉で伝えるのは難しい。見本を見せる。<br>
+        ③ <strong>修正回数を事前に確認する</strong> — 「修正無制限」は相場より高い。「3回まで」が標準的。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  PHASE 4: 制作・公開
+============================= -->
+<div class="sec">
+  <div class="phase-banner purple">
+    <div class="pb-num">4</div>
+    <div class="pb-body">
+      <h3>フェーズ4：制作・公開・URLを配布する</h3>
+      <p>ドメイン取得・制作・テスト・公開・展示会での活用まで</p>
+    </div>
+    <div class="pb-time"><span>2〜4週間</span></div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-circle purple">1</div>
+      <div class="step-body">
+        <h4>ドメインを取得する（URL決め）</h4>
+        <p>サイトのアドレス（例：sanhe-japan.com）を購入する。<br>
+        おすすめサービス：<strong>お名前.com / Xserver ドメイン / Google Domains</strong><br>
+        日本向けなら <code>.jp</code> or <code>.com</code> を推奨。年間1,000〜2,500円。</p>
+        <ul>
+          <li>候補例：sanhe-leather.jp / sanhe-oem.jp / sanhe-japan.com</li>
+          <li>会社名が入っていて、短く覚えやすいものが良い</li>
+        </ul>
+      </div>
+      <div class="step-meta"><span class="tag must">先にやる</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle purple">2</div>
+      <div class="step-body">
+        <h4>LPを制作する（ツールor外注で）</h4>
+        <p>フェーズ3で選んだ方法で制作を進める。<br>
+        ポイント：まず「ファーストビュー + 課題提起 + CTA」の3セクションだけを完成させてから全体に広げる。</p>
+      </div>
+      <div class="step-meta"><span class="tag week">2〜3週間</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle purple">3</div>
+      <div class="step-body">
+        <h4>公開前のチェックリストを確認する</h4>
+        <ul>
+          <li>スマホで表示して崩れていないか</li>
+          <li>問い合わせフォームに送信テストをする</li>
+          <li>全てのリンクが正しく動くか</li>
+          <li>日本語の誤字・不自然な表現がないか（日本人ネイティブチェック）</li>
+          <li>ページが3秒以内に表示されるか（GTmetrix等でテスト）</li>
+          <li>プライバシーポリシーページがあるか</li>
+        </ul>
+      </div>
+      <div class="step-meta"><span class="tag must">公開前必須</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle purple">4</div>
+      <div class="step-body">
+        <h4>URLを展示会の名刺・チラシに入れる</h4>
+        <p>名刺にQRコードとURLを記載する。<strong>QRコードはサイトが完成してからでないと作れない</strong>ので、公開が先。<br>
+        チラシ・リーフレットにも「詳細はこちら」としてURLを掲載する。</p>
+      </div>
+      <div class="step-meta"><span class="tag week">展示会前</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  PHASE 5: 計測・改善
+============================= -->
+<div class="sec">
+  <div class="phase-banner blue">
+    <div class="pb-num">5</div>
+    <div class="pb-body">
+      <h3>フェーズ5：公開後の計測と改善</h3>
+      <p>出してからが本番。数字を見て改善し続けることでCVRが上がる</p>
+    </div>
+    <div class="pb-time"><span>公開後〜継続</span></div>
+  </div>
+
+  <div class="two">
+    <div>
+      <div class="ib blue">
+        <div class="ico">📊</div>
+        <div class="ib-c">
+          <h4>必ず設置するツール（無料）</h4>
+          <p>
+            <strong>Google Analytics 4</strong> — 何人が来て、どこで帰ったかがわかる<br>
+            <strong>Google Search Console</strong> — どんな検索ワードで来たかがわかる<br>
+            <strong>Hotjar（無料プランあり）</strong> — どこをクリックしたか・どこまでスクロールしたかがわかる
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="ib green">
+        <div class="ico">🔄</div>
+        <div class="ib-c">
+          <h4>最初に見るべき3つの数字</h4>
+          <p>
+            <strong>離脱率</strong>：ファーストビューで帰った人の割合（70%以上なら要改善）<br>
+            <strong>CVR</strong>：訪問者に対する問い合わせ率（1.5%以上を目指す）<br>
+            <strong>流入元</strong>：展示会QR・Googleどちらから来ているか
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-circle blue">1</div>
+      <div class="step-body">
+        <h4>展示会後1週間：名刺交換した相手にURLを送る</h4>
+        <p>展示会で名刺交換した全社に72時間以内にメール送信。本文の中に「詳細はこちら → [URL]」を必ず入れる。<br>
+        サイトを見てもらうことでLPの効果を初めて試せる。</p>
+      </div>
+      <div class="step-meta"><span class="tag must">最重要</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle blue">2</div>
+      <div class="step-body">
+        <h4>1ヶ月後：Google Analytics のデータを見て1箇所だけ改善する</h4>
+        <p>一番離脱が多いセクションを特定して、そこだけ書き直す。<strong>一度に全部直そうとしない</strong>（どの改善が効いたかわからなくなる）。<br>
+        最も多い改善ポイント：キャッチコピーの言葉を変える / CTAボタンの文言を変える。</p>
+      </div>
+      <div class="step-meta"><span class="tag week">1ヶ月後</span></div>
+    </div>
+    <div class="step">
+      <div class="step-circle blue">3</div>
+      <div class="step-body">
+        <h4>3ヶ月後：本社コーポレートサイト（Site A）の制作を始める</h4>
+        <p>日本語LPが安定したら、本社サイト（韓国語・英語・日本語）の制作に移行する。<br>
+        日本語LPで得たフィードバック（どんな質問が多いか・どこで離脱するか）を本社サイトの設計に活かす。</p>
+      </div>
+      <div class="step-meta"><span class="tag week">3ヶ月後</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  全体タイムライン
+============================= -->
+<div class="sec">
+  <div class="sh">
+    <div class="sn">▶</div>
+    <div class="st">全体タイムライン（今日からの行動スケジュール）<small>COMPLETE TIMELINE</small></div>
+  </div>
+
+  <div class="timeline-visual">
+    <div class="tv-line"></div>
+
+    <div class="tv-item">
+      <div class="tv-dot"></div>
+      <div class="tv-date">今日〜5月末（1週間）</div>
+      <div class="tv-title">フェーズ0：基礎インプット</div>
+      <div class="tv-body">
+        <ul>
+          <li>YouTube でLP・BtoBマーケの動画を3本見る</li>
+          <li>競合サイトを10個スクリーンショットして保存</li>
+          <li>「自分で作る」か「外注する」か仮決め</li>
+          <li>ドメイン候補を3つ考えておく</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tv-item">
+      <div class="tv-dot"></div>
+      <div class="tv-date">6月1日〜10日（2週間）</div>
+      <div class="tv-title">フェーズ1：コンテンツ設計書を書く</div>
+      <div class="tv-body">
+        <ul>
+          <li>ペルソナを1人に絞って具体的に書く</li>
+          <li>ペルソナの5つの悩みを日本語で書く</li>
+          <li>「Sanheがその悩みをどう解決するか」を書く</li>
+          <li>載せられる数字を全部書き出す</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tv-item">
+      <div class="tv-dot warn"></div>
+      <div class="tv-date">6月1日〜15日（並行して）</div>
+      <div class="tv-title">フェーズ2：素材準備（写真・文章）</div>
+      <div class="tv-body">
+        <ul>
+          <li>工場写真の撮影または整理（最優先）</li>
+          <li>日本語担当者の顔写真を撮る</li>
+          <li>製品写真を白背景で撮り直す</li>
+          <li>取引先ブランドに掲載許可を打診</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tv-item">
+      <div class="tv-dot"></div>
+      <div class="tv-date">6月10日〜20日</div>
+      <div class="tv-title">フェーズ3〜4：制作・公開</div>
+      <div class="tv-body">
+        <ul>
+          <li>ドメインを取得する（sanhe-japan.com 等）</li>
+          <li>ツールまたは外注先を確定して制作開始</li>
+          <li>日本人ネイティブによる日本語チェック</li>
+          <li>公開前チェックリストを確認して公開</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tv-item">
+      <div class="tv-dot warn"></div>
+      <div class="tv-date">6月19日（締切）</div>
+      <div class="tv-title">ライフスタイルWeek 来場登録</div>
+      <div class="tv-body">
+        <ul>
+          <li>lifestyle-expo.jp から来場者登録（無料）</li>
+          <li><strong>LPのURLが間に合わなくても登録だけは今すぐやる</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tv-item">
+      <div class="tv-dot"></div>
+      <div class="tv-date">6月24〜26日</div>
+      <div class="tv-title">ライフスタイルWeek 展示会参加</div>
+      <div class="tv-body">
+        <ul>
+          <li>名刺にURLとQRコードを印刷して配布</li>
+          <li>「詳しくはサイトに全部載っています」とアピール</li>
+          <li>名刺交換した会社のメモを取る（後でペルソナ精度を上げる素材）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tv-item">
+      <div class="tv-dot"></div>
+      <div class="tv-date">6月27日〜7月末</div>
+      <div class="tv-title">展示会フォロー + データを見て改善</div>
+      <div class="tv-body">
+        <ul>
+          <li>名刺交換全社にメール送信（URLを含める）</li>
+          <li>Google Analytics でアクセス状況を確認</li>
+          <li>最も離脱の多いセクションを1箇所改善</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tv-item">
+      <div class="tv-dot future"></div>
+      <div class="tv-date">8月〜10月</div>
+      <div class="tv-title">日本語LPの完成度を高める + FaW TOKYO準備</div>
+      <div class="tv-body">
+        <ul>
+          <li>取引先の推薦コメントを掲載（得られた場合）</li>
+          <li>カタログPDFのダウンロード機能を追加</li>
+          <li>FaW TOKYO秋（10/7〜9）向けに内容更新</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tv-item">
+      <div class="tv-dot future"></div>
+      <div class="tv-date">10月〜12月</div>
+      <div class="tv-title">本社コーポレートサイト（Site A）制作開始</div>
+      <div class="tv-body">
+        <ul>
+          <li>日本語LPの成果（問い合わせ内容・FAQ）を本社サイトに反映</li>
+          <li>韓国語・英語・日本語の3言語サイトを構築</li>
+          <li>ハンドバッグかばん見本市（11月）に向けて充実させる</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  費用まとめ
+============================= -->
+<div class="sec">
+  <div class="sh">
+    <div class="sn">¥</div>
+    <div class="st">費用の現実的な目安<small>BUDGET GUIDE</small></div>
+  </div>
+
+  <table class="tbl">
+    <thead><tr><th>項目</th><th>自分でやる場合</th><th>外注する場合</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td class="k">ドメイン取得</td><td>年1,000〜2,500円</td><td>同左</td><td>お名前.com等で購入</td></tr>
+      <tr><td class="k">ホスティング（サーバー）</td><td>月500〜1,500円</td><td>外注先が含む場合も</td><td>ノーコードツールは不要</td></tr>
+      <tr><td class="k">ノーコードツール（STUDIO等）</td><td>月0〜3,000円</td><td>不要</td><td>無料プランで始めてもOK</td></tr>
+      <tr><td class="k">LP制作費</td><td>0円（自力）</td><td>10〜80万円</td><td>フリーランスなら10〜30万円が多い</td></tr>
+      <tr><td class="k">写真撮影（プロ依頼）</td><td>スマホなら0円</td><td>5〜20万円</td><td>最初はスマホでも可</td></tr>
+      <tr><td class="k">日本語ネイティブチェック</td><td>知人 or 3〜5万円</td><td>制作費に含む場合も</td><td>必ず実施する</td></tr>
+      <tr><td class="k">Google Analytics等</td><td>無料</td><td>無料</td><td>設置は必須</td></tr>
+      <tr style="background:#f0f6ff"><td class="k" style="color:var(--bm)"><strong>合計目安（最小）</strong></td><td><strong>月2,000〜5,000円</strong></td><td><strong>15〜100万円（初期）</strong></td><td>最初は自力でも十分</td></tr>
+    </tbody>
+  </table>
+
+  <div class="ib green">
+    <div class="ico">💡</div>
+    <div class="ib-c">
+      <h4>推奨：最初は「STUDIO × 自力制作 × 月3,000円以内」でスタート</h4>
+      <p>展示会（6月）に間に合わせることが最優先。予算と時間の両方が限られているなら、まずSTUDIOの無料プランで1枚LPを作り、展示会後に改善していくのが最も現実的。<br>
+      本社サイトの外注は、日本語LPで最初の問い合わせが取れてから考えても遅くない。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="wrap" style="padding-top:0">
+  <div style="text-align:center;padding:28px 0;color:var(--fa);font-size:11px;border-top:1px solid var(--br)">
+    <p>Sanhe Interfashion — LP制作 完全ロードマップ</p>
+    <p style="margin-top:4px">作成日：2026年5月27日　/ 社内使用限定</p>
+  </div>
+</div>
+
+<button class="print-btn" onclick="window.print()">PDF出力</button>
+
+</body>
+</html>
