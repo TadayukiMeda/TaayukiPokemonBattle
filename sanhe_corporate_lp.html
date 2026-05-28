@@ -18,7 +18,7 @@
       --dark-panel: #1e1c18;
       --gold:       #b5872c;
       --gold-light: #d4aa56;
-      --cream:      #faf8f3;
+      --cream:      #fafafa;
       --cream-mid:  #eeead f;
       --cream-dark: #e8e2d6;
       --stone:      #c4bdb0;
@@ -276,28 +276,34 @@
 
     /* ── Numbers ─────────────────────────────────────────────────────────── */
     #numbers {
-      background: var(--cream-mid, #eeead8);
-      padding: 72px var(--side);
+      background: var(--white);
+      padding: 140px var(--side);
     }
     .numbers-grid {
       max-width: var(--max-w);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 0;
+      border: 1px solid var(--border);
     }
     .number-item {
-      padding: 32px 20px;
+      padding: 56px 48px;
       border-right: 1px solid var(--border);
-      text-align: center;
+      border-bottom: 1px solid var(--border);
     }
-    .number-item:last-child { border-right: none; }
+    .number-item:nth-child(3),
+    .number-item:nth-child(6) { border-right: none; }
+    .number-item:nth-child(4),
+    .number-item:nth-child(5),
+    .number-item:nth-child(6) { border-bottom: none; }
     .number-val {
       font-family: var(--font-serif);
-      font-size: clamp(32px, 3.5vw, 48px);
+      font-size: clamp(44px, 5vw, 72px);
       font-weight: 400;
       color: var(--ink);
       line-height: 1;
+      margin-bottom: 10px;
     }
     .number-unit {
       color: var(--gold);
@@ -305,16 +311,73 @@
     }
     .number-label {
       font-size: 10px;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .number-context {
+      font-size: 14px;
+      line-height: 1.7;
       color: var(--ash);
-      margin-top: 8px;
+      max-width: 260px;
+    }
+
+    /* ── Philosophy ─────────────────────────────────────────────────────── */
+    #philosophy {
+      background: var(--white);
+      padding: 140px var(--side);
+      border-top: 1px solid var(--border);
+    }
+    .philosophy-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .philosophy-left { position: sticky; top: 120px; }
+    .philosophy-right {}
+    .philosophy-body {
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--mid);
+      margin-bottom: 28px;
+    }
+    .philosophy-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 56px;
+      border-top: 1px solid var(--border);
+    }
+    .pillar {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 32px;
+      align-items: baseline;
+    }
+    .pillar-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--ink);
+      font-style: italic;
+    }
+    .pillar-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ash);
     }
 
     /* ── Clients ─────────────────────────────────────────────────────────── */
     #clients {
       background: var(--white);
-      padding: 100px var(--side);
+      padding: 130px var(--side);
+      border-top: 1px solid var(--border);
     }
     .section-header {
       max-width: var(--max-w);
@@ -473,8 +536,9 @@
 
     /* ── Products ────────────────────────────────────────────────────────── */
     #products {
-      background: var(--cream);
-      padding: 100px var(--side);
+      background: var(--white);
+      padding: 130px var(--side);
+      border-top: 1px solid var(--border);
     }
     .products-grid {
       max-width: var(--max-w);
@@ -569,7 +633,8 @@
     /* ── Quality ─────────────────────────────────────────────────────────── */
     #quality {
       background: var(--white);
-      padding: 100px var(--side);
+      padding: 130px var(--side);
+      border-top: 1px solid var(--border);
     }
     .quality-inner {
       max-width: var(--max-w);
@@ -642,8 +707,9 @@
 
     /* ── Customization ───────────────────────────────────────────────────── */
     #customization {
-      background: var(--cream);
-      padding: 100px var(--side);
+      background: var(--white);
+      padding: 130px var(--side);
+      border-top: 1px solid var(--border);
     }
     .custom-inner {
       max-width: var(--max-w);
@@ -739,7 +805,8 @@
     /* ── FAQ ─────────────────────────────────────────────────────────────── */
     #faq {
       background: var(--white);
-      padding: 100px var(--side);
+      padding: 130px var(--side);
+      border-top: 1px solid var(--border);
     }
     .faq-inner {
       max-width: var(--max-w);
@@ -955,8 +1022,12 @@
 
     /* ── Responsive ──────────────────────────────────────────────────────── */
     @media (max-width: 900px) {
-      .numbers-grid { grid-template-columns: repeat(3, 1fr); }
-      .number-item { border-bottom: 1px solid var(--border); }
+      .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+      .number-item:nth-child(2n) { border-right: none; }
+      .number-item:nth-child(3) { border-right: 1px solid var(--border); }
+      .philosophy-inner { grid-template-columns: 1fr; gap: 48px; }
+      .philosophy-left { position: static; }
+      .pillar { grid-template-columns: 1fr; gap: 8px; }
       .clients-grid { grid-template-columns: repeat(3, 1fr); }
       .mywalit-inner { grid-template-columns: 1fr; gap: 48px; }
       .products-grid { grid-template-columns: 1fr; }
@@ -1054,27 +1125,62 @@
     <div class="numbers-grid">
       <div class="number-item reveal">
         <div class="number-val"><span class="count" data-target="23">0</span><span class="number-unit">+</span></div>
-        <div class="number-label">Years of Excellence</div>
+        <div class="number-label">Years in Business</div>
+        <p class="number-context">Every client relationship we have built since 2002 is still intact today. Longevity is not luck — it is the result of consistent quality.</p>
       </div>
       <div class="number-item reveal">
         <div class="number-val"><span class="count" data-target="500" data-suffix="K+">0</span></div>
         <div class="number-label">Units Produced</div>
+        <p class="number-context">Half a million pieces delivered to premium brands across Europe and North America — without a single major quality recall.</p>
       </div>
       <div class="number-item reveal">
         <div class="number-val"><span class="count" data-target="3000" data-suffix="+">0</span></div>
         <div class="number-label">Styles Delivered</div>
+        <p class="number-context">From minimalist cardholders to structured hand-stitched bags. No design brief has exceeded our capability in 23 years.</p>
       </div>
       <div class="number-item reveal">
         <div class="number-val"><span class="count" data-target="95">0</span><span class="number-unit">%+</span></div>
-        <div class="number-label">On-Time Rate</div>
+        <div class="number-label">On-Time Delivery</div>
+        <p class="number-context">A rate maintained even through global supply chain disruptions. Deadlines are a promise — not an estimate.</p>
       </div>
       <div class="number-item reveal">
         <div class="number-val">&lt;<span class="count" data-target="1">0</span><span class="number-unit">%</span></div>
         <div class="number-label">Defect Rate</div>
+        <p class="number-context">The standard that European luxury demands. Our four-stage quality process makes this rate not an achievement, but a baseline.</p>
       </div>
       <div class="number-item reveal">
         <div class="number-val"><span class="count" data-target="80">0</span><span class="number-unit">%+</span></div>
         <div class="number-label">Client Retention</div>
+        <p class="number-context">Most brands who order once never look for another factory. We take that as the highest form of recognition.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Philosophy ─────────────────────────────────────────────────────────── -->
+  <section id="philosophy">
+    <div class="philosophy-inner">
+      <div class="philosophy-left reveal">
+        <p class="section-eyebrow">Our Philosophy</p>
+        <h2 class="section-title">Quality is not<br>a service.<br><em>It is how we operate.</em></h2>
+      </div>
+      <div class="philosophy-right reveal">
+        <p class="philosophy-body">Since 2002, we have operated by one principle: the brands that trust us should never have to think about manufacturing. Not about defects. Not about deadlines. Not about whether the production matches the sample they approved.</p>
+        <p class="philosophy-body">They should simply receive what they designed — on time, perfectly made, every time.</p>
+        <p class="philosophy-body">That discipline is why Mywalit Italy, Roots Canada, and Jigsaw UK have stayed with us for over 15 consecutive years. Not because we were the cheapest option. Because we became the most reliable one.</p>
+        <div class="philosophy-pillars">
+          <div class="pillar">
+            <div class="pillar-title">Relationship over transaction</div>
+            <div class="pillar-desc">We measure the success of our business in years of partnership — not in single orders placed or margins achieved.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">Evidence over promises</div>
+            <div class="pillar-desc">We do not ask you to trust us. We show you 23 years of numbers, names, and verified results. You decide.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">Precision as default</div>
+            <div class="pillar-desc">A ±1mm dimensional tolerance is not our goal. It is the minimum standard we have delivered since the beginning.</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
