@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanhe LP設計ガイド — BtoB・海外OEM工場向けランディングページ設計書</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --blue-dark:  #0f2d5e;
+    --blue-mid:   #1a56db;
+    --blue-light: #3b82f6;
+    --blue-tint:  #dbeafe;
+    --blue-bg:    #eff6ff;
+    --text:       #1e3a5f;
+    --muted:      #64748b;
+    --faint:      #94a3b8;
+    --surface:    #ffffff;
+    --border:     #e2e8f0;
+    --green:      #166534;
+    --green-bg:   #f0fdf4;
+    --red:        #991b1b;
+    --red-bg:     #fff5f5;
+    --orange:     #92400e;
+    --orange-bg:  #fffbeb;
+  }
+  body {
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+    background: #f4f7fb;
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: linear-gradient(150deg, #0a1f4d 0%, #0f2d5e 50%, #163a7a 100%);
+    color: white;
+    padding: 80px 100px 60px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .cover::before {
+    content:'';position:absolute;top:-100px;right:-100px;
+    width:500px;height:500px;border-radius:50%;
+    background:radial-gradient(circle,rgba(59,130,246,.15) 0%,transparent 70%);
+  }
+  .cover-tag {
+    display:inline-block;background:rgba(147,197,253,.15);
+    border:1px solid rgba(147,197,253,.3);color:#93c5fd;
+    padding:5px 16px;border-radius:20px;font-size:10px;
+    letter-spacing:.12em;margin-bottom:32px;
+  }
+  .cover h1 { font-size:32px;font-weight:700;line-height:1.3;margin-bottom:12px; }
+  .cover h1 span { color:#93c5fd;font-weight:300;font-size:22px;display:block;margin-bottom:6px; }
+  .cover-sub { font-size:14px;color:rgba(255,255,255,.6);margin-bottom:60px; }
+  .cover-kpi {
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+    position:relative;z-index:1;
+  }
+  .cover-kpi-item {
+    background:rgba(255,255,255,.07);border:1px solid rgba(147,197,253,.2);
+    border-radius:10px;padding:18px;text-align:center;
+  }
+  .cover-kpi-item .num { font-size:22px;font-weight:700;color:#93c5fd;display:block;margin-bottom:4px; }
+  .cover-kpi-item .lbl { font-size:10px;color:rgba(255,255,255,.5); }
+
+  /* ── BODY ── */
+  .container { max-width:980px;margin:0 auto;padding:40px 48px; }
+
+  /* ── SECTION ── */
+  .sec { margin-bottom:48px; }
+  .sec-header {
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:24px;padding-bottom:12px;
+    border-bottom:2px solid var(--blue-tint);
+  }
+  .sec-num {
+    width:40px;height:40px;background:linear-gradient(135deg,var(--blue-dark),var(--blue-mid));
+    color:white;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;font-size:15px;font-weight:700;flex-shrink:0;
+  }
+  .sec-title { font-size:18px;font-weight:700;color:var(--blue-dark); }
+  .sec-title small { display:block;font-size:9px;color:var(--faint);letter-spacing:.1em;font-weight:400;margin-top:2px; }
+
+  /* ── CARD GRID ── */
+  .card-grid { display:grid;gap:14px; }
+  .card-grid.col2 { grid-template-columns:1fr 1fr; }
+  .card-grid.col3 { grid-template-columns:1fr 1fr 1fr; }
+  .card-grid.col4 { grid-template-columns:1fr 1fr 1fr 1fr; }
+
+  .card {
+    background:var(--surface);border-radius:10px;padding:20px;
+    box-shadow:0 1px 6px rgba(15,45,94,.07);
+  }
+  .card-num {
+    width:28px;height:28px;background:var(--blue-mid);color:white;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:700;margin-bottom:12px;
+  }
+  .card h4 { font-size:13px;font-weight:700;color:var(--blue-dark);margin-bottom:8px; }
+  .card p { font-size:12px;color:var(--muted);line-height:1.7; }
+  .card ul { padding-left:16px; }
+  .card ul li { font-size:12px;color:var(--muted);margin-bottom:4px; }
+
+  .card.green { border-left:4px solid #16a34a; }
+  .card.red   { border-left:4px solid #dc2626; }
+  .card.blue  { border-left:4px solid var(--blue-mid); }
+  .card.orange{ border-left:4px solid #d97706; }
+
+  /* ── HIGHLIGHT ── */
+  .highlight {
+    background:linear-gradient(135deg,var(--blue-dark),#1a40a0);
+    color:white;border-radius:10px;padding:24px 28px;margin-bottom:20px;
+  }
+  .highlight h3 { color:#93c5fd;font-size:13px;font-weight:600;margin-bottom:10px;letter-spacing:.04em; }
+  .highlight p  { font-size:13px;color:rgba(255,255,255,.85);line-height:1.8; }
+  .highlight ul { list-style:none;margin-top:10px; }
+  .highlight ul li { padding:4px 0 4px 18px;position:relative;font-size:12px;color:rgba(255,255,255,.82); }
+  .highlight ul li::before { content:'▸';position:absolute;left:0;color:#93c5fd; }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    border-radius:8px;padding:16px 20px;margin-bottom:16px;
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .info-box.blue  { background:var(--blue-bg);border:1px solid var(--blue-tint); }
+  .info-box.green { background:var(--green-bg);border:1px solid #bbf7d0; }
+  .info-box.red   { background:var(--red-bg);border:1px solid #fecaca; }
+  .info-box.orange{ background:var(--orange-bg);border:1px solid #fde68a; }
+  .info-box .icon { font-size:18px;flex-shrink:0;margin-top:1px; }
+  .info-box-content h4 { font-size:12px;font-weight:700;margin-bottom:4px; }
+  .info-box.blue   .info-box-content h4 { color:var(--blue-dark); }
+  .info-box.green  .info-box-content h4 { color:var(--green); }
+  .info-box.red    .info-box-content h4 { color:var(--red); }
+  .info-box.orange .info-box-content h4 { color:var(--orange); }
+  .info-box-content p { font-size:12px;color:var(--muted);line-height:1.7; }
+
+  /* ── WIREFRAME SECTION ── */
+  .wireframe {
+    border:2px dashed var(--blue-tint);border-radius:10px;
+    overflow:hidden;margin-bottom:16px;
+  }
+  .wf-block {
+    padding:16px 20px;border-bottom:1px solid var(--blue-tint);
+    display:flex;gap:16px;align-items:flex-start;
+  }
+  .wf-block:last-child { border-bottom:none; }
+  .wf-num {
+    width:28px;height:28px;border-radius:6px;
+    background:var(--blue-dark);color:white;
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;flex-shrink:0;
+  }
+  .wf-content { flex:1; }
+  .wf-label { font-size:11px;font-weight:700;color:var(--blue-dark);margin-bottom:4px;letter-spacing:.04em; }
+  .wf-desc  { font-size:11px;color:var(--muted);line-height:1.6; }
+  .wf-tag {
+    display:inline-block;font-size:9px;font-weight:700;padding:2px 8px;
+    border-radius:10px;margin-left:8px;vertical-align:middle;letter-spacing:.06em;
+  }
+  .wf-tag.must  { background:#fee2e2;color:#991b1b; }
+  .wf-tag.high  { background:#dbeafe;color:#1e3a5f; }
+  .wf-tag.sanhe { background:#dcfce7;color:#166534; }
+
+  .wf-block.highlighted { background:var(--blue-bg); }
+
+  /* ── TABLE ── */
+  .data-table {
+    width:100%;border-collapse:collapse;background:var(--surface);
+    border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(15,45,94,.06);
+    margin-bottom:20px;
+  }
+  .data-table thead th {
+    background:var(--blue-dark);color:#93c5fd;padding:10px 14px;
+    text-align:left;font-size:10px;letter-spacing:.05em;
+  }
+  .data-table tbody td {
+    padding:11px 14px;border-bottom:1px solid var(--border);
+    font-size:12px;color:var(--text);
+  }
+  .data-table tbody tr:last-child td { border-bottom:none; }
+  .data-table tbody tr:nth-child(even) td { background:#fafcff; }
+  .data-table td.key { font-weight:600;color:var(--blue-dark);width:220px;background:#f5f8ff; }
+
+  /* ── COPY EXAMPLE ── */
+  .copy-box {
+    background:#f8faff;border:1px solid var(--blue-tint);
+    border-left:4px solid var(--blue-mid);border-radius:8px;
+    padding:16px 20px;margin-bottom:12px;
+  }
+  .copy-box .copy-label { font-size:9px;font-weight:700;color:var(--blue-mid);letter-spacing:.1em;margin-bottom:6px; }
+  .copy-box .copy-text  { font-size:14px;font-weight:700;color:var(--blue-dark);line-height:1.5; }
+  .copy-box .copy-sub   { font-size:11px;color:var(--muted);margin-top:6px; }
+  .copy-bad {
+    background:#fff5f5;border:1px solid #fecaca;
+    border-left:4px solid #dc2626;border-radius:8px;
+    padding:12px 18px;margin-bottom:8px;
+  }
+  .copy-bad .copy-label { font-size:9px;font-weight:700;color:#dc2626;letter-spacing:.1em;margin-bottom:4px; }
+  .copy-bad .copy-text  { font-size:13px;color:#7f1d1d;text-decoration:line-through; }
+
+  /* ── STEP ROW ── */
+  .step-row { display:flex;gap:0;margin-bottom:20px;position:relative; }
+  .step-row::before {
+    content:'';position:absolute;top:20px;left:20px;right:20px;height:2px;
+    background:var(--blue-tint);z-index:0;
+  }
+  .step-item { flex:1;text-align:center;position:relative;z-index:1; }
+  .step-circle {
+    width:42px;height:42px;background:var(--blue-mid);color:white;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:14px;font-weight:700;margin:0 auto 10px;
+    border:3px solid white;box-shadow:0 0 0 2px var(--blue-mid);
+  }
+  .step-item h5 { font-size:11px;font-weight:700;color:var(--blue-dark);margin-bottom:4px; }
+  .step-item p  { font-size:10px;color:var(--muted); }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style:none;margin-bottom:20px; }
+  .checklist li {
+    padding:8px 0 8px 28px;position:relative;
+    border-bottom:1px solid var(--border);font-size:12px;color:var(--text);
+  }
+  .checklist li:last-child { border-bottom:none; }
+  .checklist li::before {
+    content:'☐';position:absolute;left:0;
+    font-size:14px;color:var(--blue-mid);top:7px;
+  }
+  .checklist li .sub { font-size:11px;color:var(--muted);display:block;margin-top:2px; }
+
+  /* ── PRINT / PDF ── */
+  .print-btn {
+    position:fixed;bottom:28px;right:28px;
+    background:var(--blue-dark);color:white;border:none;
+    padding:12px 22px;border-radius:28px;font-size:12px;font-weight:600;
+    cursor:pointer;box-shadow:0 4px 16px rgba(15,45,94,.35);
+    letter-spacing:.04em;transition:all .15s;z-index:1000;
+  }
+  .print-btn:hover { background:var(--blue-mid);transform:translateY(-1px); }
+  @media print {
+    .print-btn { display:none; }
+    body { background:white; }
+  }
+
+  /* ── MISC ── */
+  .label-tag {
+    display:inline-block;padding:2px 10px;border-radius:12px;
+    font-size:10px;font-weight:700;letter-spacing:.05em;
+  }
+  .label-tag.blue   { background:#dbeafe;color:#1e3a5f; }
+  .label-tag.green  { background:#dcfce7;color:#166534; }
+  .label-tag.red    { background:#fee2e2;color:#991b1b; }
+  .label-tag.orange { background:#fef3c7;color:#92400e; }
+
+  .divider { height:1px;background:var(--border);margin:32px 0; }
+
+  .two-col { display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">INTERNAL DESIGN DOCUMENT — LP STRATEGY</div>
+  <h1>
+    <span>Sanhe Interfashion — Japan LP 設計ガイド</span>
+    BtoB・海外OEM工場向け<br>ランディングページ設計書
+  </h1>
+  <div class="cover-sub">LP作成前に押さえるべき根本的な考え方・構成・コピーの原則</div>
+  <div class="cover-kpi">
+    <div class="cover-kpi-item">
+      <span class="num">70%</span>
+      <span class="lbl">ファーストビューで離脱する割合</span>
+    </div>
+    <div class="cover-kpi-item">
+      <span class="num">5秒</span>
+      <span class="lbl">何のサイトか判断する時間</span>
+    </div>
+    <div class="cover-kpi-item">
+      <span class="num">1.5〜2%</span>
+      <span class="lbl">BtoB製造業の平均CVR</span>
+    </div>
+    <div class="cover-kpi-item">
+      <span class="num">83%</span>
+      <span class="lbl">実績・推薦を信頼する割合</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============================
+  SECTION 0: 根本的な考え方
+============================= -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-num">0</div>
+    <div class="sec-title">LPの根本的な考え方<small>FUNDAMENTAL PHILOSOPHY</small></div>
+  </div>
+
+  <div class="highlight">
+    <h3>▌ SanheのLPが解くべき1つの問い</h3>
+    <p>「なぜ今使っている中国工場をやめて、Sanhe（韓国）に変えなければならないのか？」<br>
+    訪問者がこの問いに自分で答えを出せる状態にすること。それがSanheのLPのすべき仕事。</p>
+  </div>
+
+  <div class="card-grid col2">
+    <div class="card red">
+      <h4>❌ やってはいけない考え方</h4>
+      <ul>
+        <li>「うちの工場の強みを全部書こう」</li>
+        <li>「きれいなデザインで印象を良くしよう」</li>
+        <li>「製品カタログをそのまま載せよう」</li>
+        <li>「とりあえず問い合わせフォームを置こう」</li>
+        <li>「会社概要・沿革を詳しく書こう」</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h4>✅ 正しい考え方</h4>
+      <ul>
+        <li>訪問者の「悩み」から逆算して設計する</li>
+        <li>「読んでもらう」ではなく「決断させる」</li>
+        <li>信頼を積み上げてから行動を促す</li>
+        <li>1ページ = 1つのCTA（目的を絞る）</li>
+        <li>BtoBは「論理×感情」の両方で動く</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-box blue">
+    <div class="icon">💡</div>
+    <div class="info-box-content">
+      <h4>BtoBとBtoCのLP — 最大の違い</h4>
+      <p>BtoCは「衝動買い」があるが、BtoBは複数の担当者・決裁者が時間をかけて検討する。<br>
+      → LPは「今すぐ買わせる」ページではなく、<strong>「次のアクション（問い合わせ・サンプル請求）を起こさせる」ページ</strong>。<br>
+      → 訪問から商談まで平均3〜6ヶ月かかることを前提に、LPは「興味を持たせて連絡先を取得する入口」と割り切る。</p>
+    </div>
+  </div>
+
+  <div class="info-box orange">
+    <div class="icon">⚠️</div>
+    <div class="info-box-content">
+      <h4>海外工場が日本企業に信頼されるための大前提</h4>
+      <p>日本のバイヤーは「海外工場 = 品質が不安・連絡が取りにくい・トラブル時に困る」という不信感を持っている。<br>
+      Sanheのすべてのコンテンツはこの不信感を一つひとつ潰すことが最優先。<strong>「安い」より「安心」を先に伝える。</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  SECTION 1: ターゲット設計
+============================= -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-num">1</div>
+    <div class="sec-title">ターゲット設計（誰のためのLPか）<small>TARGET PERSONA DESIGN</small></div>
+  </div>
+
+  <div class="info-box blue">
+    <div class="icon">🎯</div>
+    <div class="info-box-content">
+      <h4>重要：「企業」ではなく「人」に向けて書く</h4>
+      <p>「日本の革バッグ会社向け」ではなく、<strong>その会社の「誰が」読むのか</strong>を決める。<br>
+      Sanheの場合、訪問者は主に2タイプ存在する。この2人を意識した設計が必要。</p>
+    </div>
+  </div>
+
+  <div class="card-grid col2">
+    <div class="card blue">
+      <h4>👤 Type A：担当者・バイヤー（調査フェーズ）</h4>
+      <ul>
+        <li>「工場を探して来てくれた人」</li>
+        <li>スペック・MOQ・価格感・対応素材を見る</li>
+        <li>比較リストを作って上司に提出する立場</li>
+        <li>→ 数字・仕様・実績を論理的に見せる</li>
+        <li>→ 資料ダウンロードやカタログ請求が刺さる</li>
+      </ul>
+    </div>
+    <div class="card blue">
+      <h4>👔 Type B：経営者・決裁者（意思決定フェーズ）</h4>
+      <ul>
+        <li>「担当者が見つけて、上長に確認させる人」</li>
+        <li>信頼性・取引先実績・会社の安定感を見る</li>
+        <li>「この工場に任せて大丈夫か」を判断する立場</li>
+        <li>→ 実績社数・ブランド名・代表の顔を出す</li>
+        <li>→ 工場見学の案内や直接商談CTAが刺さる</li>
+      </ul>
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead><tr><th>ペルソナ軸</th><th>具体的な人物像</th><th>LPで伝えるべきこと</th></tr></thead>
+    <tbody>
+      <tr><td class="key">主ターゲット</td><td>東京の革バッグ・財布ブランド<br>年商5〜30億円 / 仕入れ担当・オーナー</td><td>「今の中国工場の不満を解決できる」という提案</td></tr>
+      <tr><td class="key">痛点1</td><td>「中国工場の品質が安定しない」</td><td>韓国の品質管理体制・QC工程の写真・数値</td></tr>
+      <tr><td class="key">痛点2</td><td>「コミュニケーションに時間がかかる」</td><td>日本語対応スタッフ・レスポンス時間の明示</td></tr>
+      <tr><td class="key">痛点3</td><td>「小ロットで頼めない」</td><td>最小発注量(MOQ)を明記</td></tr>
+      <tr><td class="key">痛点4</td><td>「納期が読めない」</td><td>標準リードタイムを数字で明示</td></tr>
+      <tr><td class="key">副ターゲット</td><td>OEM仕入れ先を探している<br>セレクトショップ・新興ブランド</td><td>ODM対応・オリジナルデザイン開発の提案</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================
+  SECTION 2: LP全体構成（ワイヤーフレーム）
+============================= -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-num">2</div>
+    <div class="sec-title">LP全体構成（ワイヤーフレーム）<small>PAGE STRUCTURE & WIREFRAME</small></div>
+  </div>
+
+  <div class="info-box green">
+    <div class="icon">📐</div>
+    <div class="info-box-content">
+      <h4>設計の原則：PASONA構成 × 信頼積み上げ型</h4>
+      <p>P（Problem/課題）→ A（Agitation/共感・煽り）→ So（Solution/解決策）→ N（Narrow/絞り込み）→ A（Action/行動）の順に読者を誘導する。<br>
+      Sanheの場合は「問題提起 → 共感 → 解決 → 証拠 → 行動」の流れが最適。</p>
+    </div>
+  </div>
+
+  <div class="wireframe">
+    <div class="wf-block highlighted">
+      <div class="wf-num">1</div>
+      <div class="wf-content">
+        <div class="wf-label">ファーストビュー <span class="wf-tag must">MUST</span></div>
+        <div class="wf-desc">キャッチコピー（課題×解決策を一文で）+ 数値実績 + CTAボタン + 工場の写真<br>
+        <strong>5秒以内に「何の会社か・誰のためか・何をしてくれるか」を伝える。</strong><br>
+        70%はここで離脱するため最重要セクション。</div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-num">2</div>
+      <div class="wf-content">
+        <div class="wf-label">課題提起・共感 <span class="wf-tag must">MUST</span></div>
+        <div class="wf-desc">「こんな悩みありませんか？」チェックリスト形式で3〜5個の痛点を列挙。<br>
+        訪問者に「自分のことだ」と思わせる。具体的な言葉で書く（「品質が悪い」ではなく「縫い目のほつれが毎ロット出る」）。</div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-num">3</div>
+      <div class="wf-content">
+        <div class="wf-label">解決策の提示 <span class="wf-tag must">MUST</span></div>
+        <div class="wf-desc">「その課題、Sanheが解決します」— 課題と解決策を1対1で対応させる。<br>
+        「韓国工場だからできること」を強みとして言語化。中国工場との比較は直接行わず、Sanheのメリットとして伝える。</div>
+      </div>
+    </div>
+    <div class="wf-block highlighted">
+      <div class="wf-num">4</div>
+      <div class="wf-content">
+        <div class="wf-label">数値実績・信頼バッジ <span class="wf-tag must">MUST</span></div>
+        <div class="wf-desc">創業年数・対応ブランド数・製品出荷数・品質検査合格率など。数字は必ず入れる。<br>
+        取引実績ブランドのロゴ一覧（許可が取れた範囲で）。「◯◯社以上との取引実績」など。<br>
+        <strong>信頼を「見える化」する最重要セクション。</strong></div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-num">5</div>
+      <div class="wf-content">
+        <div class="wf-label">工場・品質紹介 <span class="wf-tag must">MUST</span></div>
+        <div class="wf-desc">工場内部の写真（清潔感・整頓された様子）・職人の作業風景・QC工程写真。<br>
+        動画があれば尚良し（ページ内で自動再生、別タブに飛ばさない）。<br>
+        「百聞は一見にしかず」— 文章より写真の方が信頼を生む。</div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-num">6</div>
+      <div class="wf-content">
+        <div class="wf-label">製品・対応カテゴリ <span class="wf-tag high">HIGH</span></div>
+        <div class="wf-desc">対応可能な製品種別（バッグ / 財布 / ポーチ / ベルト / 革小物）を一覧で見せる。<br>
+        各カテゴリに実際のサンプル写真を添付。素材対応表（牛革・豚革・合皮・キャンバス等）を載せる。</div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-num">7</div>
+      <div class="wf-content">
+        <div class="wf-label">サービス仕様・スペック <span class="wf-tag high">HIGH</span></div>
+        <div class="wf-desc">MOQ（最小発注量）/ 標準リードタイム / 価格帯（目安） / 対応ロット / OEM・ODM対応可否。<br>
+        <strong>日本のバイヤーが必ず確認する4項目。ここが書いていないサイトは即離脱される。</strong></div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-num">8</div>
+      <div class="wf-content">
+        <div class="wf-label">導入事例・お客様の声 <span class="wf-tag high">HIGH</span></div>
+        <div class="wf-desc">取引ブランドのコメント（担当者名・会社名・顔写真があれば最高）。<br>
+        「どんな課題があって → Sanheに頼んで → どう解決したか」のストーリー形式が最も効果的。</div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-num">9</div>
+      <div class="wf-content">
+        <div class="wf-label">Sanheを選ぶ理由 / 競合との違い <span class="wf-tag high">HIGH</span></div>
+        <div class="wf-desc">「なぜ中国工場ではなくSanheか」を3〜5点で整理。比較表は避け、Sanheのポジションを肯定的に語る。<br>
+        例：「韓国製品の品質基準 × 日本語対応 × 小ロット対応」の3点セット。</div>
+      </div>
+    </div>
+    <div class="wf-block">
+      <div class="wf-num">10</div>
+      <div class="wf-content">
+        <div class="wf-label">よくある質問（FAQ） <span class="wf-tag high">HIGH</span></div>
+        <div class="wf-desc">問い合わせ前の不安・疑問を先回りして解消する。<br>
+        「最小ロットは？」「支払いはどうなる？」「日本語で対応できる？」「工場見学はできる？」など8〜12問。<br>
+        FAQがあると問い合わせのハードルが下がる。</div>
+      </div>
+    </div>
+    <div class="wf-block highlighted">
+      <div class="wf-num">11</div>
+      <div class="wf-content">
+        <div class="wf-label">CTA（行動喚起）セクション <span class="wf-tag must">MUST</span></div>
+        <div class="wf-desc">問い合わせフォーム / サンプル請求 / 工場見学申込 / 資料ダウンロード。<br>
+        <strong>段階的CTAを設ける（今すぐ買う気がない人でも接点を取れるように）。</strong><br>
+        フォームは5項目以内。「会社名・氏名・メール・電話・問い合わせ内容」のみ。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box blue">
+    <div class="icon">📌</div>
+    <div class="info-box-content">
+      <h4>CTAは「3段階」設計する</h4>
+      <p>
+        <strong>① 今すぐ検討中：</strong>「見積もり依頼・工場見学申込」（フォームに直接誘導）<br>
+        <strong>② 興味はある・まだ早い：</strong>「製品カタログ・価格表のダウンロード」（メールアドレスを取得）<br>
+        <strong>③ 情報収集中：</strong>「メルマガ登録」「LINEで相談」（軽い接点）<br>
+        → ①だけだとCVRが低い。③を用意することで「今は決めないが将来顧客」を取り込める。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  SECTION 3: ファーストビュー設計
+============================= -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-num">3</div>
+    <div class="sec-title">ファーストビュー設計（最重要）<small>FIRST VIEW — THE MAKE OR BREAK SECTION</small></div>
+  </div>
+
+  <div class="highlight">
+    <h3>▌ ファーストビューの鉄則</h3>
+    <ul>
+      <li>5秒以内に「何の会社か・誰のためか・何をしてくれるか」が伝わること</li>
+      <li>キャッチコピー + 数値実績 + CTAボタンの「3点セット」を必ず配置する</li>
+      <li>背景画像は工場・製品の「リアルな写真」（イラストやストック画像は信頼を下げる）</li>
+      <li>スクロールを促す矢印や「↓ 詳しく見る」を下部に配置する</li>
+    </ul>
+  </div>
+
+  <p style="font-weight:700;color:var(--blue-dark);margin-bottom:12px;font-size:13px">キャッチコピーの作り方</p>
+
+  <div class="copy-bad">
+    <div class="copy-label">❌ NG例 — 抽象的すぎる・自社目線</div>
+    <div class="copy-text">高品質な革製品を提供する韓国のOEM工場です</div>
+  </div>
+  <div class="copy-bad">
+    <div class="copy-label">❌ NG例 — 誰のためかわからない</div>
+    <div class="copy-text">Sanhe Interfashion — Your Leather Goods Partner</div>
+  </div>
+
+  <div class="copy-box">
+    <div class="copy-label">✅ OK例 — 課題×解決を一文で・相手目線</div>
+    <div class="copy-text">「中国工場の品質トラブル、もう限界」と感じたら。<br>韓国Sanheが日本語で対応します。</div>
+    <div class="copy-sub">→ 誰が（中国工場使いの日本ブランド）・何を感じているか（品質トラブルへの疲れ）・解決策（Sanhe＋日本語対応）が一文に入っている</div>
+  </div>
+  <div class="copy-box">
+    <div class="copy-label">✅ OK例 — 数値で信頼を先に見せるパターン</div>
+    <div class="copy-text">創業28年・300社以上の実績。<br>韓国No.1革製品OEM工場が、日本ブランドの専任担当者としてつきます。</div>
+    <div class="copy-sub">→ 数値で信頼を担保してから提案している。「専任担当者」が安心感を生む。</div>
+  </div>
+  <div class="copy-box">
+    <div class="copy-label">✅ OK例 — ODM提案型（攻めのパターン）</div>
+    <div class="copy-text">あなたのブランドの革製品、韓国で作りませんか。<br>小ロット100個〜。日本語サポート付き。</div>
+    <div class="copy-sub">→ 新興ブランドに刺さる。MOQを先に出すことで「自分には無理かも」という不安を先に解消している。</div>
+  </div>
+
+  <div class="card-grid col2" style="margin-top:20px">
+    <div class="card blue">
+      <h4>ファーストビューに必ず入れる要素</h4>
+      <ul>
+        <li>キャッチコピー（課題 or 数値から始める）</li>
+        <li>サブコピー（1〜2文で詳細補足）</li>
+        <li>CTAボタン（「まず資料請求」など）</li>
+        <li>数値バッジ（創業年数・実績社数・対応MOQなど）</li>
+        <li>工場または製品のリアル写真</li>
+      </ul>
+    </div>
+    <div class="card orange">
+      <h4>ファーストビューに入れてはいけないもの</h4>
+      <ul>
+        <li>会社の歴史・沿革の説明</li>
+        <li>代表挨拶（ここではまだ早い）</li>
+        <li>製品カタログの全品紹介</li>
+        <li>英語のみの表記（日本向けサイトなら日本語優先）</li>
+        <li>アニメーション過多・ローディング画面</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  SECTION 4: 信頼獲得の設計
+============================= -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-num">4</div>
+    <div class="sec-title">信頼獲得の設計（海外工場の最重要課題）<small>TRUST BUILDING — CRITICAL FOR OVERSEAS FACTORIES</small></div>
+  </div>
+
+  <div class="info-box red">
+    <div class="icon">⚠️</div>
+    <div class="info-box-content">
+      <h4>海外工場が日本市場で失敗する最大の理由</h4>
+      <p>製品の品質や価格よりも先に「この工場、信頼できるの？」という壁がある。<br>
+      日本のバイヤーは <strong>①品質が安定しない不安 ②コミュニケーション不全の不安 ③トラブル時の対応不安</strong> という3つの不安を持っている。<br>
+      LP上でこの3つをつぶさない限り、どんなに製品が良くても問い合わせは来ない。</p>
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead><tr><th>バイヤーの不安</th><th>LPで用意すべき「証拠」</th><th>掲載場所</th></tr></thead>
+    <tbody>
+      <tr><td class="key">品質が安定しない</td><td>品質検査工程の写真・動画 / 不良品率の数値 / ISO等の認証取得状況</td><td>工場紹介セクション</td></tr>
+      <tr><td class="key">日本語で話せない</td><td>日本語対応スタッフの顔写真・名前・レスポンス時間の明記</td><td>ファーストビュー・会社概要</td></tr>
+      <tr><td class="key">納期が守られない</td><td>標準リードタイム（週単位で明記）/ 生産スケジュール管理の説明</td><td>スペックセクション</td></tr>
+      <tr><td class="key">トラブル時の対応</td><td>アフターサポート方針 / 過去の対応事例（問題→解決のストーリー）</td><td>FAQ・事例セクション</td></tr>
+      <tr><td class="key">本当に実在する工場か</td><td>工場住所・Google Maps埋め込み / 工場外観・内観の写真多数</td><td>工場紹介セクション</td></tr>
+      <tr><td class="key">他社は使っているか</td><td>取引先ブランドのロゴ一覧 / 導入事例・推薦コメント</td><td>実績セクション</td></tr>
+    </tbody>
+  </table>
+
+  <div class="card-grid col3">
+    <div class="card green">
+      <div class="card-num">①</div>
+      <h4>数字で語る（最強の信頼）</h4>
+      <p>「多くの実績」ではなく「300社以上の実績」。「品質が高い」ではなく「不良品率0.3%以下を維持」。数字のないLP＝主張のないLP。</p>
+    </div>
+    <div class="card green">
+      <div class="card-num">②</div>
+      <h4>顔を出す（人を信頼する）</h4>
+      <p>担当者の顔写真・名前・自己紹介を載せる。日本語対応の担当者が実在するとわかることが、工場への信頼に直結する。</p>
+    </div>
+    <div class="card green">
+      <div class="card-num">③</div>
+      <h4>写真の量と質（見て信頼する）</h4>
+      <p>工場内部・生産ライン・素材・完成品の写真は多ければ多いほどよい。スマホで撮った写真より、照明を意識したプロ品質の写真が望ましい。</p>
+    </div>
+    <div class="card green">
+      <div class="card-num">④</div>
+      <h4>第三者の声（推薦で信頼する）</h4>
+      <p>自社の言葉より取引先の言葉の方が3倍信頼される。1社でも実名・コメント付きの推薦があるだけでCVRが大きく変わる。</p>
+    </div>
+    <div class="card green">
+      <div class="card-num">⑤</div>
+      <h4>リスク除去（買いやすくする）</h4>
+      <p>「まずはサンプルだけ請求できる」「資料だけもらえる」「工場見学無料」など、いきなり発注しなくていい逃げ道を作る。ハードルを下げると問い合わせが増える。</p>
+    </div>
+    <div class="card green">
+      <div class="card-num">⑥</div>
+      <h4>日本語の完成度（細部で信頼する）</h4>
+      <p>翻訳ツールで作った不自然な日本語は一発でバレる。サイトの日本語の品質 = 工場の品質管理能力と無意識に判断される。ネイティブチェック必須。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  SECTION 5: コピーライティング原則
+============================= -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-num">5</div>
+    <div class="sec-title">コピーライティングの原則<small>COPYWRITING PRINCIPLES FOR SANHE</small></div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <p style="font-weight:700;color:var(--blue-dark);margin-bottom:12px;">書き方の基本原則</p>
+      <div class="info-box green">
+        <div class="icon">✅</div>
+        <div class="info-box-content">
+          <h4>「あなた」目線で書く</h4>
+          <p>主語を「私たちSanheは〜」ではなく「あなたの工場の課題を〜」にする。読んでいる人の言葉で語る。</p>
+        </div>
+      </div>
+      <div class="info-box green">
+        <div class="icon">✅</div>
+        <div class="info-box-content">
+          <h4>機能より「ベネフィット」を伝える</h4>
+          <p>「本革対応可能」ではなく「本革のハンドバッグが来週からサンプルを確認できます」。機能→体験→利益の順で伝える。</p>
+        </div>
+      </div>
+      <div class="info-box green">
+        <div class="icon">✅</div>
+        <div class="info-box-content">
+          <h4>具体的な言葉を使う</h4>
+          <p>「迅速な対応」ではなく「24時間以内に返信」。「豊富な実績」ではなく「日本ブランド47社との取引」。</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p style="font-weight:700;color:var(--red);margin-bottom:12px;">避けるべき表現</p>
+      <div class="info-box red">
+        <div class="icon">❌</div>
+        <div class="info-box-content">
+          <h4>業界用語の乱用</h4>
+          <p>「バフ仕上げ」「銀付革」「グレインレザー」など、専門用語を使うなら必ず説明を添える。担当者だけでなく経営者も読む。</p>
+        </div>
+      </div>
+      <div class="info-box red">
+        <div class="icon">❌</div>
+        <div class="info-box-content">
+          <h4>会社自慢・自己紹介</h4>
+          <p>「弊社は1996年に創業し〜」という書き出しは最悪。読者は自分の課題を解決したいのであって、Sanheの歴史に興味はない。</p>
+        </div>
+      </div>
+      <div class="info-box red">
+        <div class="icon">❌</div>
+        <div class="info-box-content">
+          <h4>過剰な謙遜・敬語</h4>
+          <p>日本語的な過剰謙遜は信頼感を下げる場合もある。「〜させていただいております」の連発より「〜しています」のほうが明快で信頼される。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  SECTION 6: Sanhe固有の差別化軸
+============================= -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-num">6</div>
+    <div class="sec-title">Sanhe固有の差別化軸（LP上での言語化）<small>SANHE'S UNIQUE VALUE PROPOSITION</small></div>
+  </div>
+
+  <div class="highlight">
+    <h3>▌ Sanheを「選ぶ理由」をLP上で3点に絞る</h3>
+    <p>競合（中国工場・台湾工場）との比較ではなく、「Sanheにしかない価値」を肯定的に語る。<br>
+    言葉で伝える差別化ポイントは多くても3つ。それ以上は記憶されない。</p>
+  </div>
+
+  <div class="card-grid col3">
+    <div class="card blue">
+      <h4>差別化軸 ①：韓国品質</h4>
+      <p>韓国のファッション産業は世界的に評価が高く、日本でも「韓国ブランド = 品質が良い」というイメージが定着しつつある。</p>
+      <p style="margin-top:8px;font-size:11px;color:var(--blue-mid);font-weight:700">LP上の言語化例：<br>「K-FASSHIONで鍛えられた品質管理基準をあなたのブランドに」</p>
+    </div>
+    <div class="card blue">
+      <h4>差別化軸 ②：日本語対応</h4>
+      <p>海外工場の最大のネックは「言葉の壁」。日本語専任担当者の存在はそれだけでSanheを選ぶ理由になる。</p>
+      <p style="margin-top:8px;font-size:11px;color:var(--blue-mid);font-weight:700">LP上の言語化例：<br>「日本語担当者が常駐。メール返信は24時間以内」</p>
+    </div>
+    <div class="card blue">
+      <h4>差別化軸 ③：小ロット×スピード</h4>
+      <p>大手中国工場は大ロット前提。新興ブランドや中小ブランドにとって「小ロットから始められる」は決定的な差別化になる。</p>
+      <p style="margin-top:8px;font-size:11px;color:var(--blue-mid);font-weight:700">LP上の言語化例：<br>「100個〜の少量発注OK。新ブランド立ち上げから対応」</p>
+    </div>
+  </div>
+
+  <table class="data-table" style="margin-top:20px">
+    <thead><tr><th>競合と比べた際の問いかけ</th><th>Sanheが答えるべき内容</th></tr></thead>
+    <tbody>
+      <tr><td class="key">「中国工場より高くない？」</td><td>「品質トラブル1回のコスト＋やり直し工数を考えると、結果的にSanheの方が安い」という価値換算で語る</td></tr>
+      <tr><td class="key">「なぜ韓国？」</td><td>「韓国の革製品産業の歴史・技術水準・品質検査基準の厳しさ」を具体的なデータで語る</td></tr>
+      <tr><td class="key">「遠くて不安」</td><td>「仁川〜成田は2時間。日本と同じタイムゾーン。工場見学も日帰りで可能」</td></tr>
+      <tr><td class="key">「実績がわからない」</td><td>取引先ブランド数・出荷個数・継続率を数字で示す</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============================
+  SECTION 7: CTA・フォーム設計
+============================= -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-num">7</div>
+    <div class="sec-title">CTA・フォーム設計<small>CALL TO ACTION & FORM DESIGN</small></div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-item">
+      <div class="step-circle">1</div>
+      <h5>資料DL<br>カタログ請求</h5>
+      <p>一番ハードルが低い<br>メアドのみ取得</p>
+    </div>
+    <div class="step-item">
+      <div class="step-circle">2</div>
+      <h5>サンプル請求</h5>
+      <p>素材・仕上げを<br>実際に確認</p>
+    </div>
+    <div class="step-item">
+      <div class="step-circle">3</div>
+      <h5>工場見学<br>申込</h5>
+      <p>韓国訪問で<br>関係を構築</p>
+    </div>
+    <div class="step-item">
+      <div class="step-circle">4</div>
+      <h5>見積もり<br>依頼</h5>
+      <p>具体的な<br>商談フェーズ</p>
+    </div>
+    <div class="step-item">
+      <div class="step-circle">5</div>
+      <h5>発注・<br>試作開始</h5>
+      <p>成約</p>
+    </div>
+  </div>
+
+  <div class="card-grid col2">
+    <div class="card green">
+      <h4>フォームの最適設計</h4>
+      <ul>
+        <li>項目は最大5つまで（多いほどCVR低下）</li>
+        <li>必須項目：会社名・氏名・メール・電話番号・お問い合わせ内容</li>
+        <li>「送信する」より「無料で資料を受け取る」の方がCVR高い</li>
+        <li>送信後の「次のステップ」を明記（いつ誰が連絡するか）</li>
+        <li>プライバシーポリシーへのリンクは必須</li>
+      </ul>
+    </div>
+    <div class="card blue">
+      <h4>CTAボタンのテキスト例</h4>
+      <ul>
+        <li>「製品カタログを無料でダウンロード」</li>
+        <li>「革サンプルを無料で請求する」</li>
+        <li>「工場見学（無料）を申し込む」</li>
+        <li>「まず相談してみる（返信24時間以内）」</li>
+        <li>「見積もりを依頼する（無料・3日以内に回答）」</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-box orange">
+    <div class="icon">💡</div>
+    <div class="info-box-content">
+      <h4>CTAは「ファーストビュー・中間・ページ最下部」の3箇所に配置する</h4>
+      <p>最初のCTAを無視して読み進める人がいる。途中で「問い合わせたい」と思った人が戻る必要のないよう、3箇所に設置する。<br>
+      固定ヘッダー（スクロールしても常に見えるCTAボタン）があるとさらに効果的。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  SECTION 8: 制作前チェックリスト
+============================= -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-num">8</div>
+    <div class="sec-title">LP制作前に用意すべき素材チェックリスト<small>PRE-PRODUCTION CHECKLIST</small></div>
+  </div>
+
+  <div class="card-grid col2">
+    <div>
+      <p style="font-weight:700;color:var(--blue-dark);margin-bottom:10px;font-size:12px">📸 写真・画像素材</p>
+      <ul class="checklist">
+        <li>工場外観写真（昼間、清潔感のある状態）<span class="sub">最低3枚以上</span></li>
+        <li>工場内部・生産ライン写真<span class="sub">機械・職人・整理整頓された様子</span></li>
+        <li>品質検査工程の写真<span class="sub">QCチームが製品をチェックしている場面</span></li>
+        <li>完成品の製品写真<span class="sub">白背景・自然光、プロ品質推奨</span></li>
+        <li>日本語担当者の顔写真<span class="sub">笑顔・ビジネスカジュアル推奨</span></li>
+        <li>取引先ブランドのロゴ<span class="sub">掲載許可を事前に取る</span></li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-weight:700;color:var(--blue-dark);margin-bottom:10px;font-size:12px">📊 数字・データ</p>
+      <ul class="checklist">
+        <li>創業年数（または設立年）</li>
+        <li>日本ブランドとの取引実績社数</li>
+        <li>年間出荷個数または累計出荷個数</li>
+        <li>不良品率または品質合格率</li>
+        <li>最小発注ロット（MOQ）</li>
+        <li>標準リードタイム（週単位）</li>
+        <li>対応素材の種類数</li>
+        <li>従業員数・工場面積（信頼感）</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-weight:700;color:var(--blue-dark);margin-bottom:10px;font-size:12px">💬 テキスト素材</p>
+      <ul class="checklist">
+        <li>取引先ブランドの推薦コメント<span class="sub">1社でも実名・顔写真付きが望ましい</span></li>
+        <li>日本語担当者のプロフィール文</li>
+        <li>よくある質問（FAQ）リスト<span class="sub">10問以上推奨</span></li>
+        <li>日本語版会社概要（1,000字以内）</li>
+        <li>対応製品カテゴリ一覧</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-weight:700;color:var(--blue-dark);margin-bottom:10px;font-size:12px">⚙️ 機能・技術面</p>
+      <ul class="checklist">
+        <li>スマホ対応（レスポンシブ）は必須<span class="sub">83%がモバイルでアクセス</span></li>
+        <li>ページ表示速度3秒以内<span class="sub">遅いとそれだけで離脱</span></li>
+        <li>問い合わせフォームのテスト</li>
+        <li>プライバシーポリシーページの設置</li>
+        <li>Google Analytics 設置（CVを計測する）</li>
+        <li>日本語・英語の切替（将来的に）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+  SECTION 9: Sanheのためのロードマップ
+============================= -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-num">9</div>
+    <div class="sec-title">SanheのLP制作ロードマップ<small>RECOMMENDED ACTION ROADMAP</small></div>
+  </div>
+
+  <table class="data-table">
+    <thead><tr><th>フェーズ</th><th>やること</th><th>目的</th><th>優先度</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="key">Phase 1<br>今すぐ（〜1ヶ月）</td>
+        <td>
+          展示会用ランディングページ（1ページ）を作る。<br>
+          ファーストビュー＋課題提起＋実績数値＋CTA（サンプル請求フォーム）のみ。
+        </td>
+        <td>展示会で名刺交換した相手が「後で調べる」ときに行き着く場所を作る</td>
+        <td><span class="label-tag red">最優先</span></td>
+      </tr>
+      <tr>
+        <td class="key">Phase 2<br>1〜3ヶ月</td>
+        <td>
+          工場写真・製品写真を本格的に撮影する。<br>
+          日本語担当者のプロフィールを用意する。<br>
+          FAQ10問を日本語で作成する。
+        </td>
+        <td>信頼獲得に必要な「証拠素材」を揃える</td>
+        <td><span class="label-tag orange">高</span></td>
+      </tr>
+      <tr>
+        <td class="key">Phase 3<br>3〜6ヶ月</td>
+        <td>
+          フルLP（全セクション）を完成させる。<br>
+          製品カタログのPDFダウンロード機能を追加。<br>
+          1社でも取引実績の推薦コメントを掲載する。
+        </td>
+        <td>CVRを高める完成形のLPにする</td>
+        <td><span class="label-tag blue">中</span></td>
+      </tr>
+      <tr>
+        <td class="key">Phase 4<br>6ヶ月〜</td>
+        <td>
+          Google Analytics でアクセス解析。<br>
+          A/Bテストでキャッチコピーを最適化。<br>
+          SEO（「バッグ OEM 韓国」などで検索上位を狙う）。
+        </td>
+        <td>展示会以外からの自然流入を作る</td>
+        <td><span class="label-tag green">将来</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight" style="margin-top:24px">
+    <h3>▌ 最も重要なメッセージ</h3>
+    <p>SanheのLP制作で最初にやるべきことは「デザインを決める」ことではない。<br>
+    <strong>「日本のバイヤーが今感じている痛みを言語化する」</strong>ことが先。<br>
+    訪問者が読んで「これは自分のことだ」と感じた瞬間、そのLPは機能している。<br>
+    デザインは最後。まずコピー（言葉）の設計から始める。</p>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<div class="container" style="padding-top:0">
+  <div style="text-align:center;padding:32px 0;color:var(--faint);font-size:11px;border-top:1px solid var(--border)">
+    <p>Sanhe Interfashion — Japan LP Strategy Guide</p>
+    <p style="margin-top:4px">本資料は社内ピッチ・LP制作準備用途に限定。作成日：2026年5月27日</p>
+  </div>
+</div>
+
+<button class="print-btn" onclick="window.print()">PDF出力</button>
+
+</body>
+</html>

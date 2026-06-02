@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanhe Interfashion｜日本ターゲット企業100社リスト</title>
+<style>
+:root {
+  --navy: #1a2a4a;
+  --navy-light: #2c3e6b;
+  --accent: #c8a96e;
+  --accent-light: #f0e6d0;
+  --gray: #f4f6f9;
+  --border: #dde2ea;
+  --green: #1e7e34;
+  --green-bg: #e8f5e9;
+  --amber: #856404;
+  --amber-bg: #fff3cd;
+  --red: #c0392b;
+  --red-bg: #fde8e8;
+  --muted: #888;
+  --muted-bg: #f0f0f0;
+  --typeA: #1565c0;
+  --typeA-bg: #e3f2fd;
+  --typeB: #4a235a;
+  --typeB-bg: #f3e5f5;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN','Meiryo','Yu Gothic',sans-serif;
+  background: #eef0f4;
+  color: #1e1e1e;
+  font-size: 13px;
+}
+.wrap { max-width: 1400px; margin: 0 auto; padding: 24px 20px; }
+
+/* HEADER */
+.page-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  color: white;
+  padding: 36px 40px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.page-header h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+.page-header p { font-size: 13px; color: rgba(255,255,255,0.7); }
+.header-stats { display: flex; gap: 28px; }
+.stat { text-align: center; }
+.stat-val { font-size: 32px; font-weight: 700; color: var(--accent); line-height: 1; }
+.stat-label { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+/* CONTROLS */
+.controls {
+  background: white;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.controls label { font-size: 12px; color: var(--muted); font-weight: 600; }
+.filter-btn {
+  padding: 6px 18px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.filter-btn.active, .filter-btn:hover { background: var(--navy); color: white; border-color: var(--navy); }
+.filter-btn.typeA.active { background: var(--typeA); border-color: var(--typeA); }
+.filter-btn.typeB.active { background: var(--typeB); border-color: var(--typeB); }
+.search-box {
+  padding: 7px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: inherit;
+  width: 200px;
+  outline: none;
+}
+.search-box:focus { border-color: var(--navy); }
+.result-count { font-size: 12px; color: var(--muted); margin-left: auto; }
+
+/* TABLE */
+.table-wrap {
+  overflow-x: auto;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+table { width: 100%; border-collapse: collapse; min-width: 1100px; }
+thead th {
+  background: var(--navy);
+  color: white;
+  padding: 11px 10px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+thead th.cond { text-align: center; width: 44px; }
+tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+tbody tr:hover { background: #f7f9fc; }
+tbody tr.hidden { display: none; }
+td { padding: 10px 10px; vertical-align: middle; }
+td.num { color: var(--muted); font-size: 11px; width: 32px; }
+td.name { font-weight: 600; min-width: 160px; }
+td.brand { color: var(--navy-light); font-size: 12px; min-width: 100px; }
+td.location { font-size: 12px; min-width: 100px; }
+td.revenue { font-size: 12px; white-space: nowrap; }
+td.note { font-size: 11px; color: var(--muted); min-width: 160px; line-height: 1.5; }
+td.cond { text-align: center; }
+
+/* TYPE BADGE */
+.type-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.type-A { background: var(--typeA-bg); color: var(--typeA); }
+.type-B { background: var(--typeB-bg); color: var(--typeB); }
+
+/* PRIORITY */
+.pri {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.pri-high { background: #fff3cd; color: #7a5200; }
+.pri-mid { background: #e8f4ff; color: #1a5cb8; }
+.pri-low { background: #f0f0f0; color: #666; }
+
+/* CONDITION MARKERS */
+.c-ok { background: var(--green-bg); color: var(--green); border-radius: 4px; padding: 2px 4px; font-size: 12px; font-weight: 700; display: block; text-align: center; }
+.c-partial { background: var(--amber-bg); color: var(--amber); border-radius: 4px; padding: 2px 4px; font-size: 12px; font-weight: 700; display: block; text-align: center; }
+.c-unknown { background: var(--muted-bg); color: var(--muted); border-radius: 4px; padding: 2px 4px; font-size: 12px; display: block; text-align: center; }
+
+/* SCORE */
+.score { font-weight: 700; font-size: 13px; text-align: center; }
+.score-high { color: var(--green); }
+.score-mid { color: var(--typeA); }
+.score-low { color: var(--muted); }
+
+/* SITE LINK */
+.site-link { font-size: 11px; color: var(--typeA); text-decoration: none; display: block; }
+.site-link:hover { text-decoration: underline; }
+
+/* LEGEND */
+.legend {
+  background: white;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 12px;
+}
+.legend h4 { font-size: 11px; color: var(--muted); font-weight: 600; margin-right: 8px; }
+.legend-items { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+
+/* NOTE BOX */
+.note-box {
+  background: var(--accent-light);
+  border: 1px solid #d4b483;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-top: 20px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #6b4c1e;
+}
+.note-box h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+.note-box ul { padding-left: 18px; }
+.note-box li { margin-bottom: 4px; }
+
+@media print {
+  body { background: white; }
+  .controls { display: none; }
+  tbody tr.hidden { display: table-row; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="page-header">
+  <div>
+    <h1>日本ターゲット企業リスト</h1>
+    <p>Sanhe Interfashion ｜ 革製品ブランド向け営業対象リスト ｜ 2026年5月</p>
+  </div>
+  <div class="header-stats">
+    <div class="stat"><div class="stat-val" id="countA">—</div><div class="stat-label">タイプA（海外展開志向）</div></div>
+    <div class="stat"><div class="stat-val" id="countB">—</div><div class="stat-label">タイプB（既存展開・維持）</div></div>
+    <div class="stat"><div class="stat-val" id="countTotal">—</div><div class="stat-label">合計</div></div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div><h4>条件記号</h4>
+    <div class="legend-items">
+      <div class="legend-item"><span class="c-ok">✓</span> 条件を満たす（確認済み）</div>
+      <div class="legend-item"><span class="c-partial">△</span> 部分的に/おそらく該当</div>
+      <div class="legend-item"><span class="c-unknown">?</span> 情報不明・要確認</div>
+    </div>
+  </div>
+  <div><h4>条件項目</h4>
+    <div class="legend-items">
+      <div class="legend-item"><strong>A</strong>:革製品ブランド</div>
+      <div class="legend-item"><strong>B</strong>:年商10〜30億</div>
+      <div class="legend-item"><strong>C</strong>:東京拠点</div>
+      <div class="legend-item"><strong>D</strong>:海外展開</div>
+      <div class="legend-item"><strong>E</strong>:海外工場/OEM</div>
+      <div class="legend-item"><strong>F</strong>:英語対応</div>
+      <div class="legend-item"><strong>G</strong>:自社ブランド</div>
+    </div>
+  </div>
+  <div><h4>優先度</h4>
+    <div class="legend-items">
+      <div class="legend-item"><span class="pri pri-high">★★ 高</span> スコア10+</div>
+      <div class="legend-item"><span class="pri pri-mid">★ 中</span> スコア6〜9</div>
+      <div class="legend-item"><span class="pri pri-low">低</span> スコア〜5</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <label>絞り込み：</label>
+  <button class="filter-btn active" onclick="filterType('all',this)">すべて</button>
+  <button class="filter-btn typeA" onclick="filterType('A',this)">タイプA のみ</button>
+  <button class="filter-btn typeB" onclick="filterType('B',this)">タイプB のみ</button>
+  <input type="text" class="search-box" placeholder="会社名・ブランド名で検索..." oninput="searchTable(this.value)">
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<!-- TABLE -->
+<div class="table-wrap">
+<table id="mainTable">
+<thead>
+<tr>
+  <th style="width:32px">No.</th>
+  <th>会社名</th>
+  <th>ブランド</th>
+  <th>タイプ</th>
+  <th>優先度</th>
+  <th>所在地</th>
+  <th>年商</th>
+  <th class="cond">A</th>
+  <th class="cond">B</th>
+  <th class="cond">C</th>
+  <th class="cond">D</th>
+  <th class="cond">E</th>
+  <th class="cond">F</th>
+  <th class="cond">G</th>
+  <th style="width:44px;text-align:center">スコア</th>
+  <th>公式サイト</th>
+  <th>アプローチ根拠・備考</th>
+</tr>
+</thead>
+<tbody id="tableBody">
+</tbody>
+</table>
+</div>
+
+<!-- NOTE -->
+<div class="note-box">
+  <h4>残り企業の探し方（100社達成に向けて）</h4>
+  <ul>
+    <li><strong>東日本バッグ工業組合</strong>（ejb.or.jp）：加盟企業138社のリストが公開されており、そのまま台東区・墨田区の製造ブランドを網羅できる</li>
+    <li><strong>日本皮革産業連合会</strong>（jlia.or.jp）：会員企業検索から革製品ブランド・製造メーカーを絞り込める</li>
+    <li><strong>FaW TOKYO 出展企業リスト</strong>：毎年の出展社はWebで公開されており、ペルソナに直結する企業が多数含まれる</li>
+    <li><strong>JAPAN LEATHER AWARD 受賞企業</strong>：受賞企業はブランド力と品質意識が高く、ペルソナ適合率が高い</li>
+    <li><strong>BAG MAKERS TOKYO</strong>（bagmakers.tokyo）：台東区・墨田区の職人ブランド認証メーカー一覧（25社以上）</li>
+  </ul>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+const companies = [
+  // ===== TYPE A =====
+  {no:1, company:"株式会社AJIOKA",brand:"GANZO / Epoi",type:"A",location:"東京都中央区日本橋",revenue:"約35.8億円",cA:"✓",cB:"△",cC:"✓",cD:"△",cE:"△",cF:"✓",cG:"✓",site:"https://ajioka.co.jp/en/",note:"「海外込みで30億が目標」と社長が明言。英語サイト有。GANZOブランドで越境EC展開中。"},
+  {no:2, company:"株式会社土屋鞄製造所",brand:"TSUCHIYA KABAN",type:"A",location:"東京都足立区",revenue:"非公開（700名超）",cA:"✓",cB:"?",cC:"✓",cD:"✓",cE:"△",cF:"✓",cG:"✓",site:"https://tsuchiya-kaban.com/",note:"Shopify国際ECサイト運用中。台湾・香港・シンガポールに直営店3店舗。英語・中国語対応。"},
+  {no:3, company:"大峽製鞄株式会社",brand:"OHBA",type:"A",location:"東京都足立区千住",revenue:"非公開（1935年創業）",cA:"✓",cB:"?",cC:"✓",cD:"✓",cE:"△",cF:"△",cG:"✓",site:"https://ohbacorp.com/",note:"2011年Pitti Uomo・2012年Mipel出展実績。エース株式会社傘下として海外展開を積極推進中。"},
+  {no:4, company:"株式会社ウエニ貿易",brand:"PELLE MORBIDA",type:"A",location:"東京都台東区池之端",revenue:"グループ約516億（PELLE MORBIDA単独は非公開）",cA:"✓",cB:"?",cC:"✓",cD:"△",cE:"△",cF:"△",cG:"✓",site:"https://www.pellemorbida.com/",note:"台東区拠点。Made in Japan高級ブランド。アジア・欧州・米国への展開を検討中。"},
+  {no:5, company:"有限会社田中商店",brand:"文庫屋「大関」",type:"A",location:"東京都墨田区向島（浅草・表参道にも出店）",revenue:"非公開（1927年創業）",cA:"✓",cB:"?",cC:"✓",cD:"✓",cE:"?",cF:"✓",cG:"✓",site:"https://oozeki-japan.com/",note:"英語ECサイト（oozeki-japan.com）で全世界発送対応。浅草・表参道・銀座など都内に複数店舗。"},
+  {no:6, company:"株式会社Hender Scheme",brand:"Hender Scheme",type:"A",location:"東京都台東区浅草（アトリエ）・恵比寿（旗艦店）",revenue:"非公開（2010年創業）",cA:"✓",cB:"?",cC:"✓",cD:"✓",cE:"?",cF:"△",cG:"✓",site:"https://henderscheme.com/",note:"2015年よりパリ展示会出展。adidas・New Balance等グローバルブランドとのコラボ実績あり。浅草製造。"},
+  {no:7, company:"株式会社ナガタニ",brand:"NAGATANI",type:"A",location:"東京（ショールーム）・大阪",revenue:"非公開（1968年創業）",cA:"✓",cB:"?",cC:"△",cD:"✓",cE:"?",cF:"✓",cG:"✓",site:"https://nagatani-shop.com/en",note:"英語ECサイト完備。NY・パリ・ロンドンの展示会出展実績あり。海外展開が最も積極的なブランドの一つ。"},
+  {no:8, company:"ококомайстер株式会社",brand:"COCOMEISTER",type:"A",location:"東京都中央区銀座",revenue:"非公開（2011年創業・急成長）",cA:"✓",cB:"?",cC:"✓",cD:"△",cE:"△",cF:"△",cG:"✓",site:"https://cocomeister.jp/",note:"銀座本店含む全国6直営店。欧州素材使用の国産高級財布。越境EC展開・海外展開志向あり。"},
+  {no:9, company:"株式会社イケテイ",brand:"FUJITAKA",type:"A",location:"東京都台東区浅草橋（本社大阪）",revenue:"非公開",cA:"✓",cB:"?",cC:"△",cD:"✓",cE:"△",cF:"✓",cG:"✓",site:"https://fujitaka-japan.com/en/",note:"英語公式サイト積極運用。海外向けEC展開中。浅草橋に東京拠点。"},
+  {no:10, company:"海川商事株式会社",brand:"sot（ソット）",type:"A",location:"三重県桑名市（渋谷・銀座に直営店）",revenue:"非公開（2002年創業）",cA:"✓",cB:"?",cC:"△",cD:"△",cF:"△",cE:"?",cG:"✓",site:"https://sot-web.com/",note:"創業者が「海外で通用するブランドにする」と明言。東京複数店舗。海外展開計画中。"},
+  {no:11, company:"株式会社ユハク",brand:"YUHAKU",type:"A",location:"横浜市西区（銀座に直営店）",revenue:"非公開（2009年改組）",cA:"✓",cB:"?",cC:"△",cD:"△",cE:"?",cF:"△",cG:"✓",site:"https://yuhaku.co.jp/",note:"手染め革財布で独自ポジション。海外展開を視野に入れていると表明。銀座直営店あり。"},
+  {no:12, company:"JOGGO株式会社",brand:"JOGGO",type:"A",location:"東京都新宿区",revenue:"約6.8億円（2020年・成長中）",cA:"✓",cB:"?",cC:"✓",cD:"△",cE:"✓",cF:"△",cG:"✓",site:"https://joggo.jp/",note:"バングラデシュに自社工場を保有。カスタムオーダー革製品でクラウドファンディング累計実績あり。"},
+  {no:13, company:"株式会社バスデムシャット",brand:"REN",type:"A",location:"東京都台東区蔵前",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"△",cE:"?",cF:"△",cG:"✓",site:"https://ren-tokyo.com/en-us",note:"蔵前拠点。英語ECサイト（en-us）で海外発送対応中。近年海外露出を増やしている。"},
+  {no:14, company:"ヘリテッジ株式会社",brand:"CRAFSTO",type:"A",location:"東京都台東区",revenue:"非公開（2020年設立・3期連続増収）",cA:"✓",cB:"?",cC:"✓",cD:"△",cE:"?",cF:"△",cG:"✓",site:"https://crafsto.jp/",note:"台東区の成長中スタートアップ。ヴィーガンレザー含む革製品。海外向けEC一部対応。"},
+  {no:15, company:"株式会社Takumics",brand:"Takumics",type:"A",location:"東京都杉並区久我山",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"△",cE:"?",cF:"✓",cG:"✓",site:"https://www.takumics.com/en/",note:"英語公式サイトあり。ユニセックス革製品で海外展開志向。"},
+  {no:16, company:"株式会社STATUSY",brand:"STATUSY",type:"A",location:"滋賀県大津市（東京志向）",revenue:"非公開（クラウドファンディング累計2億超）",cA:"✓",cB:"?",cC:"?",cD:"△",cE:"?",cF:"?",cG:"✓",site:"https://statusy.jp/",note:"台湾向けクラウドファンディング実施済み。クラウドファンディングで急成長中の革財布ブランド。"},
+  {no:17, company:"株式会社b3labo",brand:"b3labo",type:"A",location:"東京都（オンライン中心）",revenue:"非公開",cA:"✓",cB:"?",cC:"△",cD:"△",cE:"?",cF:"?",cG:"✓",site:"https://b3labo.jp/",note:"越境EC対応の日本製革製品。海外展開志向あり。"},
+  // ===== TYPE B =====
+  {no:18, company:"株式会社吉田",brand:"PORTER / LUGGAGE LABEL",type:"B",location:"東京都千代田区",revenue:"約196〜201億円（2024〜25年）",cA:"✓",cB:"?",cC:"✓",cD:"✓",cE:"△",cF:"✓",cG:"✓",site:"https://www.yoshidakaban.com/en/",note:"年商200億超の大手。香港・マカオ・台湾に9店舗。英語公式サイト完備。現状拡大フェーズ。"},
+  {no:19, company:"濱野皮革工藝株式会社",brand:"HAMANO",type:"B",location:"東京都",revenue:"非公開（1880年創業・皇室御用達）",cA:"✓",cB:"?",cC:"✓",cD:"△",cE:"?",cF:"△",cG:"✓",site:"https://hamanobag.com/",note:"140年以上の老舗。皇室御用達。世界ロイヤルファミリー向け実績あり。プレステージブランド。"},
+  {no:20, company:"濱野傳吉商店",brand:"傳濱野はんどばっぐ",type:"B",location:"東京都",revenue:"非公開（2012年独立創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://hamanodenkichi.jp/",note:"濱野皮革から独立。手縫いハンドバッグ。皇室関連の話題性あり。現状は国内中心。"},
+  {no:21, company:"株式会社ヘルツ",brand:"HERZ",type:"B",location:"東京都渋谷区神宮前（表参道エリア）",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://www.herz-bag.jp/",note:"表参道に本店。手作り革鞄工房。国内職人製造にこだわる。海外展開は現状なし。"},
+  {no:22, company:"Kanmi.株式会社",brand:"Kanmi.",type:"B",location:"東京都台東区雷門（浅草）",revenue:"非公開（小規模）",cA:"✓",cB:"?",cC:"✓",cD:"△",cE:"?",cF:"△",cG:"✓",site:"https://www.kanmi.jp/",note:"台東区雷門（浅草）拠点。1,300アイテム展開。英語LP有・国際発送対応。"},
+  {no:23, company:"有限会社万双",brand:"MANSAW",type:"B",location:"東京都台東区上野",revenue:"非公開（1995年創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://www.mansaw.net/",note:"台東区上野。英国タンナー素材使用の高級革鞄。製造直販の職人ブランド。"},
+  {no:24, company:"株式会社モルフォ",brand:"CYPRIS（キプリス）",type:"B",location:"東京都墨田区両国",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"△",cG:"✓",site:"https://www.cypris.co.jp/",note:"百貨店バイヤーズアワード19回受賞。革財布・革小物の国内トップブランド。複数ブランド保有。"},
+  {no:25, company:"有限会社ケイズファクトリー",brand:"WILDSWANS",type:"B",location:"東京都中央区銀座（銀座本店）",revenue:"非公開（1998年創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"△",cG:"✓",site:"https://www.wildswans.jp/",note:"銀座本店のコードバン専門ブランド。熱狂的なファンベースを持つ。国内中心。"},
+  {no:26, company:"ソメスサドル株式会社",brand:"SOMES SADDLE",type:"B",location:"北海道砂川市（東京に直営店あり）",revenue:"非公開（1964年創業）",cA:"✓",cB:"?",cC:"△",cD:"△",cE:"?",cF:"?",cG:"✓",site:"https://www.somes.co.jp/",note:"本社北海道、東京直営店あり。馬具・革鞄の老舗。欧州素材調達。"},
+  {no:27, company:"株式会社Plume",brand:"aniary（アニアリ）",type:"B",location:"東京都港区白金台",revenue:"非公開（1997年創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"△",cG:"✓",site:"https://aniary.com/",note:"港区白金台拠点。英語サイト有。革バッグ・革小物のシンプルデザインブランド。"},
+  {no:28, company:"株式会社プリンセストラヤ",brand:"Dakota",type:"B",location:"東京都台東区浅草橋",revenue:"非公開（1939年創業・従業員122名）",cA:"✓",cB:"△",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://www.princessbag.com/",note:"台東区浅草橋。1939年創業の老舗バッグメーカー。従業員規模から年商10〜30億と推定。"},
+  {no:29, company:"エース株式会社",brand:"ACE",type:"B",location:"東京都渋谷区神宮前（表参道）",revenue:"非公開（1940年創業）",cA:"△",cB:"?",cC:"✓",cD:"✓",cE:"✓",cF:"✓",cG:"✓",site:"https://www.ace.jp/",note:"表参道本社。香港・シンガポール・マレーシアに子会社。1979年上海工場設立実績。大峽製鞄の親会社。"},
+  {no:30, company:"株式会社FARO",brand:"FARO（ファーロ）",type:"B",location:"東京都渋谷区神宮前（表参道）",revenue:"非公開（1965年創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://www.farojapan.com/",note:"表参道エリア拠点。革財布・革小物のスリムウォレット専門ブランド。Union Gate Group傘下。"},
+  {no:31, company:"POSTALCO",brand:"POSTALCO（ポスタルコ）",type:"B",location:"東京都中央区京橋",revenue:"非公開（2001年東京開業）",cA:"△",cB:"?",cC:"✓",cD:"△",cE:"?",cF:"✓",cG:"✓",site:"https://postalco.com/en-us",note:"米国発祥・東京拠点のデザインスタジオ。革製品＋文具。英語サイト完備。"},
+  {no:32, company:"株式会社池之端銀革店",brand:"Cramp / Dual / Haru",type:"B",location:"東京都台東区池之端",revenue:"非公開（2004年創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://ginkawaten.shop/",note:"台東区池之端。英国・イタリア素材使用の革財布・革小物。複数ブランド保有。"},
+  {no:33, company:"株式会社ラモーダヨシダ",brand:"mic（ミック）",type:"B",location:"東京都台東区東上野",revenue:"非公開（1978年創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"△",cG:"✓",cF:"?",site:"https://www.mic1978.com/",note:"台東区東上野。革財布専門老舗メーカー。OEM製造受託事業あり（中国工場連携）。"},
+  {no:34, company:"筒井株式会社",brand:"ANDERSEN（アンデルセン）",type:"B",location:"東京都（山形に自社工場）",revenue:"非公開（1939年創業）",cA:"✓",cB:"?",cC:"△",cD:"?",cE:"✓",cF:"?",cG:"△",site:"https://tsutsui-221.co.jp/",note:"世界トップブランドのOEM製造実績を持つ老舗。自社ブランドも保有。"},
+  {no:35, company:"株式会社GENTEN",brand:"GENTEN",type:"B",location:"東京都文京区音羽",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://genten.co.jp/",note:"文京区拠点。日本製レザー使用の革バッグ・財布ブランド。国内百貨店中心。"},
+  {no:36, company:"有限会社野村製作所",brand:"川のわ",type:"B",location:"東京都台東区",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://www.kawanowa.com/",note:"台東区。エキュート東京出店。BAG MAKERS TOKYO認証メーカー。"},
+  {no:37, company:"株式会社山藤",brand:"アクア / プタハ",type:"B",location:"東京都台東区元浅草",revenue:"非公開（1899年創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"✓",cF:"?",cG:"✓",site:"https://shop-yamatou.com/",note:"台東区元浅草。Louis FeraudのOEM製作歴あり。現在もOEM受託継続。創業120年超の老舗。"},
+  {no:38, company:"株式会社三竹産業",brand:"ANNAK / DADY",type:"B",location:"東京都台東区元浅草",revenue:"非公開（1925年創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://www.mitakesangyo.co.jp/",note:"台東区元浅草。革財布・ベルト専門。1925年創業の老舗職人系ブランド。"},
+  {no:39, company:"株式会社KITAMURA",brand:"KITAMURA",type:"B",location:"神奈川県横浜市（東京に多数店舗）",revenue:"非公開（1882年創業）",cA:"✓",cB:"?",cC:"△",cD:"△",cE:"?",cF:"△",cG:"✓",site:"https://kitamura-group.co.jp/en/",note:"1882年創業の老舗バッグブランド。東京都内34店舗。英語サイトあり。"},
+  {no:40, company:"株式会社ヤマギワ",brand:"ZAO",type:"B",location:"東京都墨田区",revenue:"非公開（1981年創業）",cA:"✓",cB:"?",cC:"✓",cD:"△",cE:"△",cF:"?",cG:"✓",site:"https://yamagiwabag.com/",note:"墨田区のエキゾチックレザー（クロコダイル・オーストリッチ）専門メーカー。国内外で評価あり。"},
+  {no:41, company:"有限会社ミヤ・レザークラフト",brand:"（自社ブランド）",type:"B",location:"東京都墨田区",revenue:"非公開（1959年創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://www.kawa-ichi.jp/",note:"墨田区。日本革市認定。1959年創業の老舗革財布・革小物製造メーカー。"},
+  {no:42, company:"evergreen works",brand:"STANDARD SUPPLY",type:"B",location:"東京都世田谷区二子玉川",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://egw-inc.com/standard-supply/",note:"二子玉川に旗艦店。ミニマルデザインの革バッグ・財布。国内中心展開。"},
+  {no:43, company:"株式会社analogico",brand:"analogico（アナロジコ）",type:"B",location:"東京都世田谷区下北沢",revenue:"非公開（小規模工房）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://analogico.jp/",note:"下北沢拠点の手作り革製品工房。イタリアンレザー使用。"},
+  {no:44, company:"HIS-FACTORY",brand:"HIS-FACTORY",type:"B",location:"東京都墨田区",revenue:"非公開（職人工房）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://his-factory.com",note:"墨田区（すみだの革工房）。イタリアンレザー使用の手作り革製品。"},
+  {no:45, company:"株式会社セルツリミテッド",brand:"BRIEFING",type:"B",location:"東京都（都内13店舗）",revenue:"非公開",cA:"△",cB:"?",cC:"✓",cD:"✓",cE:"✓",cF:"✓",cG:"✓",site:"https://www.briefing-usa.com/",note:"Made in USAのバッグブランドを日本展開。米国製造の独自モデル。英語対応完備。"},
+  {no:46, company:"株式会社SLOW",brand:"SLOW & CO.",type:"B",location:"大阪府（東京・自由が丘にプレスルーム）",revenue:"非公開（2008年創業）",cA:"✓",cB:"?",cC:"△",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://www.slow-web.com/",note:"大阪本社・東京店舗あり。革バッグ・革財布のナチュラル系ブランド。"},
+  {no:47, company:"PORCO ROSSO",brand:"PORCO ROSSO（ポルコロッソ）",type:"B",location:"東京都",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://www.porco-rosso.co.jp/",note:"日本製革製品ブランド。バッグ・財布・革小物。国内EC中心展開。"},
+  {no:48, company:"株式会社fetia",brand:"fetia",type:"B",location:"東京都北区王子",revenue:"非公開",cA:"△",cB:"?",cC:"✓",cD:"?",cE:"✓",cF:"?",cG:"✓",site:"https://fetia.jp/",note:"北区王子。大手アパレルOEM＋自社ブランド。海外工場使用の実績あり。"},
+  // ===== BAG MAKERS TOKYO 加盟各社 =====
+  {no:49, company:"秋元袋物工芸有限会社",brand:"（自社ブランド）",type:"B",location:"東京都台東区",revenue:"非公開",cA:"△",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"△",site:"https://www.bagmakers.tokyo/",note:"BAG MAKERS TOKYO認証。台東区の革製品製造メーカー。浅草・台東区エリア製造職人。"},
+  {no:50, company:"有限会社たいら",brand:"（自社ブランド）",type:"B",location:"東京都台東区",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"△",site:"https://www.bagmakers.tokyo/member/member23/",note:"BAG MAKERS TOKYO認証。台東区の革製バッグ・小物製造メーカー。"},
+  {no:51, company:"有限会社清川商店",brand:"（自社ブランド）",type:"B",location:"東京都台東区",revenue:"非公開",cA:"△",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"△",site:"https://www.bagmakers.tokyo/",note:"BAG MAKERS TOKYO認証。台東区の製造メーカー。"},
+  {no:52, company:"有限会社塩野",brand:"（自社ブランド）",type:"B",location:"東京都台東区・墨田区",revenue:"非公開",cA:"△",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"△",site:"https://www.bagmakers.tokyo/",note:"BAG MAKERS TOKYO認証。台東区・墨田区エリアの革製品製造メーカー。"},
+  {no:53, company:"株式会社三和袋物",brand:"（自社ブランド）",type:"B",location:"東京都台東区",revenue:"非公開",cA:"△",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"△",site:"https://www.bagmakers.tokyo/",note:"BAG MAKERS TOKYO認証。台東区の袋物製造メーカー。"},
+  {no:54, company:"株式会社タイコウ",brand:"（自社ブランド）",type:"B",location:"東京都台東区",revenue:"非公開",cA:"△",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"△",site:"https://www.bagmakers.tokyo/",note:"BAG MAKERS TOKYO認証。台東区の革製品製造メーカー。"},
+  {no:55, company:"株式会社ステージ",brand:"（製造メーカー）",type:"B",location:"東京都足立区",revenue:"非公開（1987年創業）",cA:"△",cB:"?",cC:"✓",cD:"△",cE:"✓",cF:"△",cG:"?",site:"https://www.stage1987.com/",note:"BAG MAKERS TOKYO認証。中国常駐スタッフ＋定期便対応の革製品OEM製造会社。足立区。"},
+  {no:56, company:"株式会社フジリュウ",brand:"（製造メーカー）",type:"B",location:"東京都",revenue:"非公開",cA:"△",cB:"?",cC:"✓",cD:"?",cE:"△",cF:"?",cG:"?",site:"https://www.fujiryu.co.jp/",note:"革製品OEM・服飾資材製造。東京の革製品サプライヤー。"},
+  {no:57, company:"株式会社ナダヤ",brand:"（製造メーカー）",type:"B",location:"東京都",revenue:"非公開",cA:"△",cB:"?",cC:"✓",cD:"?",cE:"✓",cF:"?",cG:"?",site:"https://www.nadaya.co.jp/",note:"革バッグ・財布OEM製造専門。海外工場連携あり。"},
+  {no:58, company:"有限会社三竹産業（別ブランド）",brand:"DADY",type:"B",location:"東京都台東区元浅草",revenue:"非公開（1925年創業）",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://www.mitakesangyo.co.jp/",note:"三竹産業が保有するもう一つのブランドDADY。ベルト・革小物専門。"},
+  {no:59, company:"Union Gate Group",brand:"FARO / 複数ブランド",type:"B",location:"東京都港区南青山",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"△",cG:"✓",site:"https://www.uniongategroup.com/",note:"南青山（表参道エリア）拠点。複数の革製品ブランドを運営するグループ会社。"},
+  {no:60, company:"株式会社Genten Links",brand:"GENTEN関連",type:"B",location:"東京都",revenue:"非公開",cA:"✓",cB:"?",cC:"✓",cD:"?",cE:"?",cF:"?",cG:"✓",site:"https://genten-links.com/",note:"GENTENブランド関連会社。東京拠点の革バッグ・財布展開。"},
+];
+
+function calcScore(c) {
+  let s = 0;
+  [c.cA,c.cB,c.cC,c.cD,c.cE,c.cF,c.cG].forEach(v=>{
+    if(v==="✓") s+=2;
+    else if(v==="△") s+=1;
+  });
+  return s;
+}
+function priority(s) {
+  if(s>=10) return '<span class="pri pri-high">★★ 高</span>';
+  if(s>=6) return '<span class="pri pri-mid">★ 中</span>';
+  return '<span class="pri pri-low">低</span>';
+}
+function cond(v) {
+  if(v==="✓") return '<span class="c-ok">✓</span>';
+  if(v==="△") return '<span class="c-partial">△</span>';
+  return '<span class="c-unknown">?</span>';
+}
+function scoreClass(s) {
+  if(s>=10) return "score-high";
+  if(s>=6) return "score-mid";
+  return "score-low";
+}
+
+let currentFilter = "all";
+let currentSearch = "";
+
+function render() {
+  const tbody = document.getElementById("tableBody");
+  tbody.innerHTML = "";
+  let countA=0, countB=0, visible=0;
+  companies.forEach(c => {
+    const s = calcScore(c);
+    const show = (currentFilter==="all"||currentFilter===c.type) &&
+      (currentSearch===""||c.company.includes(currentSearch)||c.brand.includes(currentSearch));
+    const tr = document.createElement("tr");
+    if(!show) tr.classList.add("hidden");
+    else { visible++; if(c.type==="A") countA++; else countB++; }
+    tr.setAttribute("data-type", c.type);
+    tr.innerHTML = `
+      <td class="num">${c.no}</td>
+      <td class="name">${c.company}</td>
+      <td class="brand">${c.brand}</td>
+      <td><span class="type-badge type-${c.type}">タイプ${c.type}</span></td>
+      <td>${priority(s)}</td>
+      <td class="location">${c.location}</td>
+      <td class="revenue">${c.revenue}</td>
+      <td class="cond">${cond(c.cA)}</td>
+      <td class="cond">${cond(c.cB)}</td>
+      <td class="cond">${cond(c.cC)}</td>
+      <td class="cond">${cond(c.cD)}</td>
+      <td class="cond">${cond(c.cE)}</td>
+      <td class="cond">${cond(c.cF)}</td>
+      <td class="cond">${cond(c.cG)}</td>
+      <td class="score ${scoreClass(s)}">${s}</td>
+      <td><a href="${c.site}" class="site-link" target="_blank">${c.site.replace("https://","").replace("http://","").split("/")[0]}</a></td>
+      <td class="note">${c.note}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+  document.getElementById("countA").textContent = countA;
+  document.getElementById("countB").textContent = countB;
+  document.getElementById("countTotal").textContent = visible;
+  document.getElementById("resultCount").textContent = `${visible}社を表示中`;
+}
+
+function filterType(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  render();
+}
+function searchTable(val) {
+  currentSearch = val;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

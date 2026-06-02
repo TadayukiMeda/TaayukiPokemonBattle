@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanhe Interfashion｜日本のブランドへ</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Base ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter','Helvetica Neue',sans-serif;background:#fafaf8;color:#141412;line-height:1.7;overflow-x:hidden}
+img{display:block;max-width:100%}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+a{color:inherit;text-decoration:none}
+
+/* ── Variables ── */
+:root{
+  --ink:#141412;
+  --warm-dark:#1b1916;
+  --dark-panel:#1e1c18;
+  --gold:#b5872c;
+  --gold-light:#d4aa56;
+  --cream:#fafaf8;
+  --white:#ffffff;
+  --ash:#6e6860;
+  --mid:#3e3a34;
+  --border:#ddd7cc;
+  --serif:'Shippori Mincho B1','Yu Mincho',serif;
+  --sans:'Inter','Helvetica Neue',sans-serif;
+  --section-pad:clamp(80px,10vw,140px);
+  --container:1200px;
+}
+
+/* ── Utilities ── */
+.container{max-width:var(--container);margin:0 auto;padding:0 clamp(24px,4vw,60px)}
+.serif{font-family:var(--serif)}
+.gold{color:var(--gold)}
+.section-label{font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:24px}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── Navigation ── */
+.nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:0 clamp(24px,4vw,60px);display:flex;align-items:center;justify-content:space-between;height:64px;background:rgba(250,250,248,.92);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-bottom-color:var(--border)}
+.nav-logo{font-family:var(--serif);font-size:14px;letter-spacing:.12em;font-weight:700;color:var(--ink)}
+.nav-links{display:flex;gap:clamp(20px,2.5vw,36px);list-style:none}
+.nav-links a{font-size:12px;letter-spacing:.08em;color:var(--ash);transition:color .2s;white-space:nowrap}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{font-size:11px;letter-spacing:.1em;padding:9px 20px;border:1px solid var(--gold);color:var(--gold);transition:all .2s;white-space:nowrap}
+.nav-cta:hover{background:var(--gold);color:var(--white)}
+
+/* ── HERO ── */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:var(--warm-dark);overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a1210 0%,#0f0d0b 40%,#1c1510 100%);opacity:1}
+.hero-bg::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b5872c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-inner{position:relative;z-index:2;max-width:900px;padding:120px clamp(24px,4vw,60px) 80px}
+.hero-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;opacity:.9}
+.hero-headline{font-family:var(--serif);font-size:clamp(28px,4.5vw,58px);line-height:1.45;color:var(--white);margin-bottom:24px;font-weight:700}
+.hero-headline em{font-style:normal;color:var(--gold-light)}
+.hero-sub{font-size:clamp(14px,1.5vw,17px);color:rgba(255,255,255,.62);line-height:2;margin-bottom:48px;max-width:560px}
+.hero-sub br{display:block;margin-bottom:0}
+.cta-primary{display:inline-flex;align-items:center;gap:12px;font-family:var(--serif);font-size:15px;letter-spacing:.06em;color:var(--white);padding:16px 36px;border:1px solid rgba(181,135,44,.6);background:rgba(181,135,44,.12);transition:all .3s}
+.cta-primary:hover{background:var(--gold);border-color:var(--gold);color:var(--white)}
+.cta-arrow{font-size:18px;transition:transform .3s}
+.cta-primary:hover .cta-arrow{transform:translateX(4px)}
+.hero-note{margin-top:12px;font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.05em}
+
+/* ── Stats Bar ── */
+.stats-bar{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-inner{display:grid;grid-template-columns:repeat(6,1fr);position:relative}
+.stat-item{padding:28px 16px;text-align:center;cursor:default;position:relative;border-right:1px solid var(--border);transition:background .25s}
+.stat-item:last-child{border-right:none}
+.stat-item:hover{background:var(--cream)}
+.stat-num{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);font-weight:700;color:var(--ink);line-height:1.1}
+.stat-label{font-size:10px;letter-spacing:.1em;color:var(--ash);margin-top:6px}
+.stat-tooltip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--dark-panel);color:var(--white);font-size:12px;padding:10px 16px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;z-index:10}
+.stat-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--dark-panel)}
+.stat-item:hover .stat-tooltip{opacity:1}
+
+/* ── Section Base ── */
+section{padding:var(--section-pad) 0}
+
+/* ── Philosophy ── */
+#philosophy{background:var(--cream)}
+.phil-header{margin-bottom:64px}
+.phil-headline{font-family:var(--serif);font-size:clamp(22px,3vw,38px);line-height:1.6;color:var(--ink);font-weight:700;max-width:700px;margin-bottom:40px}
+.phil-headline em{font-style:normal;color:var(--gold)}
+.phil-story{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-bottom:72px}
+.phil-text p{font-size:15px;line-height:2.1;color:var(--mid);margin-bottom:24px}
+.phil-text p:last-child{margin-bottom:0}
+.phil-ceo{background:var(--dark-panel);padding:40px;position:relative}
+.phil-ceo::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold)}
+.ceo-photo-placeholder{width:72px;height:72px;background:var(--mid);border-radius:50%;margin-bottom:24px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--ash);letter-spacing:.05em}
+.ceo-quote{font-family:var(--serif);font-size:15px;line-height:2;color:rgba(255,255,255,.78);margin-bottom:20px;font-style:normal}
+.ceo-name{font-size:12px;letter-spacing:.1em;color:var(--gold);font-weight:500}
+
+/* Why reasons accordion */
+.reasons-trigger{width:100%;text-align:left;padding:24px 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-family:var(--serif);font-size:18px;color:var(--ink);cursor:pointer;transition:color .2s}
+.reasons-trigger:hover{color:var(--gold)}
+.reasons-trigger-icon{width:28px;height:28px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--ash);transition:all .3s;flex-shrink:0}
+.reasons-trigger.open .reasons-trigger-icon{background:var(--gold);border-color:var(--gold);color:var(--white);transform:rotate(45deg)}
+.reasons-body{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.reasons-body.open{max-height:800px}
+.reasons-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:24px 0 40px}
+.reason-card{padding:28px;background:var(--white);border-left:3px solid var(--gold)}
+.reason-num{font-family:var(--serif);font-size:12px;color:var(--gold);letter-spacing:.1em;margin-bottom:10px}
+.reason-title{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.reason-text{font-size:13px;line-height:1.9;color:var(--ash)}
+
+/* ── 実績 Numbers ── */
+#results{background:var(--white)}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:48px}
+.result-item{background:var(--white);padding:clamp(32px,4vw,52px) 32px;cursor:pointer;position:relative;overflow:hidden;transition:background .25s}
+.result-item:hover,.result-item.active{background:var(--dark-panel)}
+.result-num{font-family:var(--serif);font-size:clamp(40px,5vw,68px);font-weight:700;color:var(--ink);line-height:1;transition:color .25s}
+.result-item:hover .result-num,.result-item.active .result-num{color:var(--gold-light)}
+.result-unit{font-family:var(--sans);font-size:12px;letter-spacing:.1em;color:var(--ash);margin-top:8px;transition:color .25s}
+.result-item:hover .result-unit,.result-item.active .result-unit{color:rgba(255,255,255,.4)}
+.result-context{font-size:13px;line-height:1.8;color:rgba(255,255,255,.65);max-height:0;overflow:hidden;transition:max-height .4s ease,margin-top .4s ease}
+.result-item:hover .result-context,.result-item.active .result-context{max-height:80px;margin-top:16px}
+
+/* ── Clients ── */
+#clients{background:var(--cream)}
+.clients-headline{font-family:var(--serif);font-size:clamp(18px,2.5vw,30px);line-height:1.7;color:var(--ink);font-weight:700;max-width:640px;margin-bottom:16px}
+.clients-headline em{font-style:normal;color:var(--gold)}
+.clients-sub{font-size:14px;color:var(--ash);line-height:1.9;max-width:520px;margin-bottom:56px}
+
+/* Infinite scroll logos */
+.logo-scroll-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0;margin-bottom:48px;background:var(--white)}
+.logo-track-outer{display:flex;width:max-content;animation:scroll-logos 22s linear infinite}
+.logo-track-outer:hover{animation-play-state:paused}
+.logo-track{display:flex;gap:0}
+.logo-item{padding:36px 52px;border-right:1px solid var(--border);position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:200px;cursor:default}
+.logo-name{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);letter-spacing:.04em}
+.logo-tooltip{position:absolute;top:calc(100% - 4px);left:50%;transform:translateX(-50%);background:var(--dark-panel);color:var(--white);font-size:11px;padding:7px 14px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;z-index:5}
+.logo-tooltip::before{content:'';position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-bottom-color:var(--dark-panel)}
+.logo-item:hover .logo-tooltip{opacity:1}
+
+@keyframes scroll-logos{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+.clients-why{border-top:1px solid var(--border);padding-top:40px}
+.clients-why-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 0 32px;cursor:pointer}
+.clients-why-title{font-family:var(--serif);font-size:17px;color:var(--ink)}
+.why-icon{width:32px;height:32px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--ash);transition:all .3s}
+.clients-why.open .why-icon{background:var(--gold);border-color:var(--gold);color:var(--white);transform:rotate(45deg)}
+.clients-why-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.clients-why.open .clients-why-body{max-height:300px}
+.clients-why-text{font-size:14px;line-height:2;color:var(--mid);padding-bottom:32px;max-width:640px}
+
+/* ── Quality ── */
+#quality{background:var(--white)}
+.quality-nums{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:48px 0}
+.quality-num-card{padding:40px;background:var(--dark-panel);text-align:center}
+.q-num{font-family:var(--serif);font-size:clamp(44px,5vw,72px);font-weight:700;color:var(--gold-light);line-height:1}
+.q-label{font-size:13px;letter-spacing:.08em;color:rgba(255,255,255,.5);margin-top:12px}
+.q-caption{font-size:12px;color:rgba(255,255,255,.35);margin-top:8px;line-height:1.6}
+
+.process-list{border-top:1px solid var(--border);margin-bottom:64px}
+.process-item{border-bottom:1px solid var(--border)}
+.process-trigger{width:100%;display:flex;align-items:center;gap:20px;padding:22px 0;cursor:pointer;text-align:left}
+.process-trigger:hover .process-step{background:var(--gold);color:var(--white);border-color:var(--gold)}
+.process-step{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:13px;font-weight:700;color:var(--ash);flex-shrink:0;transition:all .3s}
+.process-name{font-family:var(--serif);font-size:16px;color:var(--ink);flex:1}
+.process-toggle{font-size:20px;color:var(--ash);transition:transform .3s}
+.process-item.open .process-toggle{transform:rotate(45deg);color:var(--gold)}
+.process-item.open .process-step{background:var(--gold);color:var(--white);border-color:var(--gold)}
+.process-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.process-item.open .process-body{max-height:200px}
+.process-detail{padding:0 0 24px 56px;font-size:14px;line-height:1.9;color:var(--ash)}
+
+/* Factory map */
+.factory-section{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:48px}
+.factory-map{background:var(--dark-panel);padding:32px;position:relative;min-height:280px;overflow:hidden}
+.map-bg{position:absolute;inset:0;opacity:.07;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='%23b5872c' d='M60 40 Q80 30 100 45 Q120 30 140 40 L145 90 Q130 100 115 95 Q105 110 100 105 Q95 110 85 95 Q70 100 55 90 Z'/%3E%3C/svg%3E") center/60% no-repeat}
+.map-title{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;position:relative;z-index:2}
+.map-pins{position:relative;z-index:2;min-height:180px}
+.map-pin{position:absolute;cursor:pointer}
+.pin-dot{width:12px;height:12px;background:var(--gold);border-radius:50%;border:2px solid var(--gold-light);transition:transform .2s;box-shadow:0 0 0 4px rgba(181,135,44,.2)}
+.map-pin:hover .pin-dot{transform:scale(1.4)}
+.pin-label{position:absolute;left:18px;top:-4px;white-space:nowrap;font-size:11px;color:rgba(255,255,255,.6)}
+.pin-popup{position:absolute;left:26px;top:20px;background:#2a2720;border:1px solid var(--gold);padding:12px 16px;min-width:200px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10;font-size:12px;color:rgba(255,255,255,.75);line-height:1.7}
+.map-pin:hover .pin-popup{opacity:1}
+/* pin positions */
+.pin-korea{top:18%;left:58%}
+.pin-qingdao{top:34%;left:62%}
+.pin-vietnam{top:60%;left:54%}
+
+.capacity-notice{background:linear-gradient(135deg,var(--dark-panel),#252218);padding:32px 36px;border-left:3px solid var(--gold)}
+.capacity-title{font-family:var(--serif);font-size:20px;color:var(--white);margin-bottom:12px}
+.capacity-text{font-size:14px;color:rgba(255,255,255,.55);line-height:1.9}
+.capacity-cta{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.1em;color:var(--gold);margin-top:20px;border-bottom:1px solid rgba(181,135,44,.3);padding-bottom:2px;transition:border-color .2s}
+.capacity-cta:hover{border-color:var(--gold)}
+
+/* ── Materials ── */
+#materials{background:var(--cream)}
+.materials-lead{font-family:var(--serif);font-size:clamp(16px,2vw,22px);line-height:1.8;color:var(--ink);max-width:640px;margin:24px 0 48px}
+.materials-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:48px}
+.material-card{position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer}
+.material-card:first-child{grid-row:span 2}
+.material-card:first-child .mat-img{aspect-ratio:auto;height:100%}
+.mat-img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.mat-img-placeholder{width:100%;height:100%;transition:transform .5s}
+.material-card:hover .mat-img-placeholder{transform:scale(1.04)}
+.mat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%);opacity:0;transition:opacity .3s}
+.material-card:hover .mat-overlay{opacity:1}
+.mat-name{position:absolute;bottom:16px;left:16px;right:16px;font-family:var(--serif);font-size:14px;color:var(--white);opacity:0;transform:translateY(6px);transition:all .3s}
+.material-card:hover .mat-name{opacity:1;transform:translateY(0)}
+.mat-plus{position:absolute;top:12px;right:12px;width:28px;height:28px;background:rgba(181,135,44,.9);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--white);opacity:0;transition:opacity .3s}
+.material-card:hover .mat-plus{opacity:1}
+
+/* Color swatches */
+.mat-swatch{width:100%;height:100%;display:flex;align-items:flex-end;padding:16px}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px)}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--white);max-width:500px;width:90%;padding:48px;position:relative;transform:translateY(20px);transition:transform .3s}
+.modal-overlay.open .modal-box{transform:translateY(0)}
+.modal-close{position:absolute;top:20px;right:20px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--ash);cursor:pointer;transition:color .2s}
+.modal-close:hover{color:var(--ink)}
+.modal-tag{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.modal-title{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:24px}
+.modal-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px}
+.modal-row-label{color:var(--ash)}
+.modal-row-value{color:var(--ink);font-weight:500}
+.modal-desc{font-size:13px;line-height:1.9;color:var(--mid);margin-top:20px}
+.modal-cta{margin-top:28px}
+.modal-cta a{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.08em;color:var(--gold);border-bottom:1px solid rgba(181,135,44,.4);padding-bottom:2px}
+
+.materials-cta-block{background:var(--dark-panel);padding:48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.materials-cta-text{font-family:var(--serif);font-size:clamp(16px,2vw,22px);color:var(--white);line-height:1.6;max-width:500px}
+.materials-cta-text span{display:block;font-size:13px;font-family:var(--sans);color:rgba(255,255,255,.45);margin-top:8px;font-weight:400}
+.cta-btn-light{display:inline-flex;align-items:center;gap:10px;font-family:var(--serif);font-size:14px;letter-spacing:.06em;color:var(--white);padding:14px 32px;border:1px solid rgba(255,255,255,.3);transition:all .3s;flex-shrink:0}
+.cta-btn-light:hover{background:var(--gold);border-color:var(--gold)}
+
+/* ── Products ── */
+#products{background:var(--white)}
+.products-lead{font-family:var(--serif);font-size:clamp(15px,1.8vw,19px);line-height:1.9;color:var(--mid);max-width:640px;margin:24px 0 48px}
+.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);border:1px solid var(--border)}
+.product-card{background:var(--white);padding:40px;cursor:pointer;transition:background .25s;position:relative;overflow:hidden}
+.product-card:hover{background:var(--dark-panel)}
+.product-card-num{font-family:var(--serif);font-size:clamp(56px,7vw,96px);font-weight:700;color:var(--border);line-height:.9;position:absolute;top:16px;right:24px;transition:color .25s;user-select:none}
+.product-card:hover .product-card-num{color:rgba(181,135,44,.12)}
+.product-cat{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;position:relative}
+.product-name{font-family:var(--serif);font-size:clamp(18px,2vw,24px);font-weight:700;color:var(--ink);margin-bottom:12px;position:relative;transition:color .25s}
+.product-card:hover .product-name{color:var(--white)}
+.product-hint{font-size:12px;color:var(--ash);position:relative;transition:color .25s}
+.product-card:hover .product-hint{color:rgba(255,255,255,.4)}
+.product-plus{position:absolute;bottom:24px;right:24px;width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--ash);transition:all .3s}
+.product-card:hover .product-plus{background:var(--gold);border-color:var(--gold);color:var(--white)}
+
+/* ── Order Flow ── */
+#order{background:var(--cream)}
+.order-phases{margin-top:48px;border-top:1px solid var(--border)}
+.phase-item{border-bottom:1px solid var(--border)}
+.phase-trigger{width:100%;display:flex;align-items:center;gap:20px;padding:24px 0;cursor:pointer;text-align:left}
+.phase-trigger:hover .phase-num{background:var(--gold);color:var(--white);border-color:var(--gold)}
+.phase-num{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:.08em;color:var(--ash);flex-shrink:0;transition:all .3s;font-family:var(--sans)}
+.phase-name-wrap{flex:1}
+.phase-name{font-family:var(--serif);font-size:17px;color:var(--ink);transition:color .2s}
+.phase-en{font-size:11px;letter-spacing:.1em;color:var(--ash);margin-top:3px}
+.phase-duration{font-size:12px;color:var(--gold);white-space:nowrap;font-weight:500}
+.phase-toggle{font-size:20px;color:var(--ash);transition:transform .3s}
+.phase-item.open .phase-toggle{transform:rotate(45deg);color:var(--gold)}
+.phase-item.open .phase-num{background:var(--gold);color:var(--white);border-color:var(--gold)}
+.phase-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.phase-item.open .phase-body{max-height:200px}
+.phase-detail{padding:0 0 24px 60px;font-size:13px;line-height:1.9;color:var(--ash);max-width:580px}
+
+/* ── FAQ ── */
+#faq{background:var(--white)}
+.faq-list{margin-top:48px;border-top:1px solid var(--border)}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-question{width:100%;display:flex;align-items:flex-start;gap:16px;padding:22px 0;cursor:pointer;text-align:left}
+.faq-q-mark{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--gold);flex-shrink:0;margin-top:1px}
+.faq-q-text{font-family:var(--serif);font-size:15px;color:var(--ink);flex:1;line-height:1.6;transition:color .2s}
+.faq-question:hover .faq-q-text{color:var(--gold)}
+.faq-toggle{font-size:20px;color:var(--ash);transition:transform .3s;flex-shrink:0;margin-top:-1px}
+.faq-item.open .faq-toggle{transform:rotate(45deg);color:var(--gold)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-item.open .faq-answer{max-height:400px}
+.faq-a-text{padding:0 0 22px 36px;font-size:14px;line-height:1.9;color:var(--ash)}
+
+/* ── Contact ── */
+#contact{background:var(--dark-panel)}
+.contact-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:start}
+.contact-left{}
+.contact-section-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.contact-headline{font-family:var(--serif);font-size:clamp(24px,3vw,38px);font-weight:700;color:var(--white);line-height:1.5;margin-bottom:32px}
+.contact-ctas{display:flex;flex-direction:column;gap:12px;margin-bottom:48px}
+.cta-main-btn{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:var(--gold);color:var(--white);font-family:var(--serif);font-size:15px;letter-spacing:.04em;transition:background .2s}
+.cta-main-btn:hover{background:var(--gold-light)}
+.cta-secondary-btn{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-size:13px;letter-spacing:.08em;transition:all .2s}
+.cta-secondary-btn:hover{border-color:rgba(255,255,255,.5);color:var(--white)}
+.contact-info{border-top:1px solid rgba(255,255,255,.1);padding-top:32px}
+.contact-info-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:13px;color:rgba(255,255,255,.5)}
+.contact-info-label{color:var(--gold);min-width:80px;font-size:11px;letter-spacing:.08em;margin-top:1px}
+
+/* Form */
+.contact-form{}
+.form-note{font-size:12px;color:rgba(255,255,255,.35);margin-bottom:28px;line-height:1.7}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:8px}
+.form-label span{color:var(--gold);margin-left:4px;font-size:10px}
+.form-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--white);padding:13px 16px;font-size:14px;font-family:var(--sans);transition:border-color .2s;outline:none}
+.form-input:focus{border-color:rgba(181,135,44,.6)}
+.form-input::placeholder{color:rgba(255,255,255,.2)}
+textarea.form-input{resize:vertical;min-height:100px}
+.form-submit{width:100%;padding:16px;background:var(--gold);color:var(--white);font-family:var(--serif);font-size:15px;letter-spacing:.06em;cursor:pointer;border:none;transition:background .2s;margin-top:8px}
+.form-submit:hover{background:var(--gold-light)}
+.form-success{display:none;text-align:center;padding:24px;background:rgba(181,135,44,.12);border:1px solid rgba(181,135,44,.3)}
+.form-success p{font-size:14px;color:rgba(255,255,255,.7);line-height:1.8}
+.form-success strong{color:var(--gold)}
+
+/* ── Footer ── */
+footer{background:#0f0d0b;padding:48px 0 32px}
+.footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+.footer-brand{font-family:var(--serif);font-size:15px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:8px}
+.footer-tagline{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.08em}
+.footer-info{font-size:11px;color:rgba(255,255,255,.25);line-height:2.2}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap}
+.footer-links a{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.05em;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.6)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.05em}
+
+/* ── Responsive ── */
+@media(max-width:1024px){
+  .phil-story{grid-template-columns:1fr}
+  .factory-section{grid-template-columns:1fr}
+  .contact-inner{grid-template-columns:1fr}
+  .nav-links{gap:16px}
+}
+@media(max-width:768px){
+  .stats-inner{grid-template-columns:repeat(3,1fr)}
+  .stat-item:nth-child(3){border-right:none}
+  .results-grid{grid-template-columns:1fr 1fr}
+  .materials-grid{grid-template-columns:repeat(2,1fr)}
+  .material-card:first-child{grid-row:span 1}
+  .products-grid{grid-template-columns:1fr}
+  .reasons-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .materials-cta-block{flex-direction:column}
+}
+@media(max-width:480px){
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .results-grid{grid-template-columns:1fr}
+  .quality-nums{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="nav" id="mainNav">
+  <a href="#hero" class="nav-logo">SANHE INTERFASHION</a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#results">実績</a></li>
+    <li><a href="#clients">取引先</a></li>
+    <li><a href="#quality">品質管理</a></li>
+    <li><a href="#materials">素材</a></li>
+    <li><a href="#products">製品</a></li>
+    <li><a href="#order">発注の流れ</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">お問い合わせ</a>
+</nav>
+
+<!-- ── Page 1: Hero ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Sanhe Interfashion ／ Japan</p>
+    <!-- キャッチコピー：社長確認後に最終決定 -->
+    <h1 class="hero-headline serif reveal">
+      Mywalitが<em>15年</em>選び続けた工場が、<br>
+      今日本のブランドと、組みます。
+    </h1>
+    <p class="hero-sub reveal">
+      欧米のブランド製品をつくり続けてきた<br>
+      OEMパートナーが、はじめて<br>
+      日本市場と向き合います。
+    </p>
+    <a href="#contact" class="cta-primary reveal">
+      サンプルを依頼する <span class="cta-arrow">→</span>
+    </a>
+    <p class="hero-note">まず無料でご相談ください。担当者が24時間以内にご返信します。</p>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stats-inner container">
+    <div class="stat-item">
+      <div class="stat-num serif">23年<span style="font-size:.6em">以上</span></div>
+      <div class="stat-label">業歴</div>
+      <div class="stat-tooltip">創業から一度も品質基準を下げていない</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num serif">50万<span style="font-size:.6em">個超</span></div>
+      <div class="stat-label">累計生産数</div>
+      <div class="stat-tooltip">欧米ブランドが繰り返し発注した累計総数</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num serif">80%<span style="font-size:.6em">以上</span></div>
+      <div class="stat-label">顧客継続率</div>
+      <div class="stat-tooltip">8割のブランドが翌年も発注に戻ってくる</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num serif">95%<span style="font-size:.6em">以上</span></div>
+      <div class="stat-label">納期遵守率</div>
+      <div class="stat-tooltip">約束した納期を守り続けた15年間の記録</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num serif">1%<span style="font-size:.6em">未満</span></div>
+      <div class="stat-label">不良品発生率</div>
+      <div class="stat-tooltip">4段階の品質管理で維持し続けている不良率</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num serif">15年<span style="font-size:.6em">以上</span></div>
+      <div class="stat-label">最長継続年数</div>
+      <div class="stat-tooltip">最長取引ブランドとの継続年数</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Page 2: Philosophy ── -->
+<section id="philosophy">
+  <div class="container">
+    <p class="section-label reveal">Philosophy</p>
+    <div class="phil-header">
+      <h2 class="phil-headline serif reveal">
+        イタリアブランドが求める品質基準を、<br>
+        <em>アジアの効率</em>で実現する。
+      </h2>
+    </div>
+
+    <div class="phil-story">
+      <div class="phil-text reveal">
+        <p>Sanheが最初に欧米ブランドと向き合ったのは、今から20年以上前のことだ。要求は厳しく、妥協の余地はなかった。縫製の精度、素材の選定、仕上げの一貫性。すべてにおいて「欧米が納得する基準」を突きつけられた。</p>
+        <p>最初は戸惑った。しかしその基準に応え続けた結果、Jigsawが選び、Roots Canadaが選び、Mywalitが選んだ。一度ではなく、15年以上にわたって。</p>
+        <p>私たちが日本市場と向き合う理由は明快だ。その基準を、今度は日本のブランドと共に使いたいからだ。</p>
+      </div>
+
+      <div class="phil-ceo reveal">
+        <div class="ceo-photo-placeholder">代表写真</div>
+        <p class="ceo-quote">
+          「私たちは23年間、欧米の厳しい要求に応えることで品質を鍛えてきました。その基準を、今度は日本のブランドと共に使いたい。革製品づくりに本気で向き合う企業と、長く深い関係を築きたいと思っています。」
+        </p>
+        <p class="ceo-name">代表取締役　○○○○</p>
+      </div>
+    </div>
+
+    <!-- Why reasons accordion -->
+    <button class="reasons-trigger reveal" id="reasonsTrigger">
+      なぜ15年選ばれ続けるのか
+      <span class="reasons-trigger-icon">＋</span>
+    </button>
+    <div class="reasons-body" id="reasonsBody">
+      <div class="reasons-grid">
+        <div class="reason-card">
+          <div class="reason-num">理由 01</div>
+          <div class="reason-title serif">品質の一貫性</div>
+          <p class="reason-text">1ロット目と100ロット目で品質が変わらない。それだけだ。多くの工場は最初の受注では品質を出せる。Sanheが選ばれ続ける理由は、その品質を毎回同じ水準で出し続けることにある。</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-num">理由 02</div>
+          <div class="reason-title serif">約束を守る</div>
+          <p class="reason-text">問題が起きたとき、多くの工場は沈黙する。Sanheは即座に報告し、代替案を出す。「言ったことは必ずやる」という文化が、納期遵守率95%以上という数字を支えている。</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-num">理由 03</div>
+          <div class="reason-title serif">問題解決力</div>
+          <p class="reason-text">製造現場では必ず問題が起きる。重要なのは問題が起きないことではなく、起きたときに何をするかだ。Sanheは23年間で無数の問題に向き合ってきた。その経験が確信につながっている。</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-num">理由 04</div>
+          <div class="reason-title serif">変化への対応</div>
+          <p class="reason-text">ブランドのニーズは毎シーズン変わる。変化を嫌う工場は長期取引では選ばれない。Sanheは社内デザイナーと生産管理チームが連動し、変化をチャンスとして捉える体制を持っている。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Page 3: 実績 ── -->
+<section id="results">
+  <div class="container">
+    <p class="section-label reveal">実績</p>
+    <p class="reveal" style="font-family:var(--serif);font-size:clamp(16px,2vw,20px);color:var(--ash);max-width:560px">
+      数字は主張ではない。23年間の事実だ。
+    </p>
+    <div class="results-grid reveal">
+      <div class="result-item">
+        <div class="result-num serif">23年<span style="font-size:.55em;font-weight:400">以上</span></div>
+        <div class="result-unit">業歴</div>
+        <div class="result-context">創業から一度も品質基準を下げていない。それが23年の意味だ。</div>
+      </div>
+      <div class="result-item">
+        <div class="result-num serif">50万<span style="font-size:.55em;font-weight:400">個超</span></div>
+        <div class="result-unit">累計生産数</div>
+        <div class="result-context">バッグ・財布・ベルト合計。欧米ブランドが繰り返し選んだ結果がこの数字だ。</div>
+      </div>
+      <div class="result-item">
+        <div class="result-num serif">80%<span style="font-size:.55em;font-weight:400">以上</span></div>
+        <div class="result-unit">顧客継続率</div>
+        <div class="result-context">1回限りで終わらない。8割のブランドが翌年も発注に戻ってくる。</div>
+      </div>
+      <div class="result-item">
+        <div class="result-num serif">95%<span style="font-size:.55em;font-weight:400">以上</span></div>
+        <div class="result-unit">納期遵守率</div>
+        <div class="result-context">15年間、約束を守り続けた記録だ。</div>
+      </div>
+      <div class="result-item">
+        <div class="result-num serif">1%<span style="font-size:.55em;font-weight:400">未満</span></div>
+        <div class="result-unit">不良品発生率</div>
+        <div class="result-context">4段階の品質検査で継続維持している不良率。業界平均の数分の一だ。</div>
+      </div>
+      <div class="result-item">
+        <div class="result-num serif">15年<span style="font-size:.55em;font-weight:400">以上</span></div>
+        <div class="result-unit">最長継続年数</div>
+        <div class="result-context">最長取引ブランドとの継続年数。価格ではなく信頼が関係を支えている。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Page 4: 取引先 ── -->
+<section id="clients">
+  <div class="container">
+    <p class="section-label reveal">実績・取引先</p>
+    <h2 class="clients-headline serif reveal">
+      「1回発注したら終わり」の工場とは、<em>違います。</em><br>
+      イギリス、カナダ、イタリア——<br>
+      5つのブランドが、15年以上Sanheを選び続けています。
+    </h2>
+    <p class="clients-sub reveal">
+      すべて15年以上の継続取引。価格競争で選ばれたのではなく、品質への信頼が関係を支えています。
+    </p>
+  </div>
+
+  <!-- Infinite scroll logo band -->
+  <div class="logo-scroll-wrap reveal">
+    <div class="logo-track-outer">
+      <!-- First copy -->
+      <div class="logo-track">
+        <div class="logo-item">
+          <div class="logo-name serif">Mywalit</div>
+          <div class="logo-tooltip">🇮🇹 イタリア ／ 15年以上継続</div>
+        </div>
+        <div class="logo-item">
+          <div class="logo-name serif">Jigsaw UK</div>
+          <div class="logo-tooltip">🇬🇧 イギリス ／ 15年以上継続</div>
+        </div>
+        <div class="logo-item">
+          <div class="logo-name serif">Roots Canada</div>
+          <div class="logo-tooltip">🇨🇦 カナダ ／ 15年以上継続</div>
+        </div>
+        <div class="logo-item">
+          <div class="logo-name serif">Want Les Essentiels</div>
+          <div class="logo-tooltip">🇨🇦 カナダ ／ 継続取引中</div>
+        </div>
+        <div class="logo-item">
+          <div class="logo-name serif">Quartz Co.</div>
+          <div class="logo-tooltip">🇨🇦 カナダ ／ 継続取引中</div>
+        </div>
+      </div>
+      <!-- Second copy for seamless loop -->
+      <div class="logo-track">
+        <div class="logo-item">
+          <div class="logo-name serif">Mywalit</div>
+          <div class="logo-tooltip">🇮🇹 イタリア ／ 15年以上継続</div>
+        </div>
+        <div class="logo-item">
+          <div class="logo-name serif">Jigsaw UK</div>
+          <div class="logo-tooltip">🇬🇧 イギリス ／ 15年以上継続</div>
+        </div>
+        <div class="logo-item">
+          <div class="logo-name serif">Roots Canada</div>
+          <div class="logo-tooltip">🇨🇦 カナダ ／ 15年以上継続</div>
+        </div>
+        <div class="logo-item">
+          <div class="logo-name serif">Want Les Essentiels</div>
+          <div class="logo-tooltip">🇨🇦 カナダ ／ 継続取引中</div>
+        </div>
+        <div class="logo-item">
+          <div class="logo-name serif">Quartz Co.</div>
+          <div class="logo-tooltip">🇨🇦 カナダ ／ 継続取引中</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="clients-why reveal" id="clientsWhy">
+      <button class="clients-why-trigger" onclick="toggleClientsWhy()">
+        <span class="clients-why-title serif">なぜ15年続くのか</span>
+        <span class="why-icon">＋</span>
+      </button>
+      <div class="clients-why-body">
+        <p class="clients-why-text">
+          Sanheが長期継続される理由は、安さではない。品質の一貫性、納期の誠実さ、問題が起きたときの対応力、そして変化への柔軟さ。この4つが揃っているから、ブランドはSanheを手放さない。<br><br>
+          詳しくは <a href="#philosophy" style="color:var(--gold);border-bottom:1px solid rgba(181,135,44,.3)">Philosophy</a> をご覧ください。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Page 5: 品質管理 ── -->
+<section id="quality">
+  <div class="container">
+    <p class="section-label reveal">品質管理</p>
+    <p class="reveal" style="font-family:var(--serif);font-size:clamp(16px,2vw,22px);color:var(--ink);max-width:600px;line-height:1.7">
+      不良率 1%未満、納期遵守率 95%以上。<br>
+      <span style="font-size:.75em;color:var(--ash)">この数字は、仕組みの結果だ。</span>
+    </p>
+
+    <div class="quality-nums reveal">
+      <div class="quality-num-card">
+        <div class="q-num serif">1%<span style="font-size:.5em;font-weight:400">未満</span></div>
+        <div class="q-label">不良品発生率</div>
+        <div class="q-caption">4段階品質管理プロセスによる継続維持</div>
+      </div>
+      <div class="quality-num-card">
+        <div class="q-num serif">95%<span style="font-size:.5em;font-weight:400">以上</span></div>
+        <div class="q-label">納期遵守率</div>
+        <div class="q-caption">グローバルサプライチェーン混乱期も維持</div>
+      </div>
+    </div>
+
+    <!-- 4-step process -->
+    <div class="process-list reveal">
+      <div class="process-item" id="proc1">
+        <button class="process-trigger" onclick="toggleProcess('proc1')">
+          <span class="process-step">01</span>
+          <span class="process-name serif">原材料検査</span>
+          <span class="process-toggle">＋</span>
+        </button>
+        <div class="process-body">
+          <p class="process-detail">革・副資材の品質・仕様・数量を入荷時に全数確認する。NG素材を工程に入れない。品質は最初の一手で決まる。</p>
+        </div>
+      </div>
+      <div class="process-item" id="proc2">
+        <button class="process-trigger" onclick="toggleProcess('proc2')">
+          <span class="process-step">02</span>
+          <span class="process-name serif">生産中検査</span>
+          <span class="process-toggle">＋</span>
+        </button>
+        <div class="process-body">
+          <p class="process-detail">縫製・加工の精度を製造工程中に随時チェックする。工程内の不良を早期発見し、その場で修正する。後工程に問題を持ち越さない。</p>
+        </div>
+      </div>
+      <div class="process-item" id="proc3">
+        <button class="process-trigger" onclick="toggleProcess('proc3')">
+          <span class="process-step">03</span>
+          <span class="process-name serif">最終検査</span>
+          <span class="process-toggle">＋</span>
+        </button>
+        <div class="process-body">
+          <p class="process-detail">完成品を全数検品する。寸法・縫製・仕上げ・金具・ロゴ、すべてを規格と照合する。出荷前の最終品質ゲートだ。</p>
+        </div>
+      </div>
+      <div class="process-item" id="proc4">
+        <button class="process-trigger" onclick="toggleProcess('proc4')">
+          <span class="process-step">04</span>
+          <span class="process-name serif">出荷前検査</span>
+          <span class="process-toggle">＋</span>
+        </button>
+        <div class="process-body">
+          <p class="process-detail">梱包・数量・ラベル・輸出仕様を出荷直前に確認する。輸送中のリスクを最小化し、バイヤーの手元に完全な状態で届ける。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Factory map + Capacity -->
+    <div class="factory-section reveal">
+      <div class="factory-map">
+        <p class="map-title">生産・管理拠点</p>
+        <div class="map-pins">
+          <!-- Simplified Asia map: Korea ~top-right, Qingdao ~mid-right, Vietnam ~lower-center -->
+          <div class="map-pin pin-korea">
+            <div class="pin-dot"></div>
+            <div class="pin-label">韓国本社</div>
+            <div class="pin-popup">管理・デザイン・日本語窓口。<br>すべての取引の起点はここだ。</div>
+          </div>
+          <div class="map-pin pin-qingdao">
+            <div class="pin-dot"></div>
+            <div class="pin-label">中国・青島工場</div>
+            <div class="pin-popup">メイン生産拠点。<br>海運で日本まで最短3日。<br>Factory Audit受け入れ可。</div>
+          </div>
+          <div class="map-pin pin-vietnam">
+            <div class="pin-dot"></div>
+            <div class="pin-label">ベトナム工場</div>
+            <div class="pin-popup">サブ生産拠点。<br>海運で日本まで最短5日。<br>Factory Audit受け入れ可。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="capacity-notice">
+        <h3 class="capacity-title serif">現在、新規受注受付中</h3>
+        <p class="capacity-text">
+          生産キャパシティに30〜40%の余裕があります。<br>
+          月間最大15,000個の生産能力のうち、新規ブランドへの割当が可能です。<br><br>
+          今がタイミングです。
+        </p>
+        <a href="#contact" class="capacity-cta">まず相談する <span style="margin-left:6px">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Page 6: Materials ── -->
+<section id="materials">
+  <div class="container">
+    <p class="section-label reveal">素材</p><!-- タイトル後で決定 -->
+    <p class="materials-lead serif reveal">
+      革の表情は、素材で決まる。<br>
+      <span style="font-family:var(--sans);font-size:.75em;font-weight:400;color:var(--ash)">クロコ型押しからキャメルレザー、エナメル調まで。バイヤーのブランドイメージに合わせた素材選定から対応する。</span>
+    </p>
+
+    <div class="materials-grid reveal">
+      <!-- 7 material cards with CSS color swatches -->
+      <div class="material-card" onclick="openModal('mat-croco-black')" style="grid-row:span 2">
+        <div class="mat-img-placeholder mat-swatch" style="background:linear-gradient(135deg,#1a1a1a,#2d2926);height:100%;min-height:340px">
+          <div style="width:32px;height:32px;background:rgba(181,135,44,.15);border:1px solid rgba(181,135,44,.2)"></div>
+        </div>
+        <div class="mat-overlay"></div>
+        <div class="mat-name">クロコ型押し（ブラック）</div>
+        <div class="mat-plus">＋</div>
+      </div>
+      <div class="material-card" onclick="openModal('mat-croco-green')">
+        <div class="mat-img-placeholder mat-swatch" style="background:linear-gradient(135deg,#1f2b1e,#2c3a28);min-height:160px">
+          <div style="width:20px;height:20px;background:rgba(181,135,44,.1);border:1px solid rgba(181,135,44,.15)"></div>
+        </div>
+        <div class="mat-overlay"></div>
+        <div class="mat-name">クロコ型押し（グリーン）</div>
+        <div class="mat-plus">＋</div>
+      </div>
+      <div class="material-card" onclick="openModal('mat-croco-brown')">
+        <div class="mat-img-placeholder mat-swatch" style="background:linear-gradient(135deg,#2d1f10,#3d2c18);min-height:160px">
+          <div style="width:20px;height:20px;background:rgba(181,135,44,.1)"></div>
+        </div>
+        <div class="mat-overlay"></div>
+        <div class="mat-name">クロコ型押し（ブラウン）</div>
+        <div class="mat-plus">＋</div>
+      </div>
+      <div class="material-card" onclick="openModal('mat-croco-grey')">
+        <div class="mat-img-placeholder mat-swatch" style="background:linear-gradient(135deg,#28272a,#3a3840);min-height:160px">
+          <div style="width:20px;height:20px;background:rgba(181,135,44,.1)"></div>
+        </div>
+        <div class="mat-overlay"></div>
+        <div class="mat-name">クロコ型押し（グレー）</div>
+        <div class="mat-plus">＋</div>
+      </div>
+      <div class="material-card" onclick="openModal('mat-croco-red')">
+        <div class="mat-img-placeholder mat-swatch" style="background:linear-gradient(135deg,#2d1010,#3d1818);min-height:160px">
+          <div style="width:20px;height:20px;background:rgba(181,135,44,.1)"></div>
+        </div>
+        <div class="mat-overlay"></div>
+        <div class="mat-name">クロコ型押し（レッド）</div>
+        <div class="mat-plus">＋</div>
+      </div>
+      <div class="material-card" onclick="openModal('mat-camel')">
+        <div class="mat-img-placeholder mat-swatch" style="background:linear-gradient(135deg,#b8926a,#c9a278);min-height:160px">
+          <div style="width:20px;height:20px;background:rgba(0,0,0,.1)"></div>
+        </div>
+        <div class="mat-overlay"></div>
+        <div class="mat-name">キャメルレザー</div>
+        <div class="mat-plus">＋</div>
+      </div>
+      <div class="material-card" onclick="openModal('mat-enamel')">
+        <div class="mat-img-placeholder mat-swatch" style="background:linear-gradient(135deg,#1a1a2e,#22223a);min-height:160px">
+          <div style="width:20px;height:20px;background:rgba(181,135,44,.15);border:1px solid rgba(181,135,44,.3)"></div>
+        </div>
+        <div class="mat-overlay"></div>
+        <div class="mat-name">エナメル調</div>
+        <div class="mat-plus">＋</div>
+      </div>
+    </div>
+
+    <div class="materials-cta-block reveal">
+      <p class="materials-cta-text serif">
+        使いたい素材が見つかりましたか？
+        <span>まずサンプルで実際の質感を確かめてください。革製品は、画面ではなく手で判断してください。</span>
+      </p>
+      <a href="#contact" class="cta-btn-light serif">サンプルを依頼する →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Material Modals -->
+<div class="modal-overlay" id="modal-mat-croco-black" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-mat-croco-black')">×</button>
+    <p class="modal-tag">素材詳細</p>
+    <h3 class="modal-title serif">クロコ型押し（ブラック）</h3>
+    <div class="modal-row"><span class="modal-row-label">産地</span><span class="modal-row-value">韓国産 ／ イタリア産対応</span></div>
+    <div class="modal-row"><span class="modal-row-label">カテゴリ</span><span class="modal-row-value">プレスドレザー</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応カラー</span><span class="modal-row-value">ブラック・ネイビー・他応相談</span></div>
+    <p class="modal-desc">高級感と存在感を両立する。ラグジュアリーラインの定番素材だ。Mywalitをはじめとする欧米ブランドで採用実績あり。</p>
+    <div class="modal-cta"><a href="#contact">この素材でサンプルを依頼する →</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-mat-croco-green" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-mat-croco-green')">×</button>
+    <p class="modal-tag">素材詳細</p>
+    <h3 class="modal-title serif">クロコ型押し（グリーン）</h3>
+    <div class="modal-row"><span class="modal-row-label">産地</span><span class="modal-row-value">韓国産</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応カラー</span><span class="modal-row-value">グリーン・オリーブ・応相談</span></div>
+    <p class="modal-desc">シーズンカラーとして差別化に強い。コレクションのアクセントになる一素材だ。</p>
+    <div class="modal-cta"><a href="#contact">この素材でサンプルを依頼する →</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-mat-croco-brown" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-mat-croco-brown')">×</button>
+    <p class="modal-tag">素材詳細</p>
+    <h3 class="modal-title serif">クロコ型押し（ブラウン）</h3>
+    <div class="modal-row"><span class="modal-row-label">産地</span><span class="modal-row-value">韓国産 ／ イタリア産対応</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応カラー</span><span class="modal-row-value">ブラウン・タン・キャメル</span></div>
+    <p class="modal-desc">クラシックなラグジュアリー感。長く使えるベーシックな表情を持つ。</p>
+    <div class="modal-cta"><a href="#contact">この素材でサンプルを依頼する →</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-mat-croco-grey" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-mat-croco-grey')">×</button>
+    <p class="modal-tag">素材詳細</p>
+    <h3 class="modal-title serif">クロコ型押し（グレー）</h3>
+    <div class="modal-row"><span class="modal-row-label">産地</span><span class="modal-row-value">韓国産</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応カラー</span><span class="modal-row-value">グレー・チャコール・シルバー</span></div>
+    <p class="modal-desc">ビジネスシーンに馴染む洗練された素材。性別を問わず使いやすい。</p>
+    <div class="modal-cta"><a href="#contact">この素材でサンプルを依頼する →</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-mat-croco-red" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-mat-croco-red')">×</button>
+    <p class="modal-tag">素材詳細</p>
+    <h3 class="modal-title serif">クロコ型押し（レッド）</h3>
+    <div class="modal-row"><span class="modal-row-label">産地</span><span class="modal-row-value">韓国産</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応カラー</span><span class="modal-row-value">レッド・バーガンディ・応相談</span></div>
+    <p class="modal-desc">コレクションのアクセントに。存在感のある一点を作りたいときに選ばれる。</p>
+    <div class="modal-cta"><a href="#contact">この素材でサンプルを依頼する →</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-mat-camel" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-mat-camel')">×</button>
+    <p class="modal-tag">素材詳細</p>
+    <h3 class="modal-title serif">キャメルレザー</h3>
+    <div class="modal-row"><span class="modal-row-label">産地</span><span class="modal-row-value">韓国産 ／ イタリア産対応</span></div>
+    <div class="modal-row"><span class="modal-row-label">特性</span><span class="modal-row-value">柔軟性・耐久性</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応カラー</span><span class="modal-row-value">キャメル・タン・ハニー・他</span></div>
+    <p class="modal-desc">柔らかな風合いと耐久性を兼ね備える。長く使うほど味が出る素材だ。</p>
+    <div class="modal-cta"><a href="#contact">この素材でサンプルを依頼する →</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-mat-enamel" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-mat-enamel')">×</button>
+    <p class="modal-tag">素材詳細</p>
+    <h3 class="modal-title serif">エナメル調</h3>
+    <div class="modal-row"><span class="modal-row-label">産地</span><span class="modal-row-value">韓国産</span></div>
+    <div class="modal-row"><span class="modal-row-label">特性</span><span class="modal-row-value">光沢・耐汚性</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応カラー</span><span class="modal-row-value">ブラック・ホワイト・応相談</span></div>
+    <p class="modal-desc">光沢感でブランドの個性を際立てる。季節を問わず使えるモダンな表情を持つ。</p>
+    <div class="modal-cta"><a href="#contact">この素材でサンプルを依頼する →</a></div>
+  </div>
+</div>
+
+<!-- ── Page 7: 製品ラインナップ ── -->
+<section id="products">
+  <div class="container">
+    <p class="section-label reveal">製品ラインナップ</p>
+    <p class="products-lead serif reveal">
+      OEMもODMも対応する。あなたのデザインを持ち込んでもいい。Sanheのデザイナーと一緒に作り上げてもいい。<br>
+      <span style="font-family:var(--sans);font-size:.78em;font-weight:400">まず、何を作りたいかを教えてほしい。</span>
+    </p>
+
+    <div class="products-grid reveal">
+      <div class="product-card" onclick="openModal('prod-bag')">
+        <div class="product-card-num serif">01</div>
+        <p class="product-cat">Handbag</p>
+        <h3 class="product-name serif">ハンドバッグ</h3>
+        <p class="product-hint">価格はクリックで確認</p>
+        <span class="product-plus">＋</span>
+      </div>
+      <div class="product-card" onclick="openModal('prod-wallet')">
+        <div class="product-card-num serif">02</div>
+        <p class="product-cat">Small Leather Goods</p>
+        <h3 class="product-name serif">財布・スモールレザーグッズ</h3>
+        <p class="product-hint">価格はクリックで確認</p>
+        <span class="product-plus">＋</span>
+      </div>
+      <div class="product-card" onclick="openModal('prod-belt')">
+        <div class="product-card-num serif">03</div>
+        <p class="product-cat">Belt</p>
+        <h3 class="product-name serif">ベルト</h3>
+        <p class="product-hint">価格はクリックで確認</p>
+        <span class="product-plus">＋</span>
+      </div>
+      <div class="product-card" onclick="openModal('prod-other')">
+        <div class="product-card-num serif">04</div>
+        <p class="product-cat">Other</p>
+        <h3 class="product-name serif">その他小物</h3>
+        <p class="product-hint">価格はクリックで確認</p>
+        <span class="product-plus">＋</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product Modals -->
+<div class="modal-overlay" id="modal-prod-bag" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-prod-bag')">×</button>
+    <p class="modal-tag">製品詳細</p>
+    <h3 class="modal-title serif">ハンドバッグ</h3>
+    <div class="modal-row"><span class="modal-row-label">価格帯</span><span class="modal-row-value">USD 25〜120+（FOB）</span></div>
+    <div class="modal-row"><span class="modal-row-label">MOQ</span><span class="modal-row-value">300個〜</span></div>
+    <div class="modal-row"><span class="modal-row-label">リードタイム</span><span class="modal-row-value">60〜90日</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応</span><span class="modal-row-value">OEM / ODM 両対応</span></div>
+    <p class="modal-desc">トート・ショルダー・クラッチ・ミニバッグ等、幅広いシルエットに対応。金具・裏地・ステッチカラーすべてカスタマイズ可。</p>
+    <div class="modal-cta"><a href="#contact">このカテゴリで相談する →</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-prod-wallet" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-prod-wallet')">×</button>
+    <p class="modal-tag">製品詳細</p>
+    <h3 class="modal-title serif">財布・スモールレザーグッズ</h3>
+    <div class="modal-row"><span class="modal-row-label">価格帯</span><span class="modal-row-value">USD 8〜45（FOB）</span></div>
+    <div class="modal-row"><span class="modal-row-label">MOQ</span><span class="modal-row-value">300個〜</span></div>
+    <div class="modal-row"><span class="modal-row-label">リードタイム</span><span class="modal-row-value">60〜75日</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応</span><span class="modal-row-value">OEM / ODM 両対応</span></div>
+    <p class="modal-desc">長財布・二つ折り・カードケース・コインケース等。刻印・箔押し・ロゴタグ対応。ノベルティ需要にも対応可。</p>
+    <div class="modal-cta"><a href="#contact">このカテゴリで相談する →</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-prod-belt" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-prod-belt')">×</button>
+    <p class="modal-tag">製品詳細</p>
+    <h3 class="modal-title serif">ベルト</h3>
+    <div class="modal-row"><span class="modal-row-label">価格帯</span><span class="modal-row-value">USD 10〜35（FOB）</span></div>
+    <div class="modal-row"><span class="modal-row-label">MOQ</span><span class="modal-row-value">300個〜</span></div>
+    <div class="modal-row"><span class="modal-row-label">リードタイム</span><span class="modal-row-value">60〜75日</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応</span><span class="modal-row-value">OEM / ODM 両対応</span></div>
+    <p class="modal-desc">幅・穴数・バックル素材・形状すべて指定可。YKKバックル対応。</p>
+    <div class="modal-cta"><a href="#contact">このカテゴリで相談する →</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-prod-other" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalById('modal-prod-other')">×</button>
+    <p class="modal-tag">製品詳細</p>
+    <h3 class="modal-title serif">その他小物</h3>
+    <div class="modal-row"><span class="modal-row-label">価格帯</span><span class="modal-row-value">要相談</span></div>
+    <div class="modal-row"><span class="modal-row-label">MOQ</span><span class="modal-row-value">300個〜</span></div>
+    <div class="modal-row"><span class="modal-row-label">リードタイム</span><span class="modal-row-value">要相談</span></div>
+    <div class="modal-row"><span class="modal-row-label">対応</span><span class="modal-row-value">OEM / ODM 両対応</span></div>
+    <p class="modal-desc">キーケース・パスポートケース・ポーチ・名刺入れ等。作りたいものがあればまずご相談ください。</p>
+    <div class="modal-cta"><a href="#contact">まず相談する →</a></div>
+  </div>
+</div>
+
+<!-- ── Page 8: ご発注の流れ ── -->
+<section id="order">
+  <div class="container">
+    <p class="section-label reveal">ご発注の流れ</p>
+    <p class="reveal" style="font-family:var(--serif);font-size:clamp(16px,2vw,22px);color:var(--ink);max-width:600px;line-height:1.7">
+      相談から納品まで、5つのフェーズで完結する。
+    </p>
+
+    <div class="order-phases reveal">
+      <div class="phase-item" id="phase1">
+        <button class="phase-trigger" onclick="togglePhase('phase1')">
+          <span class="phase-num">Phase 1</span>
+          <div class="phase-name-wrap">
+            <div class="phase-name serif">相談</div>
+            <div class="phase-en">Inquiry &amp; Requirement Hearing</div>
+          </div>
+          <span class="phase-duration">随時受付</span>
+          <span class="phase-toggle">＋</span>
+        </button>
+        <div class="phase-body">
+          <p class="phase-detail">まず何を作りたいかを教えてください。製品の種類・数量・素材・予算・納期の希望をヒアリングします。メール・LINE・WhatsApp、どの手段でも対応します。</p>
+        </div>
+      </div>
+      <div class="phase-item" id="phase2">
+        <button class="phase-trigger" onclick="togglePhase('phase2')">
+          <span class="phase-num">Phase 2</span>
+          <div class="phase-name-wrap">
+            <div class="phase-name serif">見積</div>
+            <div class="phase-en">Estimate &amp; Quotation</div>
+          </div>
+          <span class="phase-duration">1〜2週間</span>
+          <span class="phase-toggle">＋</span>
+        </button>
+        <div class="phase-body">
+          <p class="phase-detail">ヒアリング内容をもとに、FOB単価・MOQ・リードタイムを含む正式見積を提出します。NDA締結後に詳細協議を進めることも可能です。</p>
+        </div>
+      </div>
+      <div class="phase-item" id="phase3">
+        <button class="phase-trigger" onclick="togglePhase('phase3')">
+          <span class="phase-num">Phase 3</span>
+          <div class="phase-name-wrap">
+            <div class="phase-name serif">サンプル</div>
+            <div class="phase-en">Sample &amp; Approval</div>
+          </div>
+          <span class="phase-duration">2〜4週間</span>
+          <span class="phase-toggle">＋</span>
+        </button>
+        <div class="phase-body">
+          <p class="phase-detail">実際の素材・縫製・仕上げを確認できるサンプルを制作します。修正が必要な場合は再サンプル対応。承認後、本生産に移行します。</p>
+        </div>
+      </div>
+      <div class="phase-item" id="phase4">
+        <button class="phase-trigger" onclick="togglePhase('phase4')">
+          <span class="phase-num">Phase 4</span>
+          <div class="phase-name-wrap">
+            <div class="phase-name serif">製造</div>
+            <div class="phase-en">Production &amp; QC</div>
+          </div>
+          <span class="phase-duration">60〜90日</span>
+          <span class="phase-toggle">＋</span>
+        </button>
+        <div class="phase-body">
+          <p class="phase-detail">4段階の品質管理プロセスのもと生産します。原材料検査→生産中検査→最終検査→出荷前検査。進捗は定期報告します。</p>
+        </div>
+      </div>
+      <div class="phase-item" id="phase5">
+        <button class="phase-trigger" onclick="togglePhase('phase5')">
+          <span class="phase-num">Phase 5</span>
+          <div class="phase-name-wrap">
+            <div class="phase-name serif">納品</div>
+            <div class="phase-en">Delivery</div>
+          </div>
+          <span class="phase-duration">青島3〜7日 ／ ベトナム5〜10日</span>
+          <span class="phase-toggle">＋</span>
+        </button>
+        <div class="phase-body">
+          <p class="phase-detail">FOB・CIF・DDPのいずれかで対応。通関サポートも可能です。青島からは海運で日本まで最短3日、ベトナムからは最短5日で届きます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Page 9: FAQ ── -->
+<section id="faq">
+  <div class="container">
+    <p class="section-label reveal">よくあるご質問</p><!-- タイトル後で決定 -->
+    <p class="reveal" style="font-family:var(--serif);font-size:clamp(16px,1.8vw,20px);color:var(--ash);max-width:520px">
+      不安をすべて、ここで解消してください。
+    </p>
+
+    <div class="faq-list reveal">
+
+      <div class="faq-item" id="faq1">
+        <button class="faq-question" onclick="toggleFaq('faq1')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">MOQはいくつですか？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">原則として300個からご対応しています。ただし製品の種類や素材によって異なります。まずはお気軽にご相談ください。初回のご相談ではMOQの交渉も受け付けています。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq2">
+        <button class="faq-question" onclick="toggleFaq('faq2')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">サンプルは作れますか？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">はい、対応可能です。サンプル費用と製作期間（目安2〜4週間）については、ご要望の仕様をお聞きした上でお見積りします。実際の質感を手で確認してから本発注を判断してください。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq3">
+        <button class="faq-question" onclick="toggleFaq('faq3')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">日本語でやり取りできますか？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">はい。日本語対応の担当者が窓口を担当します。メール・LINE・WhatsAppすべて日本語でご対応可能です。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq4">
+        <button class="faq-question" onclick="toggleFaq('faq4')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">工場見学できますか？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">はい、受け入れ可能です（事前予約制）。中国・青島工場およびベトナム工場へのFactory Auditも対応しています。まずお問い合わせください。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq5">
+        <button class="faq-question" onclick="toggleFaq('faq5')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">納期はどのくらいですか？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">サンプル承認後の本生産で60〜90日が目安です。輸送期間は青島→日本で3〜7日、ベトナム→日本で5〜10日（海運）。合計でサンプル確定から約3〜4ヶ月でお手元に届きます。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq6">
+        <button class="faq-question" onclick="toggleFaq('faq6')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">NDAは締結できますか？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">はい、対応可能です。デザイン・仕様の機密保持契約（NDA）を締結した上で詳細協議を進めることができます。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq7">
+        <button class="faq-question" onclick="toggleFaq('faq7')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">OEMとODMの違いは？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">OEM（Original Equipment Manufacturing）はお客様のデザインを持ち込んでいただき、Sanheが製造します。ODM（Original Design Manufacturing）はSanheの社内デザイナーと共同でデザインを開発・製造します。どちらにも対応しています。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq8">
+        <button class="faq-question" onclick="toggleFaq('faq8')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">支払い方法は？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">電信送金（T/T）または信用状（L/C）に対応しています。支払い条件は発注確定時に30%前払い、残70%を出荷前にお支払いいただくのが標準です。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq9">
+        <button class="faq-question" onclick="toggleFaq('faq9')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">不良品が出た時の対応は？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">出荷前の4段階検査で対応しています。万が一不良品が届いた場合は、内容確認の上、代替品製造または費用調整で対応します。対応方針は事前に取引条件書で明確化します。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq10">
+        <button class="faq-question" onclick="toggleFaq('faq10')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">担当者は固定されますか？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">はい。担当者は原則として固定しています。関係が深まるほど対応品質が上がる。それが長期継続率80%以上の背景にある文化です。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq11">
+        <button class="faq-question" onclick="toggleFaq('faq11')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">オンライン商談は可能ですか？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">はい。Zoom・Google Meet・LINE通話等で対応可能です。まずはお問い合わせフォームかメールでご連絡ください。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq12">
+        <button class="faq-question" onclick="toggleFaq('faq12')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">デザインの機密性は守られますか？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">NDA締結後の案件はすべて機密扱いです。お客様のデザインや仕様を他社と共有することは一切ありません。欧米ブランドとの長期継続取引も、この信頼の上に成立しています。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq13">
+        <button class="faq-question" onclick="toggleFaq('faq13')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">初回MOQ 300個は相談できますか？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">製品・素材・仕様によっては応相談となる場合があります。まず何を作りたいかをお聞かせください。最適な提案をします。</p></div>
+      </div>
+
+      <div class="faq-item" id="faq14">
+        <button class="faq-question" onclick="toggleFaq('faq14')">
+          <span class="faq-q-mark">Q</span>
+          <span class="faq-q-text">リオーダーの条件は？</span>
+          <span class="faq-toggle">＋</span>
+        </button>
+        <div class="faq-answer"><p class="faq-a-text">初回と同じ仕様でのリオーダーは、同一MOQ・価格帯が基本です。仕様変更がある場合は再見積となります。長期取引の場合、条件の最適化をご提案することもあります。</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Page 10: お問い合わせ ── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <p class="contact-section-label">お問い合わせ</p>
+        <h2 class="contact-headline serif">
+          まず、話してみてください。
+        </h2>
+
+        <div class="contact-ctas">
+          <a href="mailto:info@sanhe.com" class="cta-main-btn">
+            <span>サンプルを依頼する</span>
+            <span>→</span>
+          </a>
+          <a href="#" class="cta-secondary-btn">
+            <span>会社資料をダウンロード（PDF）</span>
+            <span>↓</span>
+          </a>
+          <a href="#" class="cta-secondary-btn">
+            <span>LINEで相談する</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <div class="contact-info">
+          <div class="contact-info-row">
+            <span class="contact-info-label">Email</span>
+            <span>info@sanhe.com</span>
+          </div>
+          <div class="contact-info-row">
+            <span class="contact-info-label">LINE</span>
+            <span>@sanhe-japan（詳細はメールにて）</span>
+          </div>
+          <div class="contact-info-row">
+            <span class="contact-info-label">WhatsApp</span>
+            <span>対応可（メールにてご案内）</span>
+          </div>
+          <div class="contact-info-row">
+            <span class="contact-info-label">返信</span>
+            <span>24時間以内（営業日）</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <p class="form-note">* は必須項目です。いただいた情報は担当者対応のみに使用します。</p>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">会社名<span>*</span></label>
+            <input type="text" class="form-input" placeholder="株式会社〇〇" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">お名前<span>*</span></label>
+            <input type="text" class="form-input" placeholder="山田 太郎" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">メールアドレス<span>*</span></label>
+            <input type="email" class="form-input" placeholder="info@company.co.jp" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">電話番号</label>
+            <input type="tel" class="form-input" placeholder="03-0000-0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">ご質問・ご要望</label>
+            <textarea class="form-input" placeholder="作りたい製品、数量、素材などをお聞かせください。"></textarea>
+          </div>
+          <button type="submit" class="form-submit serif">送信する →</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <p><strong>お問い合わせありがとうございます。</strong><br>24時間以内に担当者よりご返信します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">SANHE INTERFASHION</p>
+        <p class="footer-tagline">OEM / ODM LEATHER GOODS MANUFACTURER</p>
+      </div>
+      <div class="footer-info">
+        <p>会社名：Sanhe Interfashion</p>
+        <p>代表者：○○○○</p>
+        <p>本社：韓国（管理本部）</p>
+        <p>生産工場：中国・青島 ／ ベトナム</p>
+        <p>Email：info@sanhe.com</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">特定商取引法に基づく表記</a>
+        <a href="#">English</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2024 Sanhe Interfashion. All rights reserved.</p>
+      <p class="footer-copy">Established 2002 · Korea · China · Vietnam</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Scroll Reveal ──
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+},{threshold:0.12});
+revealEls.forEach(el => io.observe(el));
+
+// ── Nav scroll ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── Reasons accordion ──
+const trigger = document.getElementById('reasonsTrigger');
+const body = document.getElementById('reasonsBody');
+trigger.addEventListener('click',()=>{
+  trigger.classList.toggle('open');
+  body.classList.toggle('open');
+});
+
+// ── Clients Why ──
+function toggleClientsWhy(){
+  document.getElementById('clientsWhy').classList.toggle('open');
+}
+
+// ── Process accordion ──
+function toggleProcess(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ── Phase accordion ──
+function togglePhase(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ── FAQ accordion (multiple open) ──
+function toggleFaq(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ── Modals ──
+function openModal(id){
+  document.getElementById('modal-'+id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){
+  if(e.target === e.currentTarget){
+    e.currentTarget.classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+function closeModalById(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    document.querySelectorAll('.modal-overlay.open').forEach(m=>{
+      m.classList.remove('open');
+      document.body.style.overflow='';
+    });
+  }
+});
+
+// ── Form submit ──
+function handleSubmit(e){
+  e.preventDefault();
+  document.getElementById('contactForm').style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+}
+</script>
+</body>
+</html>

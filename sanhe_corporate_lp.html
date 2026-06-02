@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanhe Interfashion — Leather Goods OEM Manufacturer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Reset & Base ────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #141412;
+      --warm-dark:  #1b1916;
+      --dark-panel: #1e1c18;
+      --gold:       #b5872c;
+      --gold-light: #d4aa56;
+      --cream:      #fafafa;
+      --cream-mid:  #eeead f;
+      --cream-dark: #e8e2d6;
+      --stone:      #c4bdb0;
+      --ash:        #6e6860;
+      --mid:        #3e3a34;
+      --border:     #ddd7cc;
+      --white:      #ffffff;
+      --font-serif: 'Shippori Mincho B1', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+      --font-sans:  'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+      --max-w:      1120px;
+      --side:       clamp(24px, 5vw, 80px);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-weight: 400;
+      background: var(--cream);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--side);
+    }
+
+    /* ── Nav ─────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px var(--side);
+      transition: background 0.4s, padding 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(20,20,18,0.96);
+      backdrop-filter: blur(12px);
+      padding-top: 14px;
+      padding-bottom: 14px;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 17px;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 10px 22px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .nav-cta:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+
+    /* ── Hero ────────────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      background: var(--warm-dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(181,135,44,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 80% at 10% 90%, rgba(181,135,44,0.05) 0%, transparent 55%);
+    }
+
+    /* Photo placeholder — replace with actual product photo */
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        var(--warm-dark) 0%,
+        var(--warm-dark) 45%,
+        rgba(40,35,28,0.7) 100%
+      );
+      z-index: 0;
+    }
+    .hero-photo::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 50%;
+      background: linear-gradient(
+        135deg,
+        rgba(60,50,35,0.4) 0%,
+        rgba(30,24,18,0.9) 100%
+      );
+      /* Replace with: background-image: url('hero-product.jpg'); background-size: cover; */
+    }
+
+    .photo-hint {
+      position: absolute;
+      right: 4%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38%;
+      aspect-ratio: 3/4;
+      border: 1px solid rgba(181,135,44,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(181,135,44,0.35);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-family: var(--font-sans);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 var(--side);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(48px, 6.5vw, 92px);
+      line-height: 1.05;
+      color: var(--white);
+      max-width: 700px;
+      margin-bottom: 28px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.4vw, 17px);
+      line-height: 1.75;
+      color: rgba(255,255,255,0.72);
+      max-width: 440px;
+      margin-bottom: 44px;
+      font-weight: 300;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--gold-light); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .btn-ghost::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+    .btn-ghost:hover { color: var(--white); }
+    .btn-ghost:hover::after { transform: translateX(4px); }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      display: flex;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-stat {
+      flex: 1;
+      padding: 22px 28px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero-stat-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 4px;
+    }
+
+    /* ── Numbers ─────────────────────────────────────────────────────────── */
+    #numbers {
+      background: var(--white);
+      padding: 140px var(--side);
+    }
+    .numbers-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .number-item {
+      padding: 56px 48px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .number-item:nth-child(3),
+    .number-item:nth-child(6) { border-right: none; }
+    .number-item:nth-child(4),
+    .number-item:nth-child(5),
+    .number-item:nth-child(6) { border-bottom: none; }
+    .number-val {
+      font-family: var(--font-serif);
+      font-size: clamp(44px, 5vw, 72px);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .number-unit {
+      color: var(--gold);
+      font-style: italic;
+    }
+    .number-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .number-context {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ash);
+      max-width: 260px;
+    }
+
+    /* ── Philosophy ─────────────────────────────────────────────────────── */
+    #philosophy {
+      background: var(--white);
+      padding: 140px var(--side);
+      border-top: 1px solid var(--border);
+    }
+    .philosophy-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .philosophy-left { position: sticky; top: 120px; }
+    .philosophy-right {}
+    .philosophy-body {
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--mid);
+      margin-bottom: 28px;
+    }
+    .philosophy-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 56px;
+      border-top: 1px solid var(--border);
+    }
+    .pillar {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 32px;
+      align-items: baseline;
+    }
+    .pillar-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--ink);
+      font-style: italic;
+    }
+    .pillar-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ash);
+    }
+
+    /* ── Clients ─────────────────────────────────────────────────────────── */
+    #clients {
+      background: var(--white);
+      padding: 130px var(--side);
+      border-top: 1px solid var(--border);
+    }
+    .section-header {
+      max-width: var(--max-w);
+      margin: 0 auto 60px;
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.12;
+      color: var(--ink);
+    }
+    .section-title em { font-style: italic; }
+    .section-sub {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--ash);
+      max-width: 500px;
+      margin-top: 18px;
+    }
+
+    .clients-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .client-card {
+      padding: 44px 24px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+      transition: background 0.25s;
+    }
+    .client-card:last-child { border-right: none; }
+    .client-card:hover { background: var(--cream); }
+    .client-name {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .client-country {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 14px;
+    }
+    .client-tag {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(181,135,44,0.35);
+      padding: 5px 12px;
+    }
+    .clients-note {
+      max-width: var(--max-w);
+      margin: 28px auto 0;
+      font-size: 13px;
+      color: var(--ash);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Mywalit Story ───────────────────────────────────────────────────── */
+    #mywalit {
+      background: var(--dark-panel);
+      padding: 120px var(--side);
+      position: relative;
+      overflow: hidden;
+    }
+    #mywalit::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(181,135,44,0.06) 0%, transparent 70%);
+    }
+    .mywalit-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .mywalit-left .label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .mywalit-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(32px, 3.5vw, 52px);
+      line-height: 1.12;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+    .mywalit-title em { font-style: italic; color: rgba(255,255,255,0.65); }
+    .mywalit-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 20px;
+    }
+    .mywalit-highlight {
+      border-left: 2px solid var(--gold);
+      padding: 16px 0 16px 24px;
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-style: italic;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+      margin: 36px 0;
+    }
+    .mywalit-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .mywalit-stat {
+      padding: 28px 32px;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: border-color 0.25s;
+    }
+    .mywalit-stat:hover { border-color: rgba(181,135,44,0.4); }
+    .mywalit-stat-num {
+      font-family: var(--font-serif);
+      font-size: 40px;
+      font-weight: 300;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+    }
+    .mywalit-stat-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+    }
+
+    /* ── Products ────────────────────────────────────────────────────────── */
+    #products {
+      background: var(--white);
+      padding: 130px var(--side);
+      border-top: 1px solid var(--border);
+    }
+    .products-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .product-card {
+      background: var(--white);
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .product-card:hover { box-shadow: 0 12px 40px rgba(20,20,18,0.10); }
+    .product-img {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #e8e2d6 0%, #d8d0c4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--stone);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(20,20,18,0.04) 100%);
+    }
+    /* Unique gradient per product */
+    .product-card:nth-child(1) .product-img {
+      background: linear-gradient(135deg, #d4c8b8 0%, #bfb09e 100%);
+    }
+    .product-card:nth-child(2) .product-img {
+      background: linear-gradient(135deg, #c8c0b0 0%, #b0a890 100%);
+    }
+    .product-card:nth-child(3) .product-img {
+      background: linear-gradient(135deg, #d8d0c0 0%, #c4b8a4 100%);
+    }
+    .product-info {
+      padding: 32px 28px 36px;
+    }
+    .product-cat {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .product-name {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .product-specs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .product-spec {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .spec-key {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+    .spec-val {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      color: var(--ink);
+    }
+    .spec-val span {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--ash);
+      margin-left: 4px;
+    }
+
+    /* ── Quality ─────────────────────────────────────────────────────────── */
+    #quality {
+      background: var(--white);
+      padding: 130px var(--side);
+      border-top: 1px solid var(--border);
+    }
+    .quality-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .quality-left .section-title { margin-bottom: 20px; }
+    .quality-left p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ash);
+      margin-bottom: 32px;
+    }
+    .quality-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      padding: 14px 20px;
+      font-size: 12px;
+      color: var(--mid);
+    }
+    .quality-badge::before {
+      content: '●';
+      color: var(--gold);
+      font-size: 8px;
+    }
+
+    .quality-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .quality-step {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 24px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .quality-step:last-child { border-bottom: none; }
+    .step-num {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      background: rgba(181,135,44,0.08);
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+    }
+    .step-content {}
+    .step-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--ash);
+    }
+
+    /* ── Customization ───────────────────────────────────────────────────── */
+    #customization {
+      background: var(--white);
+      padding: 130px var(--side);
+      border-top: 1px solid var(--border);
+    }
+    .custom-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .custom-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 56px;
+    }
+    .custom-item {
+      background: var(--white);
+      padding: 32px 24px;
+      transition: background 0.25s;
+    }
+    .custom-item:hover { background: #fdfcfa; }
+    .custom-icon {
+      width: 36px; height: 36px;
+      background: rgba(181,135,44,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-size: 12px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+    }
+    .custom-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .custom-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ash);
+    }
+
+    /* ── Logistics ───────────────────────────────────────────────────────── */
+    #logistics {
+      background: var(--dark-panel);
+      padding: 80px var(--side);
+    }
+    .logistics-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .logistics-inner .section-title { color: var(--white); }
+    .logistics-inner .section-eyebrow { color: var(--gold); }
+    .logistics-inner .section-sub { color: rgba(255,255,255,0.4); }
+    .logistics-table {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .logistics-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .logistics-row.head {
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      margin-bottom: 0;
+    }
+    .logistics-cell {
+      padding: 18px 20px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+    }
+    .logistics-row.head .logistics-cell {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      padding-top: 0;
+      padding-bottom: 14px;
+    }
+    .logistics-cell.highlight {
+      color: var(--white);
+      font-family: var(--font-serif);
+      font-size: 16px;
+    }
+
+    /* ── FAQ ─────────────────────────────────────────────────────────────── */
+    #faq {
+      background: var(--white);
+      padding: 130px var(--side);
+      border-top: 1px solid var(--border);
+    }
+    .faq-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+    }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      text-align: left;
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink);
+      gap: 16px;
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: var(--gold); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--ash);
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s;
+    }
+    .faq-item.open .faq-a {
+      max-height: 200px;
+    }
+    .faq-a-inner {
+      padding-bottom: 22px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--ash);
+    }
+
+    /* ── CTA ─────────────────────────────────────────────────────────────── */
+    #cta {
+      background: var(--warm-dark);
+      padding: 120px var(--side);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(181,135,44,0.07) 0%, transparent 65%);
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .cta-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+    .cta-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .cta-title em { font-style: italic; }
+    .cta-sub {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 44px;
+    }
+    .cta-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .btn-light {
+      display: inline-block;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      transition: background 0.25s;
+    }
+    .btn-light:hover { background: var(--cream-dark, #e8e2d6); }
+    .btn-outline-light {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 15px 36px;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-outline-light:hover { border-color: var(--white); color: var(--white); }
+
+    .cta-contact {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .cta-contact-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .contact-label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .contact-val {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+    }
+    .japan-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 32px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 20px;
+    }
+    .japan-note::before { content: '🇯🇵'; font-size: 14px; }
+
+    /* ── Footer ──────────────────────────────────────────────────────────── */
+    footer {
+      background: #0e0d0b;
+      padding: 48px var(--side);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-brand {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-info {
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.7;
+      text-align: right;
+    }
+    .footer-info strong {
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+    }
+
+    /* ── Scroll reveal ───────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+      .number-item:nth-child(2n) { border-right: none; }
+      .number-item:nth-child(3) { border-right: 1px solid var(--border); }
+      .philosophy-inner { grid-template-columns: 1fr; gap: 48px; }
+      .philosophy-left { position: static; }
+      .pillar { grid-template-columns: 1fr; gap: 8px; }
+      .clients-grid { grid-template-columns: repeat(3, 1fr); }
+      .mywalit-inner { grid-template-columns: 1fr; gap: 48px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .quality-inner { grid-template-columns: 1fr; gap: 48px; }
+      .logistics-inner { grid-template-columns: 1fr; gap: 40px; }
+      .faq-inner { grid-template-columns: 1fr; gap: 48px; }
+      .custom-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-stats { flex-wrap: wrap; }
+      .hero-stat { min-width: 33%; }
+      .photo-hint { display: none; }
+    }
+
+    @media (max-width: 580px) {
+      .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+      .clients-grid { grid-template-columns: 1fr 1fr; }
+      .custom-grid { grid-template-columns: 1fr; }
+      .logistics-row { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .footer-info { text-align: left; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Navigation ───────────────────────────────────────────────────────── -->
+  <nav id="nav">
+    <div class="nav-logo">Sanhe Interfashion</div>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#quality">Quality</a></li>
+      <li><a href="#clients">Clients</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#cta" class="nav-cta">Request Sample</a>
+  </nav>
+
+  <!-- ── Hero ─────────────────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-texture"></div>
+    <div class="hero-photo">
+      <!-- Replace with: <img src="hero-leather-goods.jpg" alt="Sanhe leather goods"> -->
+    </div>
+
+    <div class="photo-hint">Product Photography Here</div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Since 2002 · Leather Goods OEM Manufacturer · Korea &amp; Asia</p>
+      <h1 class="hero-title">
+        Mywalit Italy.<br>
+        Roots Canada.<br>
+        <em>All chose us.</em>
+      </h1>
+      <p class="hero-sub">
+        Five European and North American premium brands.
+        23 years. 500,000+ units. Under 1% defect rate.
+        Now manufacturing for Japan's most discerning brands.
+      </p>
+      <div class="hero-ctas">
+        <a href="#cta" class="btn-primary">Request a Sample</a>
+        <a href="#cta" class="btn-ghost">Download Spec Sheet</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">23<span style="font-size:18px;color:var(--gold)">+</span></div>
+        <div class="hero-stat-label">Years in Business</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">500K<span style="font-size:18px;color:var(--gold)">+</span></div>
+        <div class="hero-stat-label">Units Produced</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3,000<span style="font-size:18px;color:var(--gold)">+</span></div>
+        <div class="hero-stat-label">Styles Delivered</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">&lt;1<span style="font-size:18px;color:var(--gold)">%</span></div>
+        <div class="hero-stat-label">Defect Rate</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">95<span style="font-size:18px;color:var(--gold)">%+</span></div>
+        <div class="hero-stat-label">On-Time Delivery</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">80<span style="font-size:18px;color:var(--gold)">%+</span></div>
+        <div class="hero-stat-label">Client Retention</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Numbers ───────────────────────────────────────────────────────────── -->
+  <section id="numbers">
+    <div class="numbers-grid">
+      <div class="number-item reveal">
+        <div class="number-val"><span class="count" data-target="23">0</span><span class="number-unit">+</span></div>
+        <div class="number-label">Years in Business</div>
+        <p class="number-context">Every client relationship we have built since 2002 is still intact today. Longevity is not luck — it is the result of consistent quality.</p>
+      </div>
+      <div class="number-item reveal">
+        <div class="number-val"><span class="count" data-target="500" data-suffix="K+">0</span></div>
+        <div class="number-label">Units Produced</div>
+        <p class="number-context">Half a million pieces delivered to premium brands across Europe and North America — without a single major quality recall.</p>
+      </div>
+      <div class="number-item reveal">
+        <div class="number-val"><span class="count" data-target="3000" data-suffix="+">0</span></div>
+        <div class="number-label">Styles Delivered</div>
+        <p class="number-context">From minimalist cardholders to structured hand-stitched bags. No design brief has exceeded our capability in 23 years.</p>
+      </div>
+      <div class="number-item reveal">
+        <div class="number-val"><span class="count" data-target="95">0</span><span class="number-unit">%+</span></div>
+        <div class="number-label">On-Time Delivery</div>
+        <p class="number-context">A rate maintained even through global supply chain disruptions. Deadlines are a promise — not an estimate.</p>
+      </div>
+      <div class="number-item reveal">
+        <div class="number-val">&lt;<span class="count" data-target="1">0</span><span class="number-unit">%</span></div>
+        <div class="number-label">Defect Rate</div>
+        <p class="number-context">The standard that European luxury demands. Our four-stage quality process makes this rate not an achievement, but a baseline.</p>
+      </div>
+      <div class="number-item reveal">
+        <div class="number-val"><span class="count" data-target="80">0</span><span class="number-unit">%+</span></div>
+        <div class="number-label">Client Retention</div>
+        <p class="number-context">Most brands who order once never look for another factory. We take that as the highest form of recognition.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Philosophy ─────────────────────────────────────────────────────────── -->
+  <section id="philosophy">
+    <div class="philosophy-inner">
+      <div class="philosophy-left reveal">
+        <p class="section-eyebrow">Our Philosophy</p>
+        <h2 class="section-title">Quality is not<br>a service.<br><em>It is how we operate.</em></h2>
+      </div>
+      <div class="philosophy-right reveal">
+        <p class="philosophy-body">Since 2002, we have operated by one principle: the brands that trust us should never have to think about manufacturing. Not about defects. Not about deadlines. Not about whether the production matches the sample they approved.</p>
+        <p class="philosophy-body">They should simply receive what they designed — on time, perfectly made, every time.</p>
+        <p class="philosophy-body">That discipline is why Mywalit Italy, Roots Canada, and Jigsaw UK have stayed with us for over 15 consecutive years. Not because we were the cheapest option. Because we became the most reliable one.</p>
+        <div class="philosophy-pillars">
+          <div class="pillar">
+            <div class="pillar-title">Relationship over transaction</div>
+            <div class="pillar-desc">We measure the success of our business in years of partnership — not in single orders placed or margins achieved.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">Evidence over promises</div>
+            <div class="pillar-desc">We do not ask you to trust us. We show you 23 years of numbers, names, and verified results. You decide.</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-title">Precision as default</div>
+            <div class="pillar-desc">A ±1mm dimensional tolerance is not our goal. It is the minimum standard we have delivered since the beginning.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Clients ───────────────────────────────────────────────────────────── -->
+  <section id="clients">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Our Partners</p>
+      <h2 class="section-title">Trusted by the world's<br><em>most demanding brands.</em></h2>
+      <p class="section-sub">Not one-off projects. 15+ years of continuous partnership with each of the following brands.</p>
+    </div>
+    <div class="clients-grid reveal">
+      <div class="client-card">
+        <div class="client-name">Jigsaw</div>
+        <div class="client-country">🇬🇧 United Kingdom</div>
+        <span class="client-tag">15+ years · Ongoing</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Roots</div>
+        <div class="client-country">🇨🇦 Canada</div>
+        <span class="client-tag">15+ years · Ongoing</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Mywalit</div>
+        <div class="client-country">🇮🇹 Italy · UK</div>
+        <span class="client-tag">15+ years · Ongoing</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Want Les Essentiels</div>
+        <div class="client-country">🇨🇦 Canada</div>
+        <span class="client-tag">15+ years · Ongoing</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Quartz Co.</div>
+        <div class="client-country">🇨🇦 Canada</div>
+        <span class="client-tag">Ongoing</span>
+      </div>
+    </div>
+    <p class="clients-note reveal">
+      * All partnerships reflect continuous, ongoing relationships — not single orders. Client logos available upon request with signed NDA.
+    </p>
+  </section>
+
+  <!-- ── Mywalit Story ──────────────────────────────────────────────────────── -->
+  <section id="mywalit">
+    <div class="mywalit-inner">
+      <div class="mywalit-left reveal">
+        <p class="label">Why Mywalit Matters</p>
+        <h2 class="mywalit-title">Why does an Italian<br><em>leather brand choose</em><br>an Asian factory?</h2>
+        <p class="mywalit-body">
+          Mywalit is a premium leather goods brand rooted in Malta and the UK —
+          with the quality standards of the world's leather capital, Italy, at its core.
+          Their products sit alongside the finest European craftsmanship.
+        </p>
+        <blockquote class="mywalit-highlight">
+          "The world's most demanding leather brand<br>has used our factory for 15 consecutive years."
+        </blockquote>
+        <p class="mywalit-body">
+          The answer is simple: Sanhe delivers European quality standards
+          at Asian production efficiency. If your brand demands the same —
+          we are ready.
+        </p>
+      </div>
+      <div class="mywalit-right reveal">
+        <div class="mywalit-stat">
+          <div class="mywalit-stat-num">15+</div>
+          <div class="mywalit-stat-desc">Years of continuous production for Mywalit Italy —<br>a brand synonymous with precision leather craftsmanship.</div>
+        </div>
+        <div class="mywalit-stat">
+          <div class="mywalit-stat-num">&lt;1%</div>
+          <div class="mywalit-stat-desc">Defect rate maintained across 500,000+ units —<br>the standard that European luxury requires.</div>
+        </div>
+        <div class="mywalit-stat">
+          <div class="mywalit-stat-num">80%+</div>
+          <div class="mywalit-stat-desc">Of our clients return for repeat orders —<br>because quality consistency is not a one-time achievement.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Products ──────────────────────────────────────────────────────────── -->
+  <section id="products">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Product Lines</p>
+      <h2 class="section-title">What we <em>manufacture.</em></h2>
+      <p class="section-sub">FOB pricing. Actual costs depend on specifications, materials, and order volume. Current capacity: 30–40% available.</p>
+    </div>
+    <div class="products-grid reveal">
+      <div class="product-card">
+        <div class="product-img">
+          <!-- Replace with: <img src="handbags.jpg" alt="Handbags"> -->
+          Product Photography
+        </div>
+        <div class="product-info">
+          <p class="product-cat">Category 01</p>
+          <h3 class="product-name">Handbags</h3>
+          <div class="product-specs">
+            <div class="product-spec">
+              <span class="spec-key">FOB Price</span>
+              <span class="spec-val">USD 25–120+ <span>per unit</span></span>
+            </div>
+            <div class="product-spec">
+              <span class="spec-key">MOQ</span>
+              <span class="spec-val">300 <span>units</span></span>
+            </div>
+            <div class="product-spec">
+              <span class="spec-key">Lead Time</span>
+              <span class="spec-val">60–90 <span>days</span></span>
+            </div>
+            <div class="product-spec">
+              <span class="spec-key">JPY Estimate</span>
+              <span class="spec-val">¥4,000–19,000+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">Product Photography</div>
+        <div class="product-info">
+          <p class="product-cat">Category 02</p>
+          <h3 class="product-name">Wallets &amp; Small Leather Goods</h3>
+          <div class="product-specs">
+            <div class="product-spec">
+              <span class="spec-key">FOB Price</span>
+              <span class="spec-val">USD 8–45 <span>per unit</span></span>
+            </div>
+            <div class="product-spec">
+              <span class="spec-key">MOQ</span>
+              <span class="spec-val">300 <span>units</span></span>
+            </div>
+            <div class="product-spec">
+              <span class="spec-key">Lead Time</span>
+              <span class="spec-val">60–75 <span>days</span></span>
+            </div>
+            <div class="product-spec">
+              <span class="spec-key">JPY Estimate</span>
+              <span class="spec-val">¥1,300–7,200</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">Product Photography</div>
+        <div class="product-info">
+          <p class="product-cat">Category 03</p>
+          <h3 class="product-name">Belts</h3>
+          <div class="product-specs">
+            <div class="product-spec">
+              <span class="spec-key">FOB Price</span>
+              <span class="spec-val">USD 10–35 <span>per unit</span></span>
+            </div>
+            <div class="product-spec">
+              <span class="spec-key">MOQ</span>
+              <span class="spec-val">300 <span>units</span></span>
+            </div>
+            <div class="product-spec">
+              <span class="spec-key">Lead Time</span>
+              <span class="spec-val">60–75 <span>days</span></span>
+            </div>
+            <div class="product-spec">
+              <span class="spec-key">JPY Estimate</span>
+              <span class="spec-val">¥1,600–5,600</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Quality ───────────────────────────────────────────────────────────── -->
+  <section id="quality">
+    <div class="quality-inner">
+      <div class="quality-left reveal">
+        <p class="section-eyebrow">Quality Control</p>
+        <h2 class="section-title">Four gates.<br><em>Zero tolerance.</em></h2>
+        <p>Every unit passes through four independent quality checkpoints before it leaves our facility. This process is why our defect rate stays below 1%.</p>
+        <div class="quality-badge">Factory Audit Accepted — by appointment</div>
+      </div>
+      <div class="quality-steps reveal">
+        <div class="quality-step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h3 class="step-title">Raw Material Inspection</h3>
+            <p class="step-desc">Every incoming hide, fabric, and hardware component is inspected against specification before entering production. Sub-standard materials are rejected at intake — they never reach the production floor.</p>
+          </div>
+        </div>
+        <div class="quality-step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h3 class="step-title">In-Process Inspection</h3>
+            <p class="step-desc">Stitching tension, edge finishing, and structural integrity are checked continuously during production. Defects are corrected at the source, not discovered at the end.</p>
+          </div>
+        </div>
+        <div class="quality-step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h3 class="step-title">Final Inspection</h3>
+            <p class="step-desc">Completed units are inspected 100% — not sampled. Every piece is measured against the approved spec sheet and original sample. Dimensional tolerance: ±1mm.</p>
+          </div>
+        </div>
+        <div class="quality-step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h3 class="step-title">Pre-Shipment Inspection</h3>
+            <p class="step-desc">Packaging, labeling, quantity count, and export documentation are verified before loading. The last checkpoint before the shipment leaves our hands.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Customization ──────────────────────────────────────────────────────── -->
+  <section id="customization">
+    <div class="custom-inner">
+      <div class="section-header reveal" style="margin-bottom:0">
+        <p class="section-eyebrow">Customization</p>
+        <h2 class="section-title">OEM &amp; ODM —<br><em>your vision, our craft.</em></h2>
+        <p class="section-sub" style="margin-bottom:0">We handle both design-in (OEM) and co-development (ODM). In-house designers on staff.</p>
+      </div>
+      <div class="custom-grid reveal">
+        <div class="custom-item">
+          <div class="custom-icon">01</div>
+          <h3 class="custom-title">Hardware</h3>
+          <p class="custom-desc">Brass, zinc, stainless — shape, finish, and color specified to your brand standards.</p>
+        </div>
+        <div class="custom-item">
+          <div class="custom-icon">02</div>
+          <h3 class="custom-title">Lining &amp; Interior</h3>
+          <p class="custom-desc">Customer-supplied fabrics accepted. Full interior configuration design available.</p>
+        </div>
+        <div class="custom-item">
+          <div class="custom-icon">03</div>
+          <h3 class="custom-title">YKK Zippers</h3>
+          <p class="custom-desc">International quality standard zippers as default. Custom pulls and finishes available.</p>
+        </div>
+        <div class="custom-item">
+          <div class="custom-icon">04</div>
+          <h3 class="custom-title">Branding Elements</h3>
+          <p class="custom-desc">Debossing, hot-stamp foiling, embroidery, woven labels — all in-house.</p>
+        </div>
+        <div class="custom-item">
+          <div class="custom-icon">05</div>
+          <h3 class="custom-title">Packaging</h3>
+          <p class="custom-desc">Gift boxes, dust bags, hang tags — designed to match your brand world.</p>
+        </div>
+        <div class="custom-item">
+          <div class="custom-icon">06</div>
+          <h3 class="custom-title">Stitch Color</h3>
+          <p class="custom-desc">Pantone-matched thread colors. Edge painting in any specified tone.</p>
+        </div>
+        <div class="custom-item">
+          <div class="custom-icon">07</div>
+          <h3 class="custom-title">Material Sourcing</h3>
+          <p class="custom-desc">Korean, Italian, or customer-specified leathers. We work with what your brand requires.</p>
+        </div>
+        <div class="custom-item">
+          <div class="custom-icon">08</div>
+          <h3 class="custom-title">ODM Co-Design</h3>
+          <p class="custom-desc">Our in-house design team (2–3 designers) collaborates from concept through prototype.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Logistics ──────────────────────────────────────────────────────────── -->
+  <section id="logistics">
+    <div class="logistics-inner">
+      <div class="reveal">
+        <p class="section-eyebrow">Logistics</p>
+        <h2 class="section-title" style="color:var(--white)">From our<br><em style="color:rgba(255,255,255,0.6)">factories</em><br>to your warehouse.</h2>
+        <p class="section-sub">FOB, CIF, and DDP available. We handle customs clearance so you don't have to.</p>
+      </div>
+      <div class="logistics-table reveal">
+        <div class="logistics-row head">
+          <div class="logistics-cell">Origin</div>
+          <div class="logistics-cell">Mode</div>
+          <div class="logistics-cell">Transit to Japan</div>
+          <div class="logistics-cell">Incoterms</div>
+        </div>
+        <div class="logistics-row">
+          <div class="logistics-cell highlight">Qingdao, China</div>
+          <div class="logistics-cell">Sea Freight</div>
+          <div class="logistics-cell highlight">3–7 days</div>
+          <div class="logistics-cell">FOB / CIF / DDP</div>
+        </div>
+        <div class="logistics-row">
+          <div class="logistics-cell highlight">Vietnam Factory</div>
+          <div class="logistics-cell">Sea Freight</div>
+          <div class="logistics-cell highlight">5–10 days</div>
+          <div class="logistics-cell">FOB / CIF / DDP</div>
+        </div>
+        <div class="logistics-row">
+          <div class="logistics-cell highlight">Either Origin</div>
+          <div class="logistics-cell">Air (urgent)</div>
+          <div class="logistics-cell highlight">2–3 days</div>
+          <div class="logistics-cell">On request</div>
+        </div>
+        <div class="logistics-row" style="border-bottom:none; padding-top:8px">
+          <div class="logistics-cell" style="grid-column:1/-1; padding-top:20px; color:rgba(255,255,255,0.25); font-size:12px; border-top:1px solid rgba(255,255,255,0.07)">
+            DDP (Delivered Duty Paid) available: Sanhe handles customs clearance and import duties. You receive goods domestically.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────────────────────── -->
+  <section id="faq">
+    <div class="faq-inner">
+      <div class="reveal">
+        <p class="section-eyebrow">FAQ</p>
+        <h2 class="section-title">Common<br><em>questions.</em></h2>
+        <p class="section-sub" style="margin-top:18px">Everything you need to make a confident first inquiry. Still have questions? Contact our team directly.</p>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q">What is your minimum order quantity?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Our standard MOQ is 300 units per style. For select products, lower quantities may be negotiable — please contact us to discuss your specific requirements.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can we get a sample before placing an order?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Sample production is available. Sample costs and lead times vary by specification — typically 2–3 weeks for in-stock materials. Please contact us for a sample quotation.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What is the typical production lead time?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">60–90 days from order confirmation and material approval. Factors include product complexity, volume, and current capacity. We currently have 30–40% production capacity available.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can we visit the factory?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Absolutely. Factory audits and buyer visits are welcomed at both our Qingdao, China and Vietnam facilities. Visits are by appointment. We recommend a visit before your first order — it builds confidence for both parties.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do you sign NDAs?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. We sign mutual NDAs before any design sharing or detailed discussion. For OEM projects with proprietary designs, an NDA is standard practice on our side as well.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What payment terms do you offer?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Standard terms: 30% deposit at order confirmation, 70% balance before shipment. Payment via T/T (wire transfer) or L/C (Letter of Credit). Payment schedule is negotiable for established relationships.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do you have Japanese language support?<span class="faq-icon">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Sanhe Interfashion Japan Team handles all inquiries in Japanese. Contact us via Email, LINE, or WhatsApp — Japanese is fully supported.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────────────────────────── -->
+  <section id="cta">
+    <div class="cta-inner reveal">
+      <p class="cta-eyebrow">Start the Conversation</p>
+      <h2 class="cta-title">Ready to work<br><em>with us?</em></h2>
+      <p class="cta-sub">
+        Request a sample. Download our spec sheet. Or simply reach out —
+        our team responds within 2 business days.
+      </p>
+      <div class="cta-buttons">
+        <a href="mailto:contact@sanhe.com" class="btn-light">Request a Sample</a>
+        <a href="mailto:contact@sanhe.com" class="btn-outline-light">Download Spec Sheet</a>
+      </div>
+      <div class="cta-contact">
+        <div class="cta-contact-item">
+          <span class="contact-label">Email</span>
+          <span class="contact-val">________@sanhe.com</span>
+        </div>
+        <div class="cta-contact-item">
+          <span class="contact-label">LINE / WhatsApp</span>
+          <span class="contact-val">Available — contact by email first</span>
+        </div>
+        <div class="cta-contact-item">
+          <span class="contact-label">Response Time</span>
+          <span class="contact-val">Within 2 business days</span>
+        </div>
+      </div>
+      <div style="margin-top:32px">
+        <span class="japan-note">Sanhe Japan Team — 日本語対応チームあり. お気軽にご連絡ください。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-brand">Sanhe Interfashion</div>
+    <div class="footer-info">
+      <strong>Headquarters:</strong> Korea (Management) &nbsp;·&nbsp; <strong>Factories:</strong> Qingdao, China &nbsp;/&nbsp; Vietnam<br>
+      80+ Staff &nbsp;·&nbsp; 23+ Years &nbsp;·&nbsp; Languages: EN / KO / ZH / JA<br>
+      <span style="color:rgba(255,255,255,0.15)">© Sanhe Interfashion. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── Nav scroll effect ──────────────────────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── FAQ accordion ──────────────────────────────────────────────────────
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // ── Counter animation ──────────────────────────────────────────────────
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1600;
+      const start = performance.now();
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(ease * target);
+        el.textContent = current.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    // ── Scroll reveal + counter trigger ───────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Trigger counters inside this element
+          entry.target.querySelectorAll('.count').forEach(el => {
+            if (!el.dataset.animated) {
+              el.dataset.animated = '1';
+              animateCounter(el);
+            }
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── Smooth active nav highlight ────────────────────────────────────────
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === `#${current}`
+          ? 'rgba(255,255,255,0.95)'
+          : 'rgba(255,255,255,0.55)';
+      });
+    });
+  </script>
+</body>
+</html>
